@@ -1,5 +1,19 @@
 <form role="form">
   <div class="form-group">
+    <label for="smartwheels">
+      Smartwheels
+    </label>
+    <br>
+    <toggle-switch
+      name="smartwheels"
+      id="smartwheels"
+      ng-model="filters.smartwheels"
+      on-label="Aan"
+      off-label="Uit">
+    <toggle-switch>
+    </select>
+  </div>
+  <div class="form-group">
     <label for="minSeats">
       {{ 'SEARCH_RADIUS' | translate }}
     </label>

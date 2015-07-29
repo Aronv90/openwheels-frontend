@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('owm.resource.filter', [])
+angular.module('owm.resource.filter', ['toggle-switch'])
 
   .controller('ResourceFilterController', function ($scope, $stateParams, $modalInstance, $translate, props, filters, options) {
     $scope.props   = props; // .radius, ...

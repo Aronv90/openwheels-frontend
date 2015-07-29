@@ -38,6 +38,7 @@ module.exports = {
       'vendor/angular-translate-storage-local/angular-translate-storage-local.js',
       'vendor/angular-ui-utils/modules/unique/unique.js',
       'vendor/angular-ui-calendar/src/calendar.js',
+      'vendor/angular-toggle-switch/angular-toggle-switch.min.js',
       'vendor/fullcalendar/fullcalendar.js',
       'vendor/angularjs-geolocation/src/geolocation.js',
       'vendor/ngScrollTo/ng-scrollto.js',
