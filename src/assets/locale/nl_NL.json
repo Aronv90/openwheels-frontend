@@ -366,6 +366,7 @@
     "CONTRACT.PROP.OWNRISKWAIVER.NOT.DESC": "Ik wil het eigen risico niet afkopen of verlagen",
     "CONTRACT.PROP.OWNRISKWAIVER.BOOKING": "Verlaagd per rit",
     "CONTRACT.PROP.OWNRISKWAIVER.BOOKING.DESC": "Voor € 3,50 per rit verlaag ik mijn eigen risico met € 250,-",
+    "CONTRACT.PROP.OWNRISKWAIVER.MONTH.DESC": "Voor € 7,50 per maand verlaag ik mijn eigen risico met € 250,-",
     "CONTRACT_END_CAPTION" : "Contract opzeggen en borg terugvragen",
     "CONTRACT_END_ACTION": "Contract opzeggen",
     "CONTRACT_END_CONFIRM_DESC" : "Na opzegging kun je niet meer reserveren en rijden op dit contract. We sturen je een mail ter bevestiging van je opzegging. Weet je zeker dat je dit contract wilt opzeggen?",

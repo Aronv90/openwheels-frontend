@@ -37,6 +37,13 @@
                   {{ 'CONTRACT.PROP.OWNRISKWAIVER.BOOKING.DESC' | translate }}<br/>
                 </label>
               </div>
+
+              <div class="radio" ng-if="contract.type.id === 66 || contract.type.id === 71 || contract.ownRiskWaiver === 'month'">
+                <label>
+                <input type="radio" value="month" ng-model="contract.ownRiskWaiver" />
+                  {{ 'CONTRACT.PROP.OWNRISKWAIVER.MONTH.DESC' | translate }}<br/>
+                </label>
+              </div>
             </div>
             <button class="btn btn-primary" ng-click="saveContract($index, editForm)" ng-disabled="busy || editForm.$pristine">
               {{ 'SAVE' | translate }}
