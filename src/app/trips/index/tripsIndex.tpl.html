@@ -93,7 +93,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="booking in bookings.forOwner.data | orderBy: 'beginBooking' : true">
+          <tr ng-repeat="booking in bookings.forOwner.data | filter:{ status: 'accepted' } | orderBy: 'beginBooking' : true">
             <td>{{ booking.beginBooking | amDateFormat:'DD-MM-YYYY' }}</td>
             <td>{{ booking.resource.alias }}</td>
             <td>{{ booking.person | fullname }}</td>
