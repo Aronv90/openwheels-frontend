@@ -10,7 +10,8 @@ angular.module('owm.resource', [
   'owm.resource.filterDirective',
   'owm.resourceQueryService',
   'owm.resource.reservationForm',
-  'owm.resource.favoriteIcon'
+  'owm.resource.favoriteIcon',
+  'infinite-scroll'
 ])
 
   .config(function ($stateProvider) {

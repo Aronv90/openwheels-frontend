@@ -35,6 +35,10 @@ angular.module('owm.resource.search', [
     $scope.resources = [];
     $scope.searchText = '';
 
+    var loading = false,
+      offset = 0,
+      limit = 20;
+
     $scope.completePlacesOptions = {
       country: $filter('translateOrDefault')('SEARCH_COUNTRY', 'nl'),
       watchEnter: true
@@ -88,10 +92,9 @@ angular.module('owm.resource.search', [
       }
 
       $scope.searchText = query.text;
-      doSearch(true);
     }
 
-    function doSearch (isInitialSearch) {
+    $scope.loadResources = function (reset) {
       // time frame
       resourceQueryService.setTimeFrame({
         startDate: $scope.booking.beginRequested,
@@ -109,20 +112,6 @@ angular.module('owm.resource.search', [
       var filtersObject = $scope.filters.filters;
       resourceQueryService.setFilters(filtersObject);
 
-      if (!isInitialSearch) {
-        // on subsequent searches, jump to normal search page
-        if ($state.includes('owm.resource.place.list')) {
-          return $state.go('owm.resource.search.list');
-        } else if ($state.includes('owm.resource.place.map')) {
-          return $state.go('owm.resource.search.map');
-        }
-        updateUrl();
-      } else {
-        if (!$state.includes('owm.resource.place')) {
-          updateUrl();
-        }
-      }
-
       // construct api call
       var params = {};
       if (query.location)  { params.location  = query.location;  }
@@ -137,21 +126,34 @@ angular.module('owm.resource.search', [
           params.location = DEFAULT_LOCATION;
         }
       }
+      if(reset) {
+        $scope.resources = [];
+        params.offset = 0;
+        params.limit = 20;
+        reset = false;
+      } else {
+        params.limit = limit;
+        params.offset = offset + limit;
+      }
 
       // perform search
       alertService.load();
-      $scope.searching = true;
-      return resourceService.searchV2(params).then(function (resources) {
-        $scope.resources = resources;
-        return resources;
-      })
-      .catch(function (err) {
-        alertService.addError(err);
-      })
-      .finally(function () {
-        $scope.searching = false;
-        alertService.loaded();
-      });
+      if(!loading){
+        loading = resourceService.searchV2({params})
+        .then(function (resources) {
+          loading = false;
+          offset += limit;
+          $scope.resources = $scope.resources.concat(resources);
+          return resources;
+        })
+        .catch(function (err) {
+          alertService.addError(err);
+        })
+        .finally(function () {
+          $scope.searching = false;
+          alertService.loaded();
+        });
+      }
     }
 
     //select timeframe modal
@@ -166,14 +168,14 @@ angular.module('owm.resource.search', [
         }
       }).result.then(function (booking) {
           $scope.booking = booking;
-          return doSearch();
+          return $scope.loadResources(true);
         });
     };
 
     $scope.removeTimeframe = function () {
       $scope.booking.beginRequested = null;
       $scope.booking.endRequested = null;
-      return doSearch();
+      return $scope.loadResources(true);
     };
 
     //select filters modal
@@ -196,12 +198,12 @@ angular.module('owm.resource.search', [
           $scope.filters.props   = selected.props;
           $scope.filters.filters = selected.filters;
           $scope.filters.options = selected.options;
-          return doSearch();
+          return $scope.loadResources(true);
         });
     };
 
     $scope.sidebarFiltersChanged = function () {
-      doSearch();
+      $scope.loadResources(true);
     };
 
     $scope.$watch('placeDetails', function (newVal, oldVal) {
@@ -213,13 +215,13 @@ angular.module('owm.resource.search', [
         longitude: newVal.geometry.location.lng()
       });
       resourceQueryService.setText(newVal.formatted_address);
-      return doSearch();
+      return $scope.loadResources(true);
     });
 
     $scope.removeTimeframe = function () {
       $scope.booking.beginRequested = null;
       $scope.booking.endRequested = null;
-      return doSearch();
+      return $scope.loadResources(true);
     };
 
     function updateUrl () {

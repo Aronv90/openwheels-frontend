@@ -48,6 +48,7 @@ module.exports = {
       'vendor/fullcalendar/fullcalendar.js',
       'vendor/angularjs-geolocation/src/geolocation.js',
       'vendor/ngScrollTo/ng-scrollto.js',
+      'vendor/ngInfiniteScroll/build/ng-infinite-scroll.js',
       'vendor/ngstorage/ngStorage.js',
       'vendor/pickadate/lib/picker.js',
       'vendor/pickadate/lib/picker.date.js',
