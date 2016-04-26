@@ -1,46 +1,61 @@
 <div class="card">
     <section class="card-heading">
         <h2 class="card-title">{{ 'CONTRACT_CHOICE' | translate }}</h2>
-        <p>{{ 'CONTRACT_CHOICE_INFO' | translate }}</p>
     </section>
     <section class="card-body">
-        <div class="row">
-            <article class="col-md-6">
-                <h3 class="">{{ 'MYWHEELS_GO' | translate }}</h3>
-                <ul>
-                    <li>{{ 'PREPAID' | translate }}</li>
-                    <li>{{ 'OWN_RISK_STANDARD' | translate }}</li>
+      <p>{{ 'CONTRACT_CHOICE_INFO' | translate }}</p>
+
+      <div class="row">
+
+        <div class="col-md-6">
+          <md-card>
+            <md-card-header class="blue-header">
+              <md-card-header-text>
+                <span class="md-title text-center">
+                    {{ 'MYWHEELS_GO' | translate }}
+                  </a>
+                </span>
+              </md-card-header-text>
+            </md-card-header>
+            <md-card-content style="padding:0px;">
+                <ul class="list-group text-center">
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'PREPAID' | translate }}</li>
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'OWN_RISK_STANDARD' | translate }}</li>
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'OWN_RISK_STANDARD' | translate }}</li>
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'OWN_RISK_STANDARD' | translate }}</li>
                 </ul>
-                <article class="text-center">
-                    <a ui-sref="owm.finance.vouchers" class="btn btn-success">Betaal je rit</a>
-                </article>
-            </article>
-            <article class="col-md-6">
-                <h3 class="">{{ 'MYWHEELS_MEMBER' | translate }}</h3>
-                <ul>
-                    <li>{{ 'COLLECTION' | translate }}</li>
-                    <li>{{ 'OWN_RISK_OPTIONAL' | translate }}</li>
+            </md-card-content>
+            <md-card-actions layout="column" layout-align="start">
+              <md-button class="md-raised md-primary" ng-click="buyVoucher()">Betaal je rit</md-button>
+            </md-card-actions>
+          </md-card>
+        </div>
+
+        <div class="col-md-6">
+          <md-card>
+            <md-card-header class="blue-header">
+              <md-card-header-text>
+                <span class="md-title text-center">
+                    {{ 'MYWHEELS_MEMBER' | translate }}
+                  </a>
+                </span>
+              </md-card-header-text>
+            </md-card-header>
+            <md-card-content style="padding:0px;">
+                <ul class="list-group text-center">
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'COLLECTION' | translate }}</li>
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'OWN_RISK_OPTIONAL' | translate }}</li>
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'OWN_RISK_OPTIONAL' | translate }}</li>
+                    <li class="list-group-item"><i class="fa fa-check"></i> {{ 'OWN_RISK_OPTIONAL' | translate }}</li>
                 </ul>
-                <article class="text-center">
-                    <button ng-click="createMember()" class="btn btn-success">Betaal &euro; 250 borg</button>
-                </article>
-            </article>
-            </div>
+            </md-card-content>
+            <md-card-actions layout="column" layout-align="start">
+                <md-button class="md-raised md-primary" ng-click="createMember()">Betaal €250 borg</md-button>
+            </md-card-actions>
+          </md-card>
+        </div>
+
+      </div>
+
     </section>
-
-<div class="pricing-table">
-  <ul>
-    <li class="price"><i>$</i><span>100</span></li>
-    <li><i>+</i>3 Years Managed Hosting</li>
-    <li><i>+</i>Unlimited Domains</li>
-    <li class="choice-1"><i>+</i>2 Year Warranty</li>
-    <li class="choice-1"><i>+</i>Unlimited Service and Maintenance</li>
-    <li class="choice-2"><i>+</i>Drag and Drop Designer</li>
-    <li class="choice-2"><i>+</i>5 Ready Made Templates</li>
-    <li class="choice-3"><i>+</i>Advanced Statistics</li>
-    <li class="choice-3"><i>+</i>Custom CSS Options</li>
-    <li><i>+</i>Basic Statistics</li>
-  </ul>
 </div>
-</div>
-

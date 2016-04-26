@@ -21,6 +21,10 @@ angular.module('owm.contract', [])
   });
 })
 .controller('ContractChoiceController', function ($scope, depositService, person, contractService, $log) {
+  $scope.buyVoucher = function () {
+    $state.go('owm.finance.vouchers');
+  }
+  
   $scope.createMember = function () {
     $log.log('requesting 62 contract');
     contractService.forContractor({
