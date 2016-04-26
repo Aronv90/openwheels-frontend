@@ -2,7 +2,7 @@
 angular.module('owm.contract', [])
 .config(function($stateProvider){
   $stateProvider.state('contractchoice', {
-    url: '/contractkeuze',
+    url: '/contract-keuze',
     parent: 'owm',
     views: {
       'main@shell': {
