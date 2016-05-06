@@ -141,6 +141,7 @@
     "GO_TO_SHOW_RESOURCE": "Go to car page",
     "SHARING_SETTINGS": "Sharing settings",
     "RESOURCE_MEMBERS": "Friends of your car",
+    "RESOURCE_DISCOUNTS": "Discount",
     "DATA": "Details",
     "EDIT_RESOURCE_SHARING_SETTINGS": "Edit sharing settings",
     "ADVERTISEMENT": "Advertisement",
@@ -420,7 +421,6 @@
     "AUTH_CHANGE_PWD_SUCCESS": "Your new password has been saved",
     "AUTH_EMAIL_VALIDATE_SUCCESS": "Thank you for confirming your email address",
     "ANWBID.SAVE_SUCCESS": "Your membership number has been saved",
-
     "INFO_BOOKING_CHANGE_REQUEST": "The renter can request to extend or shorten a booking. If the owner accepts, the booking times will be adjusted accordingly. If the owner rejects, any previously accepted times will remain valid.",
     "INFO_FAVORITES": "Your favorite cars, cars you have previously rented and/or cars near you",
     "INFO_RESOURCE_FREE_KM_DAY": "or 10 km free per hour when staying below the daily rate",
