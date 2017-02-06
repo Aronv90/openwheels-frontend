@@ -210,7 +210,7 @@
                   {{Math.round(invoiceGroup.invoice.paid) !== Math.round(invoiceGroup.invoice.total) ? 'Nog te betalen' : 'Betaald'}}
                 </td>
                 <td ng-if="invoiceGroup.invoice.due && invoiceGroup.invoice.paid < 0.00">
-                  {{Math.round(invoiceGroup.invoice.paid) !== Math.round(invoiceGroup.invoice.total) ? 'In behandeling' : 'Uitbetaald'}}
+                  {{Math.round(invoiceGroup.invoice.paid) !== Math.round(invoiceGroup.invoice.total) ? 'In behandeling' : 'Uitbetaald'}} 
                 </td>
                 <td ng-if="!invoiceGroup.invoice.due">In opbouw</td>
                 <td class="text-right">{{invoiceGroup.invoice.total < 0 ? -invoiceGroup.invoice.total : invoiceGroup.invoice.total | currency}}</td>
