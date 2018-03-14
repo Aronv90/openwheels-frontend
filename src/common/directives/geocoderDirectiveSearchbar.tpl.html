@@ -1,6 +1,6 @@
 <section class="homepage-searchbar"> 
 
-  <form class="mywheels-form searchbar searchbar--no-opacity">
+  <form class="mywheels-form searchbar searchbar--no-opacity" ng-class="{ 'toolbar-search': toolbar === 'yes'}">
     <div class="icon location searchbar searchbar--no-opacity">
       <input type="text" g-places-autocomplete options="options" force-selection="true" ng-model="search.text" class="form-control" placeholder="Waar wil je huren?" style="font-weight: normal;" />
       <div class="clearbutton__flex" hide-gt-sm ng-show="search.text">
@@ -36,7 +36,7 @@
         </md-menu-content>
       </md-menu>
     </div>
-    <div class="button button--no-grow md-ink-ripple" md-ink-ripple="#232521" id="searchButton">
+    <div class="button button--no-grow md-ink-ripple" ng-if="toolbar !== 'yes'" md-ink-ripple="#232521" id="searchButton">
       <button ng-if="!searcher.loading" hide-xs hide-sm type="button" class="btn btn-success" ng-click="doSearch()">Zoek een auto</button>
       <button ng-if="searcher.loading" hide-xs hide-sm disabled type="button" class="btn btn-success"><i class="fa fa-fw fa-circle-o-notch fa-spin"></i></button>
       <button ng-if="!searcher.loading" hide-gt-sm type="button" class="btn auto-width btn-success" ng-click="doSearch()"><md-icon class="text-white">search</md-icon></button>

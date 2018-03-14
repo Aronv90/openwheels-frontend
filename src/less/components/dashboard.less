@@ -41,25 +41,6 @@
             }
         }
     }
-    &-blog-items {
-        position: absolute;
-        bottom: 0;
-        left: (@grid-gutter-width / 2);
-        right: (@grid-gutter-width / 2);
-        li {
-            padding: 0;
-            margin-bottom: 5px;
-            a {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                display: block;
-                padding: 5px;
-                background: #fff;
-                opacity: 0.9;
-            }
-        }
-    }
 }
 @media (min-width:@screen-sm) {
     .dashboard-hero {
@@ -83,5 +64,73 @@ span.action-button:last-child a.btn {
     list-style: none;
     md-ink-bar {
         display: none;
+    }
+}
+
+/* ---------------------- BLOG ITEMS  ------------------- */
+.dashboard--blog--overview {
+    width: 100%;
+    margin: 0 auto;
+    box-shadow: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 1em auto; 
+    -webkit-box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
+    section {
+        padding: 1em;
+        display: inline-block;
+        ul {
+            color: #5faac8;
+        }
+    }
+    h2 {
+        margin: 0px;
+    }
+}
+.dashboard--blog--overview--items {
+    display: inline-block;
+    background-position: 20% auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    section {
+        padding-top: 0px;
+    }
+}
+.dashboard--blog--item {
+    padding-bottom:2px;
+    font-size:1.2em;
+}
+@media (min-width:40em) {
+    .dashboard--blog--overview {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        section {
+            flex-basis: 50%;
+            padding: 1.2em;
+        }
+        .center {
+            text-align: center;
+        }
+        h2 {
+            margin: 0 0 15px;
+        }
+    }
+    .dashboard--blog--overview--items {
+        flex-basis: 50%;
+        display: inline-block;
+        max-width: 100%;
+    }
+}
+@media (min-width:60em) {
+    .dashboard--blog--overview {
+        background: #fff;
+        .center {
+            text-align: center;
+        }
+        h2 {
+            margin: 0 0 15px;
+        }
     }
 }

@@ -1,228 +1,263 @@
-<!-- SHORTCUT MYWHEELS -->
-<div class="card" ng-if="me.provider.id === 1 && me.preference">
-  <div class="card-body no-padding">
-
-    <md-tabs class="shortcut" ng-if="me.preference !== 'owner'">
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.trips">{{ 'MY_TRIPS' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.finance.v4">{{ 'MY_FINANCE' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.message">{{ 'MY_MESSAGES' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.person.aboutme">{{ 'MY_MEMBER_PAGE' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a href="{{ 'NAVBAR.HOW_IT_WORKS_URL' | translate }}">{{ 'NAVBAR.HOW_IT_WORKS' | translate }}</a>
-      </md-tab-label></md-tab>
-    </md-tabs>
-
-    <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length > 0">
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.trips">{{ 'TRIPS_BOOKINGS_FOR_OWNER' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab ng-if="resources.length === 1"><md-tab-label>
-        <a ng-href="{{ $state.href('owm.resource.calendar', { city: resources[0].city, resourceId: resources[0].id }) }}">{{ 'RESOURCE_EDIT_CALENDAR' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab ng-if="resources.length > 1"><md-tab-label>
-        <a ui-sref="owm.resource.own">{{ 'RESOURCE_EDIT_CALENDAR' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.resource.own">{{ 'MY_RESOURCES' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.finance.v4">{{ 'MY_FINANCE' | translate }}</a>
-      </md-tab-label></md-tab>
-    </md-tabs>
-
-    <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length === 0">
-      <md-tab><md-tab-label>
-        <a ui-sref="list-your-car">{{ 'CREATE_RESOURCE_BUTTON' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.trips">{{ 'TRIPS_BOOKINGS_FOR_OWNER' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.finance.v4">{{ 'MY_FINANCE' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a href="{{ 'NAVBAR.HOW_IT_WORKS_URL' | translate }}">{{ 'NAVBAR.HOW_IT_WORKS' | translate }}</a>
-      </md-tab-label></md-tab>
-    </md-tabs>
-
-  </div>
+<div class="dashboard-hero">
+  <div class="hero-overlay" style="z-index:1;"></div>
+  <span><h1 id="tagline" class="fadeInDown animated ng-binding">MyWheels maakt autodelen makkelijk</h1></span>
 </div>
 
-<!-- SHORTCUT DEELAUTO -->
-<div class="card" ng-if="me.provider.id === 5 && me.preference">
-  <div class="card-body no-padding">
+<div class="container container-transitional">
 
-    <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length === 0">
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.resource.own">{{ 'CREATE_RESOURCE_BUTTON' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.person.profile">{{ 'ADD_PROFILE_PERSONAL' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }}</a>
-      </md-tab-label></md-tab>
-    </md-tabs>
+  <div class="row">
+    <div ng-class="{ 'col-md-8': showSidebar, 'col-xs-12': !showSidebar }">
+      <!-- SHORTCUT MYWHEELS -->
+      <div class="card" ng-if="me.provider.id === 1 && me.preference">
+        <div class="card-body no-padding">
 
-    <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length > 0">
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.resource.own">{{ 'ADD_PARKING_PERMIT' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.resource.own">{{ 'ADD_MEMBERS' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.person.profile">{{ 'ADD_PROFILE_PERSONAL' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }}</a>
-      </md-tab-label></md-tab>
-    </md-tabs>
+          <md-tabs class="shortcut" ng-if="me.preference !== 'owner'">
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.trips">{{ 'MY_TRIPS' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.finance.v4">{{ 'MY_FINANCE' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.message">{{ 'MY_MESSAGES' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.person.aboutme">{{ 'MY_MEMBER_PAGE' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a href="{{ 'NAVBAR.HOW_IT_WORKS_URL' | translate }}">{{ 'NAVBAR.HOW_IT_WORKS' | translate }}</a>
+            </md-tab-label></md-tab>
+          </md-tabs>
 
-    <md-tabs class="shortcut" ng-if="me.preference !== 'owner'">
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.person.profile">{{ 'ADD_PROFILE_PERSONAL' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }}</a>
-      </md-tab-label></md-tab>
-      <md-tab><md-tab-label>
-        <a href="{{ 'NAVBAR.HOW_IT_WORKS_URL' | translate }}">{{ 'NAVBAR.HOW_IT_WORKS' | translate }}</a>
-      </md-tab-label></md-tab>
-    </md-tabs>
+          <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length > 0">
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.trips">{{ 'TRIPS_BOOKINGS_FOR_OWNER' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab ng-if="resources.length === 1"><md-tab-label>
+              <a ng-href="{{ $state.href('owm.resource.calendar', { city: resources[0].city, resourceId: resources[0].id }) }}">{{ 'RESOURCE_EDIT_CALENDAR' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab ng-if="resources.length > 1"><md-tab-label>
+              <a ui-sref="owm.resource.own">{{ 'RESOURCE_EDIT_CALENDAR' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.resource.own">{{ 'MY_RESOURCES' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.finance.v4">{{ 'MY_FINANCE' | translate }}</a>
+            </md-tab-label></md-tab>
+          </md-tabs>
 
-  </div>
-</div>
+          <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length === 0">
+            <md-tab><md-tab-label>
+              <a ui-sref="list-your-car">{{ 'CREATE_RESOURCE_BUTTON' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.trips">{{ 'TRIPS_BOOKINGS_FOR_OWNER' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.finance.v4">{{ 'MY_FINANCE' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a href="{{ 'NAVBAR.HOW_IT_WORKS_URL' | translate }}">{{ 'NAVBAR.HOW_IT_WORKS' | translate }}</a>
+            </md-tab-label></md-tab>
+          </md-tabs>
 
-<!-- ACTIONS -->
-<div class="card" ng-if="actions.length">
-  <div class="card-heading">
-    <h2 class="card-title" ng-if="actions.length">{{ 'MY_ACTIONS' | translate }}</h2>
-  </div>
+        </div>
+      </div>
 
-  <div class="card-body" ng-if="actions.length">
-    <ul class="list-row action-list">
-      <li ng-repeat="a in actions">
+      <!-- SHORTCUT DEELAUTO -->
+      <div class="card" ng-if="me.provider.id === 5 && me.preference">
+        <div class="card-body no-padding">
 
-        <a ng-if="a.descriptor.deletable" class="close pull-right" ng-click="deleteAction(a)">&times;</a>
+          <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length === 0">
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.resource.own">{{ 'CREATE_RESOURCE_BUTTON' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.person.profile">{{ 'ADD_PROFILE_PERSONAL' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }}</a>
+            </md-tab-label></md-tab>
+          </md-tabs>
 
-        <div ng-bind-html="renderHtml(a.message)" style="margin-bottom: 5px"></div>
+          <md-tabs class="shortcut" ng-if="me.preference === 'owner' && resources.length > 0">
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.resource.own">{{ 'ADD_PARKING_PERMIT' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.resource.own">{{ 'ADD_MEMBERS' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.person.profile">{{ 'ADD_PROFILE_PERSONAL' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }}</a>
+            </md-tab-label></md-tab>
+          </md-tabs>
 
-        <span ng-repeat="button in a.descriptor.buttons">
-          <button class="btn btn-primary" ng-if="button.state" ui-sref="{{ button.state }}">{{ button.text }}</button>
-        </span>
+          <md-tabs class="shortcut" ng-if="me.preference !== 'owner'">
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.person.profile">{{ 'ADD_PROFILE_PERSONAL' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }}</a>
+            </md-tab-label></md-tab>
+            <md-tab><md-tab-label>
+              <a href="{{ 'NAVBAR.HOW_IT_WORKS_URL' | translate }}">{{ 'NAVBAR.HOW_IT_WORKS' | translate }}</a>
+            </md-tab-label></md-tab>
+          </md-tabs>
 
-      </li>
-    </ul>
-  </div>
-</div>
+        </div>
+      </div>
 
-<!-- CURRENT BOOKINGS -->
-<div id="current_bookings" class="card" ng-if="bookings.length > 0">
-  <div class="card-heading">
-    <h2 class="card-title">{{ 'CURRENT_BOOKINGS' | translate }}
-      <span class="pull-right" hide-xs>
-        <small>
-          Getoond: {{ bookings.length }} van {{ totalBookings }} (<a ui-sref="owm.trips">Bekijk ritgeschiedenis</a>)
-        </small>
-      </span>
-      <span class="pull-left" hide-gt-xs>
-        <small>
-          Getoond: {{ bookings.length }} van {{ totalBookings }} (<a ui-sref="owm.trips">Bekijk alles</a>)
-        </small>
-      </span>
-    </h2>
-  </div>
-  <div class="card-body">
-    <ul class="list-row booking-list">
-      <li ng-repeat="b in bookings" ng-include="'booking/list/partial/booking-list-item.tpl.html'">
-      </li>
-    </ul>
-  </div>
-</div>
+      <!-- ACTIONS -->
+      <div class="card" ng-if="actions.length">
+        <div class="card-heading">
+          <h2 class="card-title" ng-if="actions.length">{{ 'MY_ACTIONS' | translate }}</h2>
+        </div>
 
-<!-- CURRENT RENTALS -->
-<div id="current_rentals" class="card" ng-if="rentals.length > 0">
-  <div class="card-heading">
-    <h2 class="card-title">{{ 'CURRENT_RENTALS' | translate }}
-      <span class="pull-right" hide-xs>
-        <small>
-          Getoond: {{ rentals.length }} van {{ totalRentals }}
-          (<a ng-if="me.provider.id !== 50" ui-sref="owm.trips">Bekijk verhuurgeschiedenis</a>
-          <a ng-if="me.provider.id === 50" ui-sref="owm.trips">Bekijk ritgeschiedenis</a>)
-        </small>
-      </span>
-      <span class="pull-left" hide-gt-xs>
-        <small>
-          Getoond: {{ rentals.length }} van {{ totalRentals }}
-          (<a ui-sref="owm.trips">Bekijk alles</a>)
-        </small>
-      </span>
-    </h2>
-  </div>
-  <div class="card-body" id="resource-info">
-    <ul class="list-row booking-list">
-      <li ng-repeat="b in rentals" ui-sref="owm.booking.show({ bookingId: b.id })"
-          ng-include="'booking/list/partial/booking-list-item--owner.tpl.html'">
-      </li>
-    </ul>
-  </div>
-</div>
+        <div class="card-body" ng-if="actions.length">
+          <ul class="list-row action-list">
+            <li ng-repeat="a in actions">
 
-<!-- MEMBER RESOURCES -->
-<div id="members_resource_buttons" class="card" ng-if="membersResources.length >= 1">
+              <a ng-if="a.descriptor.deletable" class="close pull-right" ng-click="deleteAction(a)">&times;</a>
 
-  <div class="card-heading">
-    <h2 class="card-title">{{ 'MEMBERS_RESOURCES' | translate }}<info-icon tooltip-html="'INFO_MEMBERS_RESOURCES' | translate"></info-icon></h2>
-  </div>
+              <div ng-bind-html="renderHtml(a.message)" style="margin-bottom: 5px"></div>
 
-  <div class="card-body">
-    <div ng-if="membersResources.length >= 1">
-      <ul class="list-row">
-        <li ng-repeat="resource in membersResources" ng-click="selectFavoriteResource(resource)">
-          <div ng-include="'resource/partials/resource-header1.tpl.html'"></div>
-        </li>
-      </ul>
+              <span ng-repeat="button in a.descriptor.buttons">
+                <button class="btn btn-primary" ng-if="button.state" ui-sref="{{ button.state }}">{{ button.text }}</button>
+              </span>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CURRENT BOOKINGS -->
+      <div id="current_bookings" class="card" ng-if="bookings.length > 0">
+        <div class="card-heading">
+          <h2 class="card-title">{{ 'CURRENT_BOOKINGS' | translate }}
+            <span class="pull-right" hide-xs>
+              <small>
+                Getoond: {{ bookings.length }} van {{ totalBookings }} (<a ui-sref="owm.trips">Bekijk ritgeschiedenis</a>)
+              </small>
+            </span>
+            <span class="pull-left" hide-gt-xs>
+              <small>
+                Getoond: {{ bookings.length }} van {{ totalBookings }} (<a ui-sref="owm.trips">Bekijk alles</a>)
+              </small>
+            </span>
+          </h2>
+        </div>
+        <div class="card-body">
+          <ul class="list-row booking-list">
+            <li ng-repeat="b in bookings" ng-include="'booking/list/partial/booking-list-item.tpl.html'">
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- CURRENT RENTALS -->
+      <div id="current_rentals" class="card" ng-if="rentals.length > 0">
+        <div class="card-heading">
+          <h2 class="card-title">{{ 'CURRENT_RENTALS' | translate }}
+            <span class="pull-right" hide-xs>
+              <small>
+                Getoond: {{ rentals.length }} van {{ totalRentals }}
+                (<a ng-if="me.provider.id !== 50" ui-sref="owm.trips">Bekijk verhuurgeschiedenis</a>
+                <a ng-if="me.provider.id === 50" ui-sref="owm.trips">Bekijk ritgeschiedenis</a>)
+              </small>
+            </span>
+            <span class="pull-left" hide-gt-xs>
+              <small>
+                Getoond: {{ rentals.length }} van {{ totalRentals }}
+                (<a ui-sref="owm.trips">Bekijk alles</a>)
+              </small>
+            </span>
+          </h2>
+        </div>
+        <div class="card-body" id="resource-info">
+          <ul class="list-row booking-list">
+            <li ng-repeat="b in rentals" ui-sref="owm.booking.show({ bookingId: b.id })"
+                ng-include="'booking/list/partial/booking-list-item--owner.tpl.html'">
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- MEMBER RESOURCES -->
+      <div id="members_resource_buttons" class="card" ng-if="membersResources.length >= 1">
+
+        <div class="card-heading">
+          <h2 class="card-title">{{ 'MEMBERS_RESOURCES' | translate }}<info-icon tooltip-html="'INFO_MEMBERS_RESOURCES' | translate"></info-icon></h2>
+        </div>
+
+        <div class="card-body">
+          <div ng-if="membersResources.length >= 1">
+            <ul class="list-row">
+              <li ng-repeat="resource in membersResources" ng-click="selectFavoriteResource(resource)">
+                <div ng-include="'resource/partials/resource-header1.tpl.html'"></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- BLOG ITEMS -->   
+      <div class="dashboard--blog--overview">
+          <section class="center">
+              <h2>Ons laatste nieuws</h2>
+              <a type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-big" href="https://mywheels.nl/blog/" target="_blank" md-ink-ripple="#3a6d81" hide-xs>
+                  Lees alles
+              </a>
+          </section>
+          <div class="dashboard--blog--overview--items">
+              <section>
+                  <ul>
+                      <li class="dashboard--blog--item" ng-repeat="item in blogItems">
+                          <a target="_blank" href="{{ item.url }}" ng-bind="item.title"></a>
+                      </li>
+                  </ul>
+                  <a type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-margin-top mywheels-btn-big" href="/blog" md-ink-ripple="#3a6d81" hide-gt-xs>
+                      Lees alles
+                  </a>
+              </section>
+          </div>
+      </div>
+
+      <!-- FAVORITES -->
+      <div id="dashboard_buttons" class="card">
+
+        <div class="card-heading" ng-if="favoriteResources.length >= 1">
+          <h2 class="card-title">{{ 'FAVORITE_RESOURCES' | translate }}<info-icon tooltip-html="'INFO_FAVORITES' | translate"></info-icon></h2>
+        </div>
+
+        <div class="card-body">
+          <div ng-if="favoriteResources.length >= 1">
+            <ul class="list-row">
+              <li ng-repeat="resource in favoriteResources" ng-click="selectFavoriteResource(resource)">
+                <div ng-include="'resource/partials/resource-header1.tpl.html'"></div>
+              </li>
+            </ul>
+            <a ui-sref="owm.resource.search.list" class="btn btn-success">{{ 'SHOW_MORE_RESOURCES' | translate }}</a>
+          </div>
+
+          <ul class="list-inline" ng-if="!(favoriteResources.length >= 1)">
+            <li id="dashboard_rent_a_car" ng-if="me.preference != 'owner'">
+              <a ui-sref="owm.resource.search.list" class="btn btn-success">
+                {{ 'RENT_A_CAR' | translate }}
+              </a>
+            </li>
+            <li id="dashboard_list_your_car" ng-if="me.preference != 'renter'">
+              <a ui-sref="owm.resource.own" class="btn btn-primary">
+                {{ 'MY_RESOURCES' | translate }}
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
     </div>
-  </div>
-</div>
-
-<!-- FAVORITES -->
-<div id="dashboard_buttons" class="card">
-
-  <div class="card-heading" ng-if="favoriteResources.length >= 1">
-    <h2 class="card-title">{{ 'FAVORITE_RESOURCES' | translate }}<info-icon tooltip-html="'INFO_FAVORITES' | translate"></info-icon></h2>
-  </div>
-
-  <div class="card-body">
-    <div ng-if="favoriteResources.length >= 1">
-      <ul class="list-row">
-        <li ng-repeat="resource in favoriteResources" ng-click="selectFavoriteResource(resource)">
-          <div ng-include="'resource/partials/resource-header1.tpl.html'"></div>
-        </li>
-      </ul>
-      <a ui-sref="owm.resource.search.list" class="btn btn-success">{{ 'SHOW_MORE_RESOURCES' | translate }}</a>
-    </div>
-
-    <ul class="list-inline" ng-if="!(favoriteResources.length >= 1)">
-      <li id="dashboard_rent_a_car" ng-if="me.preference != 'owner'">
-        <a ui-sref="owm.resource.search.list" class="btn btn-success">
-          {{ 'RENT_A_CAR' | translate }}
-        </a>
-      </li>
-      <li id="dashboard_list_your_car" ng-if="me.preference != 'renter'">
-        <a ui-sref="owm.resource.own" class="btn btn-primary">
-          {{ 'MY_RESOURCES' | translate }}
-        </a>
-      </li>
-    </ul>
   </div>
 </div>

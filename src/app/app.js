@@ -171,7 +171,8 @@ angular.module('openwheels', [
 
 .config(function (uiGmapGoogleMapApiProvider) {
   uiGmapGoogleMapApiProvider.configure({
-    key: 'AIzaSyC1QrtfmsYNsJAfx9OOl5QX0oNpMVo3fbw',
+    key: 'AIzaSyCHB96NegdNAKvHnDBiM7fDy8EJDMcQVYo',
+    // key: 'AIzaSyC1QrtfmsYNsJAfx9OOl5QX0oNpMVo3fbw',
     v: '3.30.0',
     libraries: 'places',
     language: 'nl'
@@ -286,6 +287,7 @@ angular.module('openwheels', [
       (featuresService.get('filtersSidebar') && $state.includes('owm.resource.search')) ||
       (featuresService.get('filtersSidebar') && $state.includes('owm.resource.place')) ||
       (featuresService.get('resourceSidebar') && $state.includes('owm.resource.show')) ||
+      $state.includes('owm.person.dashboard') ||
       $state.includes('member')
     );
     $rootScope.containerHome = (

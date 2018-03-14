@@ -3,7 +3,6 @@
 angular.module('owm.person', [
   'owm.person.dashboard',
   'owm.person.intro',
-  'owm.person.dashboard.v1',
   'owm.person.profile',
   'owm.person.details',
   'owm.person.aboutme',
@@ -99,13 +98,9 @@ angular.module('owm.person', [
   $stateProvider.state('owm.person.dashboard', {
     url: '',
     views: {
-      'main@shell': {
+      'main-full@shell': {
         templateUrl: 'person/dashboard/person-dashboard.tpl.html',
         controller: 'PersonDashboardController'
-      },
-      'main-full@shell': {
-        templateUrl: 'person/dashboard/person-dashboard-hero.tpl.html',
-        controller: 'PersonDashboardHeroController'
       }
     },
     resolve: {
