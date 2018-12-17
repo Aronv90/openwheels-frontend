@@ -4,7 +4,7 @@ angular.module('DutchZipcodeService', [])
 
 .factory('dutchZipcodeService', function($rootScope, $timeout, $http, $q) {
   var zipcodeService = {};
-  var pro6pp_auth_key = 'Xv1RdZtTHhXgcaOF';
+  var pro6pp_auth_key = '5MyYoDMamZNLazVS';
 
   // Trigger on '5408xb' and on '5408 XB'
   var NL_SIXPP_REGEX = /[0-9]{4,4}\s?[a-zA-Z]{2,2}/;
