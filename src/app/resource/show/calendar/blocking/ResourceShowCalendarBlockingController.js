@@ -1,35 +1,13 @@
 'use strict';
 angular.module('owm.resource.show.calendar.blocking', [])
 
-	.controller('ResourceShowCalendarBlockingController', function ($location, $rootScope, $scope, $state, $filter, $uibModalInstance, blocking, API_DATE_FORMAT) {
+	.controller('ResourceShowCalendarBlockingController', function (
+		$scope,
+		$mdDialog,
+		blocking,
+		API_DATE_FORMAT
+	) {
 		$scope.blocking = angular.copy(blocking);
-
-		$scope.dateConfig = {
-			//model
-			modelFormat: API_DATE_FORMAT,
-			formatSubmit: 'yyyy-mm-dd',
-
-			//view
-			viewFormat: 'DD-MM-YYYY',
-			format: 'dd-mm-yyyy',
-			//options
-			selectMonths: true
-
-		};
-
-		$scope.timeConfig = {
-			//model
-			modelFormat: API_DATE_FORMAT,
-			formatSubmit: 'HH:i',
-
-			//view
-			viewFormat: 'HH:mm',
-			format: 'HH:i',
-
-			//options
-			interval: $rootScope.timePickerInterval || 15
-		};
-
 
 		var timeCache = {};
 
@@ -63,16 +41,16 @@ angular.module('owm.resource.show.calendar.blocking', [])
 			}
 		});
 
-		$scope.save = function(){
-			$uibModalInstance.close($scope.blocking);
+		$scope.accept = function(){
+			$mdDialog.hide($scope.blocking);
 		};
 
 		$scope.remove = function(){
 			$scope.blocking.remove = true;
-			$uibModalInstance.close($scope.blocking);
+			$mdDialog.hide($scope.blocking);
 		};
 
-		$scope.cancel = function () {
-			$uibModalInstance.dismiss();
+		$scope.hide = function () {
+			$mdDialog.cancel();
 		};
 	});

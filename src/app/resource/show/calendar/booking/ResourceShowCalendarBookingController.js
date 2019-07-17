@@ -1,15 +1,20 @@
 'use strict';
 angular.module('owm.resource.show.calendar.booking', [])
 
-	.controller('ResourceShowCalendarBookingController', function ($location, $scope, $state, $filter, $uibModalInstance, booking) {
+	.controller('ResourceShowCalendarBookingController', function (
+		$scope,
+		$state,
+		$mdDialog,
+		booking
+	) {
 		$scope.booking = booking;
 
-		$scope.cancel = function () {
-			$uibModalInstance.dismiss();
+		$scope.hide = function () {
+			$mdDialog.cancel();
 		};
 
     $scope.goMember = function (personId) {
-      $uibModalInstance.dismiss();
+      $mdDialog.cancel();
       $state.go('member', { personId: personId });
     };
 	});
