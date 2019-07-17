@@ -7,10 +7,25 @@ angular.module('owm.resource.show.calendar', [
   'owm.models.calendar.blockingEvent'
 ])
 
-  .controller('ResourceShowCalendarController', function ($location, $scope, $state, $stateParams, $filter, $uibModal, $translate,
-    isBeheerder,
-    me, calendarService, bookings, resource, blockings, BlockingEvent, BookingEvent, API_DATE_FORMAT, Analytics, metaInfoService, appConfig) {
-    
+  .controller('ResourceShowCalendarController', function (
+    $location,
+    $scope,
+    $state,
+    $stateParams,
+    $mdDialog,
+    me,
+    calendarService,
+    bookings,
+    resource,
+    blockings,
+    BlockingEvent,
+    BookingEvent,
+    API_DATE_FORMAT,
+    Analytics,
+    metaInfoService,
+    appConfig
+  ) {
+
     metaInfoService.set({url: appConfig.serverUrl + '/auto-huren/'+ (resource.city || '').toLowerCase().replace(/ /g, '-') + '/' + resource.id + '/kalender'});
     metaInfoService.set({canonical: 'https://mywheels.nl/auto-huren/'+ (resource.city || '').toLowerCase().replace(/ /g, '-') + '/' + resource.id + '/kalender'});
 
@@ -38,28 +53,30 @@ angular.module('owm.resource.show.calendar', [
 
 
       function editBookingEvent() {
-        $uibModal.open({
+        $mdDialog.show({
+          locals: {
+            booking: event.booking
+          },
           templateUrl: 'resource/show/calendar/booking/resource-show-calendar-booking.tpl.html',
           controller: 'ResourceShowCalendarBookingController',
-          resolve: {
-            booking: function () {
-              return event.booking;
-            }
-          }
+          parent: angular.element(document.body),
+          clickOutsideToClose: true
         });
       }
 
 
       function editBlockingEvent() {
-        $uibModal.open({
+        $mdDialog.show({
+          locals: {
+            blocking: event.blocking,
+          },
           templateUrl: 'resource/show/calendar/blocking/resource-show-calendar-blocking.tpl.html',
           controller: 'ResourceShowCalendarBlockingController',
-          resolve: {
-            blocking: function () {
-              return event.blocking;
-            }
-          }
-        }).result.then(function (blocking) {
+          parent: angular.element(document.body),
+          //targetEvent: $event,
+          clickOutsideToClose: true,
+        })
+          .then(function (blocking) {
             var newProps;
             if (blocking.remove) {
               removeBlocking(blocking);
@@ -140,18 +157,20 @@ angular.module('owm.resource.show.calendar', [
         return;
       }
       function addBlocking() {
-        $uibModal.open({
+        $mdDialog.show({
+          locals: {
+            blocking: {
+              start: moment(date).format(API_DATE_FORMAT),
+              until: moment(date).add(6, 'hours').format(API_DATE_FORMAT)
+            },
+          },
           templateUrl: 'resource/show/calendar/blocking/resource-show-calendar-blocking.tpl.html',
           controller: 'ResourceShowCalendarBlockingController',
-          resolve: {
-            blocking: function () {
-              return {
-                start: moment(date).format(API_DATE_FORMAT),
-                until: moment(date).add(6, 'hours').format(API_DATE_FORMAT)
-              };
-            }
-          }
-        }).result.then(function (blocking) {
+          parent: angular.element(document.body),
+          //targetEvent: $event,
+          clickOutsideToClose: true,
+        })
+          .then(function (blocking) {
             var otherProps = {};
             if (blocking.repeat) {
 

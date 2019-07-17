@@ -1,42 +1,44 @@
-<div class="modal-content">
+<md-dialog flex-xs="90" flex-sm="60" flex-md="50" flex-lg="30" flex-xl="25"
+           style="overflow: visible; position: absolute; top: 10px;">
 
-    <div class="modal-header">
-        <button type="button" class="close" ng-click="cancel()"><span aria-hidden="true">&times;</span><span
-                class="sr-only">Close</span></button>
-        <h4 class="modal-title">{{ 'BOOKING_INFO' | translate }}</h4>
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>
+        <ng-md-icon icon="access_time"></ng-md-icon>
+        {{ 'BOOKING_INFO' | translate }}
+      </h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="hide()">
+        <ng-md-icon icon="close"></ng-md-icon>
+      </md-button>
     </div>
+  </md-toolbar>
 
-    <div class="modal-body">
+  <md-dialog-content class="md-dialog-content"
+                     style="overflow: visible; padding: 14px;">
 
-        <table class="table">
-            <tr>
-                <th>{{ 'DATE_START' | translate }}</th>
-                <td>{{ booking.beginBooking | amDateFormat:'DD-MM-YYYY HH:mm' }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'DATE_END' | translate }}</th>
-                <td>{{ booking.endBooking | amDateFormat:'DD-MM-YYYY HH:mm' }}</td>
-            </tr>
-            <tr>
-                <th>{{ 'FIRST_NAME' | translate }}</th>
-                <td>
-                  <a ng-click="goMember(booking.person.id)">{{ booking.person.firstName }}</a>
-                  <info-icon tooltip-html="'BOOKING_INFO_FIRSTNAME_TIP' | translate"></info-icon>
-                </td>
-            </tr>
-        </table>
+    <table class="table">
+        <tr>
+            <th>{{ 'DATE_START' | translate }}</th>
+            <td>{{ booking.beginBooking | amDateFormat:'DD-MM-YYYY HH:mm' }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'DATE_END' | translate }}</th>
+            <td>{{ booking.endBooking | amDateFormat:'DD-MM-YYYY HH:mm' }}</td>
+        </tr>
+        <tr>
+            <th>{{ 'FIRST_NAME' | translate }}</th>
+            <td>
+                <a ng-click="goMember(booking.person.id)">{{ booking.person.firstName }}</a>
+                <info-icon tooltip-html="'BOOKING_INFO_FIRSTNAME_TIP' | translate"></info-icon>
+            </td>
+        </tr>
+    </table>
 
-    </div>
+  </md-dialog-content>
+  
+  <md-dialog-actions layout="row">
+    <md-button ng-click="hide()" class="md-raised md-primary mw-green">OK</md-button>
+  </md-dialog-actions>
 
-    <div class="modal-footer">
-        <button class="btn btn-primary" ng-click="cancel()">OK</button>
-    </div>
-</div>
-
-<select name="coupon_type" id="dropdown_shop_coupon_type" style="width: 150px; display: none;">
-    <option value="">Show all types</option>
-    <option value="fixed_cart"></option>
-    <option value="percent"></option>
-    <option value="fixed_product"></option>
-    <option value="percent_product" selected="selected"></option>
-</select>
+</md-dialog>
