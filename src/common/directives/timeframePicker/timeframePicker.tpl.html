@@ -28,7 +28,8 @@
           <input type="text" autocomplete="off" name="pickupTime" id="pickupTime" placeholder="Tijd" required
                  ng-model="pickupTime"
                  ng-change="checkTimeframe('pickup', $event)"
-                 ng-keydown="$event.keyCode == 13 ? true : null" />
+                 ng-keydown="$event.keyCode == 13 ? true : null"
+                 ng-disabled="disableTimeFields" />
           <div ng-if="mobile" class="mobile-mask"></div>
         </div>
       </div>
@@ -67,7 +68,8 @@
           <input type="text" autocomplete="off" name="returnTime" id="returnTime" placeholder="Tijd" required
                  ng-model="returnTime"
                  ng-change="checkTimeframe('return', $event)"
-                 ng-keydown="$event.keyCode == 13 ? true : null" />
+                 ng-keydown="$event.keyCode == 13 ? true : null"
+                 ng-disabled="disableTimeFields" />
           <div ng-if="mobile" class="mobile-mask"></div>
         </div>
       </div>

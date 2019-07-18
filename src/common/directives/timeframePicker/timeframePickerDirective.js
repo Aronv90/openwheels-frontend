@@ -7,6 +7,7 @@
  *      mobile-autoscroll    (=)  :: boolean (whether to autoscroll on mobile)
  *      show-extend-buttons  (=)  :: boolean (whether to show +1/+2/+4 extension buttons)
  *      disable-logic        (=)  :: boolean
+ *      disable-time-fields  (=)  :: boolean
  *      pickup-date-time     (=)  :: string in format `API_DATE_FORMAT`
  *      return-date-time     (=)  :: string in format `API_DATE_FORMAT`
  *   />
@@ -71,6 +72,7 @@ angular.module('timeframePickerDirective', [])
       mobileAutoscroll: '=',
       showExtendButtons: '=',
       disableLogic: '=',
+      disableTimeFields: '=',
       pickupDateTime: '=', // a string in format `API_DATE_FORMAT` (for the data model, not the user)
       returnDateTime: '=', // a string in format `API_DATE_FORMAT` (for the data model, not the user)
     },
