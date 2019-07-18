@@ -38,8 +38,8 @@ angular.module("owm.components")
     } else if (this.resource) {
       params = {
         location: {
-          latitude: this.resource.lat,
-          longitude: this.resource.lng
+          latitude: this.resource.latitude,
+          longitude: this.resource.longitude
         },
         radius: 5000,
         maxresults: 4,

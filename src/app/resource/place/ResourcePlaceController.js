@@ -115,7 +115,7 @@ angular.module('owm.resource.place', [])
       ],*/
       filters: filters, /*{
         //smartwheels: true ("true"?),
-        //resourceType: "van" | "cabrio" | "station" | "oldtimer"
+        //resourceType: "van" | "station"
         //minSeats: 4,
         //fuelType: "cng" | "benzine" | "diesel" | "elektrisch" | "hybride" | "lpg"
       },*/
