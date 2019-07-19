@@ -63,14 +63,10 @@ angular.module('owm.resource.show', [])
   function setResourceType (resource) {
     if (resource.resourceType === 'car') {
       $scope.resourceTypeValue = $translate.instant('RESOURCE_TYPE.CAR');
-    } else if (resource.resourceType === 'cabrio') {
-      $scope.resourceTypeValue = $translate.instant('RESOURCE_TYPE.CABRIO');
     } else if (resource.resourceType === 'van') {
       $scope.resourceTypeValue = $translate.instant('RESOURCE_TYPE.VAN');
     } else if (resource.resourceType === 'station') {
       $scope.resourceTypeValue = $translate.instant('RESOURCE_TYPE.STATION');
-    } else if (resource.resourceType === 'oldtimer') {
-      $scope.resourceTypeValue = $translate.instant('RESOURCE_TYPE.OLDTIMER');
     } else {
       $scope.resourceTypeValue = $translate.instant('RESOURCE_TYPE.CAR');
     }

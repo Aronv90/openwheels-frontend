@@ -163,8 +163,22 @@
                 </p>
             </section>
 
+            <section ng-show="licencePlate.data && !licencePlate.data.teDureAuto && licencePlate.data.cabrio">
+                <h2 class="list-your-car--container--error">Helaas, je kunt via MyWheels geen cabrio's verhuren.</h2>
+                <p class="text-center">
+                    Onze verzekering is niet geschikt voor het verhuren van cabrio's, je kunt jouw cabrio daarom niet via MyWheels verhuren.
+                </p>
+            </section>
+
+            <section ng-show="licencePlate.data && !licencePlate.data.teDureAuto && licencePlate.data.oldtimer">
+                <h2 class="list-your-car--container--error">Helaas, je kunt via MyWheels geen oldtimers verhuren.</h2>
+                <p class="text-center">
+                    Onze verzekering is niet geschikt voor het verhuren van oldtimers, je kunt jouw oldtimer daarom niet via MyWheels verhuren.
+                </p>
+            </section>
+
             <section
-                ng-show="licencePlate.data && !licencePlate.data.teDureAuto && !licencePlate.data.camper"
+                ng-show="licencePlate.data && !licencePlate.data.teDureAuto && !licencePlate.data.camper && !licencePlate.data.cabrio && !licencePlate.data.oldtimer"
             >
                 <div class="list-your-car--car-info-list" style="min-height: 0; margin-bottom: 2rem;">
                     <ul>
@@ -204,7 +218,7 @@
                 </div>
             </section>
             <div layout="column" layout-align="center center" class="list-your-car--buttons layout-align-center-center layout-column">
-              <button type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-big" ng-click="beginRentingOut()" ng-show="licencePlate.data && !licencePlate.data.teDureAuto && !licencePlate.data.camper" ng-disabled="!licencePlate.data">
+              <button type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-big" ng-click="beginRentingOut()" ng-show="licencePlate.data && !licencePlate.data.teDureAuto && !licencePlate.data.camper && !licencePlate.data.cabrio && !licencePlate.data.oldtimer" ng-disabled="!licencePlate.data">
                 Voeg deze auto toe
               </button>
               <button type="button" name="button" class="mywheels-btn mywheels-btn-light" ng-show="licencePlate.data" ng-click="licencePlate.data = licencePlate.content = ''">

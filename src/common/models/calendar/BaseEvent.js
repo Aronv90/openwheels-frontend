@@ -19,7 +19,10 @@ angular.module('owm.models.calendar.baseEvent', [])
     };
 
     BaseEvent.prototype.isAllDay = function(){
-      return new Date(this.start).getHours() + new Date(this.end).getHours() === 0;
+      return (
+        (new Date(this.start).getHours() + new Date(this.end).getHours() === 0) ||
+        (moment(this.start).format('HH:mm') === '00:00' && moment(this.end).format('HH:mm') === '23:59')
+      );
     };
 
     return BaseEvent;

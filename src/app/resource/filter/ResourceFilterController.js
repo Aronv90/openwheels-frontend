@@ -26,9 +26,7 @@ angular.module('owm.resource.filter', [])
 
     $scope.resourceTypeOptions = [
       {value: 'van', label: $translate.instant('RESOURCE_TYPE.VAN')},
-      {value: 'cabrio', label: $translate.instant('RESOURCE_TYPE.CABRIO')},
       {value: 'station', label: $translate.instant('RESOURCE_TYPE.STATION')},
-      {value: 'oldtimer', label: $translate.instant('RESOURCE_TYPE.OLDTIMER')}
     ];
 
     $scope.minSeatOptions = [
