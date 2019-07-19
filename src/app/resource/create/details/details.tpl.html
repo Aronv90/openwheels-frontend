@@ -16,7 +16,7 @@
             <p ng-show="!$root.personSubmitted && !personSubmitted">{{ ('LIST_YOUR_CAR_PERSON' | translate).split('&nbsp;').join(' ') }}</p>
             
             <section ng-show="$root.personSubmitted || personSubmitted">
-                <p>Jouw {{ resource.brand | toTitleCase }} is nu beschikbaar voor meer dan 65.000 leden van MyWheels. Klik hieronder om te bekijken hoe zij jouw auto zien.</p>
+                <p>Jouw {{ resource.brand | toTitleCase }} is nu beschikbaar voor meer dan 70.000 leden van MyWheels. Klik hieronder om te bekijken hoe zij jouw auto zien.</p>
 
                 <center><button type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-big" ui-sref="owm.resource.show({city: (resource.city | replaceSpaceToDash | lowercase), resourceId: resource.id})" ui-sref-opts="{ inherit: false }">Bekijk autopagina</button></center>
 
