@@ -149,7 +149,7 @@ angular.module('personalDataDirective', [])
             if (year && month && day) {
               if (phoneNumbers) {
                 if (male) {
-                  if (streetName && streetNumber && city && containsStreetNumber(streetNumber)) {
+                  if (streetName && streetNumber && city && zipcode && containsStreetNumber(streetNumber)) {
 
                     // save persons info
                     personService.alter({
@@ -413,7 +413,7 @@ angular.module('personalDataDirective', [])
             }
             const geocoder = new google.maps.Geocoder();
             geocoder.geocode({
-              address: `${$scope.person.streetName}, ${$scope.person.streetNumber}, ${$scope.person.city}`,
+              address: `${$scope.person.streetName}, ${$scope.person.streetNumber}, ${$scope.person.zipcode}, ${$scope.person.city}`,
               componentRestrictions: { country: $scope.person.country },
               region: "nl"
             }, (results, status) => {
@@ -427,8 +427,11 @@ angular.module('personalDataDirective', [])
                 const found = extract(results[0]);
                 // console.log(found);
                 if (found.streetName && found.latitude && found.longitude) {
-                  if (found.streetName === $scope.person.streetName) {
-                    angular.merge($scope.person, found);
+                  if ((found.streetName === $scope.person.streetName) ||
+                      (found.zipcode || '').replace(/ /g, '') === ($scope.person.zipcode || '').replace(/ /g, '')
+                  ) {
+                    const newLocData = { latitude: found.latitude, longitude: found.longitude };
+                    angular.merge($scope.person, newLocData);
                   }
                 }
               }
