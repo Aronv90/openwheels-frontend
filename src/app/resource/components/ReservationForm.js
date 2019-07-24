@@ -500,7 +500,7 @@ angular.module('owm.resource.reservationForm', [])
         })
         .then(function (response) {
           var bookingId = response.id;
-          // return $state.go('owm.booking.show', { bookingId: bookingId });
+          return $state.go('owm.booking.show', { bookingId: bookingId });
         })
         .catch(function (err) {
           $log.debug('got error', err);
