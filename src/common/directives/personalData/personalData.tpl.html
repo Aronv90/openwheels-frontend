@@ -103,7 +103,7 @@
                 force-selection="true"
                 ng-model="addressSearch.address"
                 class="form-control"
-                placeholder="Straatnaam en huisnummer"
+                placeholder="Zoeken op straatnaam en huisnummer"
                 style="font-weight: normal; line-height: inherit !important; height: 40px !important;"
                 ng-focus="handleFocus()"
                 ng-blur="handleBlur()"
@@ -118,7 +118,7 @@
             <div class="responsive">
                 <!-- streetName -->
                 <div id="streetName_group" class="icon home field">
-                    <input type="text" name="streetName" id="streetName" ng-focus="backToAutocomplete()" ng-model="person.streetName" placeholder="{{ 'STREET_NAME' | translate }}">
+                    <input type="text" name="streetName" id="streetName" ng-focus="onSplitAddressChange()" ng-model="person.streetName" placeholder="{{ 'STREET_NAME' | translate }}">
 
                     <div class="err-block" ng-show="personalDataForm.$submitted && !person.streetName">
                         <span class="text-danger">{{ 'REQUIRED' | translate }}</span>
@@ -137,9 +137,29 @@
                 <!-- /streetNumber -->
             </div>
 
-            <div style="margin: 1rem 0;">
-                <em>{{ person.city }}, {{ person.country }}</em>
+            <div class="responsive">
+                <!-- zipcode -->
+                <div id="zipcode_group" class="icon home field">
+                    <input type="text" name="zipcode" id="zipcode" ng-change="onSplitAddressChange()" ng-model="person.zipcode" placeholder="Postcode">
+
+                    <div class="err-block" ng-show="personalDataForm.$submitted && !person.zipcode">
+                        <span class="text-danger">{{ 'REQUIRED' | translate }}</span>
+                    </div>
+                </div>
+                <!-- /zipcode -->
+
+                <!-- city -->
+                <div id="city_group" class="icon home field">
+                    <input type="text" name="city" id="city" ng-change="onSplitAddressChange()" ng-model="person.city" placeholder="Stad">
+
+                    <div class="err-block" ng-show="personalDataForm.$submitted && !person.city">
+                        <span class="text-danger">{{ 'REQUIRED' | translate }}</span>
+                    </div>
+                </div>
+                <!-- /city -->
             </div>
+
+            <p style="margin: 1rem 0;"><a ng-click="backToAutocomplete()">Opnieuw zoeken</a></p>
         </div>
 
         <!-- iban -->

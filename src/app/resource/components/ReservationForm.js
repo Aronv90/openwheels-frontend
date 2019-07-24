@@ -475,7 +475,9 @@ angular.module('owm.resource.reservationForm', [])
         //  * Apply discount (only if we have a discount code)
         //  */
         .then(function (response) {
-          Analytics.trackEvent('booking', 'created_post', response.id, $scope.resource.owner.id === 282 ? 11 : (!$scope.resource.isConfirmationRequiredOthers ? 4 : undefined), true);
+          if (booking.contract.contractor.id !== booking.resource.owner.id) {
+            Analytics.trackEvent('booking', 'created_post', response.id, $scope.resource.owner.id === 282 ? 11 : (!$scope.resource.isConfirmationRequiredOthers ? 4 : undefined), true);
+          }
           if (!booking.discountCode) { // === undefined (?)
             return response;
           } else {
