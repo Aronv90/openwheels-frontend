@@ -507,7 +507,9 @@ angular.module('owm.person.details', [])
       contract: contractId,
       riskReduction: riskReduction,
     }).then(function (booking) { //go to an other state
-      Analytics.trackEvent('booking', 'created_post', booking.id, booking.resource.owner.id === 282 ? 11 : (!booking.resource.isConfirmationRequiredOthers ? 4 : undefined), true);
+      if (booking.contract.contractor.id !== booking.resource.owner.id) {
+        Analytics.trackEvent('booking', 'created_post', booking.id, booking.resource.owner.id === 282 ? 11 : (!booking.resource.isConfirmationRequiredOthers ? 4 : undefined), true);
+      }
       goToNextState(3, booking.id); //set the booking id in the url
       $scope.isAvailable = true; //set isAvailable to true to render the table
       return booking;

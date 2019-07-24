@@ -110,7 +110,7 @@ BOOKING - DONE
 
   + created_post
     - label: booking.id
-    - value: fixed number 11 iif owner 282, 4 iif isConfirmationRequiredOthers = false, else undefined
+    - value: fixed number 11 iif owner 282, 4 if isConfirmationRequiredOthers = false, else undefined
     - triggers:
         - reservationForm.js then after booking.create
 
