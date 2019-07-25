@@ -497,6 +497,11 @@ angular.module('openwheels', [
       var hashedUserId = hash(userId);
       $analytics.setUsername(hashedUserId);
     }
+
+    var dataLayer = window.dataLayer = window.dataLayer || [];
+    dataLayer.push({
+      'mywheels user category': (!authService.user || !authService.user.identity || authService.user.identity.status === 'new') ? 'newUser' : 'returningUser'
+    });
   }
 
   function setAnalyticsUserStats () {
