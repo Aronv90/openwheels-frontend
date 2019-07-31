@@ -227,7 +227,7 @@ angular.module('owm.person.dashboard', [])
 
     personService.alter(params)
     .then(function(res) {
-        me = res;
+      me.registerSource = res.registerSource;
     })
     .catch(function (err) {
       alertService.addError(err);
