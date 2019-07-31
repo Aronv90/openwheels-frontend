@@ -165,9 +165,9 @@ angular.module('owm.person.dashboard', [])
 
   loadContracts();
 
-  if(me.registerSource === 'facebook_register') {
+  if(me.registerSource === 'web_fb') {
     Analytics.trackEvent('person', 'created', me.id, undefined, true);
-    saveRegisterSource('facebook_login');
+    saveRegisterSource('web_fb_login');
   }
 
   //Syntus Utrecht offer for MyWheels Open
