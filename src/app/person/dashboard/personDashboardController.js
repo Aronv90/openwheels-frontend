@@ -224,16 +224,18 @@ angular.module('owm.person.dashboard', [])
 
     alertService.load();
     $scope.busy = true;
-    personService.alter(params).then(function () {
 
+    personService.alter(params)
+    .then(function(res) {
+        me = res;
     })
-      .catch(function (err) {
-        alertService.addError(err);
-      })
-      .finally(function () {
-        alertService.loaded();
-        $scope.busy = false;
-      });
+    .catch(function (err) {
+      alertService.addError(err);
+    })
+    .finally(function () {
+      alertService.loaded();
+      $scope.busy = false;
+    });
   }
 
   function loadResources() {
