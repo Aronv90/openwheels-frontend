@@ -592,6 +592,7 @@ angular.module('owm.booking.show', [])
   payRedirect,
   authService, boardcomputerService, discountUsageService, chatPopupService, linksService,
   booking, me, declarationService, $mdDialog, contract, Analytics, paymentService, voucherService,
+  zoneService,
   $window, $mdMedia, discountService, account2Service, $rootScope, chipcardService, metaInfoService,
   extraDriverService,
   damageService) {
@@ -1005,29 +1006,42 @@ angular.module('owm.booking.show', [])
   var zoom = 14;
 
   $scope.setMarkersForMap = function() {
-    angular.extend($scope, {
-      map: {
-        center: {
-          latitude: latitude,
-          longitude: longitude
-        },
-        draggable: true,
-        markers: [{
-          idKey: 1,
-          icon: ($scope.resource.locktypes.indexOf('chipcard') >= 0 || $scope.resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-80.png' : 'assets/img/mywheels-key-marker-v2-80.png',
-          latitude: latitude,
-          longitude: longitude,
-          title: $scope.resource.alias
-        }], // an array of markers,
-        zoom: zoom,
-        options: {
-          scrollwheel: false,
-          fullscreenControl: false,
-          mapTypeControl: false,
-          streetViewControl: false
+    var addMap = function (zonePolygon) {
+      angular.extend($scope, {
+        map: {
+          zonePolygon: zonePolygon, // : { geometry: Array<{ latitude: number, longitude: number }>, type: "polygon" }
+          center: {
+            latitude: latitude,
+            longitude: longitude
+          },
+          draggable: true,
+          markers: [{
+            idKey: 1,
+            icon: ($scope.resource.locktypes.indexOf('chipcard') >= 0 || $scope.resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-80.png' : 'assets/img/mywheels-key-marker-v2-80.png',
+            latitude: latitude,
+            longitude: longitude,
+            title: $scope.resource.alias
+          }], // an array of markers,
+          zoom: zoom,
+          options: {
+            scrollwheel: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
+            streetViewControl: false
+          }
         }
-      }
-    });
+      });
+    };
+
+    if ($scope.resource.parkingType === 'zone') {
+      zoneService
+      .forResource({ resource: $scope.resource.id })
+      .then(function (res) {
+        addMap(res.geometry);
+      });
+    } else {
+      addMap();
+    }
   };
 
   if (booking.resource.locktypes.indexOf('smartphone') >= 0 && !$scope.bookingEndedReally && $scope.accepted && booking.ok && $scope.bookingStartsWithinOneHour) {

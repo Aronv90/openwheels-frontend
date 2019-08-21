@@ -30,4 +30,14 @@
       {{ resource.numberOfBookings | wasBookedTimes }}
     </div>
   </div>
+  <div layout="column" layout-gt-xs="row" layout-align="center start" class="key-features-row">
+    <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.parkingType !== 'default'">
+      <ng-md-icon icon="local_parking"></ng-md-icon>
+      {{ resource.parkingType | parkingType }}
+    </div>
+    <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.fuelLevel !== null">
+      <fuel-charging-icon resource="resource" />
+      {{ resource.fuelLevel }}% ({{ resource.fuelRange }} km bereik)
+    </div>
+  </div>
 </div>

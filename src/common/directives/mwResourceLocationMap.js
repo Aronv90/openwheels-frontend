@@ -40,6 +40,16 @@ angular.module('mwResourceLocationMap', [])
 
       var height = Math.round(width * (350/640));
 
+      // make sure polygon is a closed loop
+      if ($scope.map.zonePolygon) {
+        var coords = $scope.map.zonePolygon.coordinates;
+        var a = coords[0];
+        var z = coords[coords.length - 1];
+        if ((z.longitude - a.longitude) + (z.latitude - a.latitude) < 0.01) {
+          coords.push(a);
+        }
+      }
+
       $scope.src = [
         'https://maps.googleapis.com/maps/api/staticmap',
         '?zoom=', 14,
@@ -48,6 +58,9 @@ angular.module('mwResourceLocationMap', [])
         '&size=', width, 'x', height,
         '&maptype=roadmap',
         (markers ? '&markers=' + markers : ''),
+        ($scope.map.zonePolygon ? '&path=color:0x6c9d3fff|fillcolor:0x85bb5476|weight:2|' + $scope.map.zonePolygon.coordinates.map(function (c) {
+          return c.latitude + ',' + c.longitude;
+        }).join('|') : ''),
         '&key=', appConfig.gmaps_js_api_key,
 // TODO        '&signature=',
       ].join('');

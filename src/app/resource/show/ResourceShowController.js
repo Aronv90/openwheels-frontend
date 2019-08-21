@@ -5,6 +5,7 @@ angular.module('owm.resource.show', [])
 .controller('ResourceShowController', function ($window, $log, $q, $timeout, $location, $mdDialog, $mdMedia, $scope,
   $state, $filter, authService, resourceService, bookingService, invoice2Service, alertService,
   chatPopupService, ratingService, API_DATE_FORMAT, resource, me, resourceQueryService, featuresService, $stateParams,
+  zoneService,
   prevState,
   linksService, Analytics, metaInfoService, $localStorage, $translate, appConfig, $anchorScroll) {
   Analytics.trackEvent('discovery', 'show_car', resource.id, undefined, true);
@@ -254,30 +255,43 @@ angular.module('owm.resource.show', [])
     });
   }
 
-  if(!$scope.removed) {
-    angular.extend($scope, {
-      map: {
-        center: {
-          latitude: resource.latitude,
-          longitude: resource.longitude
-        },
-        draggable: true,
-        markers: [{
-          idKey: 1,
-          icon: (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-80.png' : 'assets/img/mywheels-key-marker-v2-80.png',
-          latitude: resource.latitude,
-          longitude: resource.longitude,
-          title: resource.alias
-        }], // an array of markers,
-        zoom: 14,
-        options: {
-          scrollwheel: false,
-          fullscreenControl: false,
-          mapTypeControl: false,
-          streetViewControl: false
+  if (!$scope.removed) {
+    var addMap = function (zonePolygon) {
+      angular.extend($scope, {
+        map: {
+          zonePolygon: zonePolygon, // : { geometry: Array<{ latitude: number, longitude: number }>, type: "polygon" }
+          center: {
+            latitude: resource.latitude,
+            longitude: resource.longitude
+          },
+          draggable: true,
+          markers: [{
+            idKey: 1,
+            icon: (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-80.png' : 'assets/img/mywheels-key-marker-v2-80.png',
+            latitude: resource.latitude,
+            longitude: resource.longitude,
+            title: resource.alias
+          }], // an array of markers,
+          zoom: 14,
+          options: {
+            scrollwheel: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
+            streetViewControl: false
+          }
         }
-      }
-    });
+      });
+    };
+
+    if ($scope.resource.parkingType === 'zone') {
+      zoneService
+      .forResource({ resource: $scope.resource.id })
+      .then(function (res) {
+        addMap(res.geometry);
+      });
+    } else {
+      addMap();
+    }
   }
 
   function loadFavorite () {
