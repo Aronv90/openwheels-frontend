@@ -274,13 +274,15 @@ angular.module('owm.resource.place', [])
           };
 
           if (!mapResourceCache[resourcePreview.id]) {
+            var keyType = resourcePreview.boardcomputer ? '-open' : '-key';
+            var approx = (resourcePreview.parkingType === 'zone') ? '-approx' : '';
             var marker = {
               id: resourcePreview.id,
               //position: { lat: coords.latitude, lng: coords.longitude },
               coords: coords,
               title: resourcePreview.alias,
               resource: resourcePreview,
-              icon: resourcePreview.boardcomputer ? 'assets/img/mywheels-open-marker-v2-40.png' : 'assets/img/mywheels-key-marker-v2-40.png',
+              icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-40.png',
               showWindow: false,
             };
 

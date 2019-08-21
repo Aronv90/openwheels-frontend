@@ -52,19 +52,24 @@
                             <md-tooltip md-direction="bottom" class="multiline">{{ 'MYWHEELS_OPEN_INFO' | translate }}</md-tooltip>
                         </span>
                         <span 
-                            ng-if="resource.newScoreCar && ['smartphone', 'chipcard'].indexOf(resource.locktype) < 0"
+                            ng-if="resource.newScoreCar"
                             class="tag tag-success"
                             style="margin-left: 0px;"
                         >
                             {{ 'NEW_TIP' | translate }}
                         </span>
-                        <span 
-                            ng-if="resource.newScoreCar && ['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0"
-                            class="tag tag-success"
+                        <span
+                            ng-if="resource.parkingType !== 'default'"
+                            class="tag tag-info"
                             style="margin-left: 0px;"
                         >
-                            {{ 'NEW_TIP' | translate }}
+                            {{ resource.parkingType | parkingType }}
                         </span>
+                        <fuel-charging-icon
+                            show-percentage="true"
+                            resource="resource"
+                            style="margin-left: -6px;"
+                        />
                     </div>
                 </md-list-item>
                 <md-list-item>
