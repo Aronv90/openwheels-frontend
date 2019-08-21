@@ -263,7 +263,7 @@
                 <div class="card-heading" ng-if="resource.location">
                     <h3>{{ resource.location }} <small ng-if="resource.city">{{ resource.city | replaceDashToSpace | toTitleCase }}</small></h3>
                 </div>
-                <div class="decrease-max-gmaps-height">
+                <div class="decrease-max-gmaps-height" ng-if="map">
                     <mw-resource-location-map map="map"></mw-resource-location-map>
                 </div>
 

@@ -1,4 +1,9 @@
 
+const PARKING_TYPES = {
+  "parking_spot": "Vaste plek",
+  "zone": "Zoneplek"
+};
+
 angular.module("filters.resource", [])
 
 .filter("resourcePicture", function ($filter, appConfig) {
@@ -16,6 +21,27 @@ angular.module("filters.resource", [])
       }
     }
     return imageUrl;
+  };
+})
+
+.filter("parkingType", function () {
+  return function (parkingType) {
+    return PARKING_TYPES[parkingType] || "Onbekend";
+  };
+})
+
+.filter("fuelChargingIconName", function () {
+  return function (resource) {
+    if (resource.fuelLevel === null) {
+      return "battery_unknown";
+    }
+    const prefix = "battery_" + (resource.charging ? "charging_" : "");
+    for (const level of [90, 80, 60, 50, 30, 20]) {
+      if (resource.fuelLevel >= level) {
+        return prefix + level;
+      }
+    }
+    return prefix + 20;
   };
 });
 

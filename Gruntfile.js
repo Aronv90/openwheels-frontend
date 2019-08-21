@@ -563,14 +563,6 @@ module.exports = function (grunt) {
     'connect:livereload',
     'watch'
   ]);
-  // run local server
-  grunt.registerTask('docker', [
-    'build-common',
-    'less:build',
-    'configure',
-    'ngconstant:development',
-    'index:build'
-  ]);
 
   // sync locale files
   grunt.registerTask('locale', ['synclocale:nl_en']);

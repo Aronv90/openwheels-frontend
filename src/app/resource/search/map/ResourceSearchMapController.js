@@ -255,13 +255,15 @@ angular.module('owm.resource.search.map', ['uiGmapgoogle-maps'])
               longitude: resource.longitude
             };
 
+            var keyType = (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
+            var approx = (resource.parkingType === 'zone') ? '-approx' : '';
             var marker = {
               id: resource.id,
               coords: coords,
               title: resource.alias,
               animation: maps.Animation.DROP,
               resource: resource,
-              icon: (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-40.png' : 'assets/img/mywheels-key-marker-v2-40.png',
+              icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-40.png',
               showWindow: false
             };
 

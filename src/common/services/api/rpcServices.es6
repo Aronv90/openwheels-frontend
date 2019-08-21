@@ -41,6 +41,13 @@ angular.module('rpcServices', [])
   this.search = m('search');
 })
 
+.service('zoneService', function (api) {
+  var m = function (name) {
+    return api.createRpcMethod('zone.' + name);
+  };
+  this.forResource = m('forResource');
+})
+
 .service('contractService', function (api) {
   var m = function (name) {
     return api.createRpcMethod('contract.' + name);
