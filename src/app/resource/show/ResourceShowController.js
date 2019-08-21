@@ -257,6 +257,8 @@ angular.module('owm.resource.show', [])
 
   if (!$scope.removed) {
     var addMap = function (zonePolygon) {
+      var keyType = (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
+      var approx = (resource.parkingType === 'zone') ? '-approx' : '';
       angular.extend($scope, {
         map: {
           zonePolygon: zonePolygon, // : { geometry: Array<{ latitude: number, longitude: number }>, type: "polygon" }
@@ -267,7 +269,7 @@ angular.module('owm.resource.show', [])
           draggable: true,
           markers: [{
             idKey: 1,
-            icon: (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-80.png' : 'assets/img/mywheels-key-marker-v2-80.png',
+            icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
             latitude: resource.latitude,
             longitude: resource.longitude,
             title: resource.alias

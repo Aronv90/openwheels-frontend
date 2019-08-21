@@ -17,7 +17,7 @@ angular.module("mwResourceLocationMap", [])
       if ($scope.map.markers && $scope.map.markers.length > 0) {
         var m = $scope.map.markers[0];
         if (!m.icon.match(/^http/)) {
-          m.icon = "https://mywheels.nl/" + m.icon;
+          m.icon = window.location.origin + "/" + m.icon;
         }
         // use `m.title` ?
         markers = encodeURIComponent([

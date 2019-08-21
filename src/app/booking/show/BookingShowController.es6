@@ -1007,6 +1007,8 @@ angular.module('owm.booking.show', [])
 
   $scope.setMarkersForMap = function() {
     var addMap = function (zonePolygon) {
+      var keyType = ($scope.resource.locktypes.indexOf('chipcard') >= 0 || $scope.resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
+      var approx = ($scope.resource.parkingType === 'zone') ? '-approx' : '';
       angular.extend($scope, {
         map: {
           zonePolygon: zonePolygon, // : { geometry: Array<{ latitude: number, longitude: number }>, type: "polygon" }
@@ -1017,7 +1019,7 @@ angular.module('owm.booking.show', [])
           draggable: true,
           markers: [{
             idKey: 1,
-            icon: ($scope.resource.locktypes.indexOf('chipcard') >= 0 || $scope.resource.locktypes.indexOf('smartphone') >= 0) ? 'assets/img/mywheels-open-marker-v2-80.png' : 'assets/img/mywheels-key-marker-v2-80.png',
+            icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
             latitude: latitude,
             longitude: longitude,
             title: $scope.resource.alias
