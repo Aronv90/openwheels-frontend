@@ -1,5 +1,10 @@
 <div class="mw-resource-location-map">
 
+  <p ng-if="map.zonePolygon" class="card-body" style="padding-top: 0; padding-bottom: 0;">
+    Deze auto heeft geen vaste parkeerplaats, en kan vrij in de groen gemarkeerde zone geparkeerd worden.
+    <!-- iets van "Je krijgt de exacte locatie toegestuurd voor de rit begint." -->
+  </p>
+
   <a class="map-link" ng-click="openMap()" ng-if="!showMap">
     <img style="display: block; max-width: 100%; height: auto;" src="{{ src }}" />
     <div class="hover_overlay"></div>
