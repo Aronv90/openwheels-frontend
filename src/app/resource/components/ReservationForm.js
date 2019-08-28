@@ -475,9 +475,11 @@ angular.module('owm.resource.reservationForm', [])
         //  * Apply discount (only if we have a discount code)
         //  */
         .then(function (response) {
-          if (booking.contract.contractor.id !== booking.resource.owner.id && booking.resource.provider.id === 1) {
-            Analytics.trackEvent('booking', 'created_post', response.id, $scope.resource.owner.id === 282 ? 11 : (!$scope.resource.isConfirmationRequiredOthers ? 4 : undefined), true);
-          }
+          try {
+            if (booking.person.id !== booking.resource.owner.id && booking.resource.provider.id === 1) {
+              Analytics.trackEvent('booking', 'created_post', response.id, $scope.resource.owner.id === 282 ? 11 : (!$scope.resource.isConfirmationRequiredOthers ? 4 : undefined), true);
+            }
+          } catch (e) {}
           if (!booking.discountCode) { // === undefined (?)
             return response;
           } else {
