@@ -1006,7 +1006,7 @@ angular.module('owm.booking.show', [])
   var zoom = 14;
 
   $scope.setMarkersForMap = function() {
-    var addMap = function (zonePolygon) {
+    var addMap = function (zonePolygon, chargingPoints) {
       var keyType = ($scope.resource.locktypes.indexOf('chipcard') >= 0 || $scope.resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
       var approx = ($scope.resource.parkingType === 'zone') ? '-approx' : '';
       angular.extend($scope, {
@@ -1023,7 +1023,15 @@ angular.module('owm.booking.show', [])
             latitude: latitude,
             longitude: longitude,
             title: $scope.resource.alias
-          }], // an array of markers,
+          }].concat((chargingPoints || []).map(function (chargingPoint, j) {
+            var key = Math.ceil(2 * (chargingPoint.status.available / (chargingPoint.status.available + chargingPoint.status.charging)));
+            return {
+              idKey: j + 2,
+              icon: 'assets/img/chargingpoint_' + key + '.png',
+              latitude: chargingPoint.location.latitude,
+              longitude: chargingPoint.location.longitude
+            };
+          })),
           zoom: zoom,
           options: {
             scrollwheel: false,
@@ -1039,7 +1047,14 @@ angular.module('owm.booking.show', [])
       zoneService
       .forResource({ resource: $scope.resource.id })
       .then(function (res) {
-        addMap(res.geometry);
+        zoneService
+        .chargingPoints({
+          coordinates: res.geometry.coordinates,
+          type: 'polygon'
+        })
+        .then(function (res2) {
+          addMap(res.geometry, res2.data);
+        });
       });
     } else {
       addMap();

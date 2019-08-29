@@ -256,7 +256,7 @@ angular.module('owm.resource.show', [])
   }
 
   if (!$scope.removed) {
-    var addMap = function (zonePolygon, chargingPoints) {
+    var addMap = function (zonePolygon) {
       var keyType = (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
       var approx = (resource.parkingType === 'zone') ? '-approx' : '';
       angular.extend($scope, {
@@ -275,13 +275,7 @@ angular.module('owm.resource.show', [])
               longitude: resource.longitude,
               title: resource.alias
             }
-          ].concat((chargingPoints || []).map(function (chargingPoint, j) {
-            return {
-              idKey: j + 2,
-              latitude: chargingPoint.location.latitude,
-              longitude: chargingPoint.location.longitude
-            };
-          })),
+          ],
           zoom: 14,
           options: {
             scrollwheel: false,
@@ -297,14 +291,7 @@ angular.module('owm.resource.show', [])
       zoneService
       .forResource({ resource: $scope.resource.id })
       .then(function (res) {
-        zoneService
-        .chargingPoints({
-          coordinates: res.geometry.coordinates,
-          type: 'polygon'
-        })
-        .then(function (res2) {
-          addMap(res.geometry, res2.data);
-        });
+        addMap(res.geometry);
       });
     } else {
       addMap();
