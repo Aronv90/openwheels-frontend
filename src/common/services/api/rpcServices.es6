@@ -46,6 +46,7 @@ angular.module('rpcServices', [])
     return api.createRpcMethod('zone.' + name);
   };
   this.forResource = m('forResource');
+  this.chargingPoints = m('chargingPoints');
 })
 
 .service('contractService', function (api) {

@@ -267,13 +267,15 @@ angular.module('owm.resource.show', [])
             longitude: resource.longitude
           },
           draggable: true,
-          markers: [{
-            idKey: 1,
-            icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
-            latitude: resource.latitude,
-            longitude: resource.longitude,
-            title: resource.alias
-          }], // an array of markers,
+          markers: [
+            {
+              idKey: 1,
+              icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
+              latitude: resource.latitude,
+              longitude: resource.longitude,
+              title: resource.alias
+            }
+          ],
           zoom: 14,
           options: {
             scrollwheel: false,

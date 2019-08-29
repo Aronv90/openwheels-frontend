@@ -12,21 +12,21 @@ angular.module("mwResourceLocationMap", [])
     controller: function ($scope, $element) {
 
       var center = "";
-      var markers = "";
+      var markers;
 
       if ($scope.map.markers && $scope.map.markers.length > 0) {
-        var m = $scope.map.markers[0];
-        if (!m.icon.match(/^http/)) {
-          m.icon = window.location.origin + "/" + m.icon;
-        }
-        // use `m.title` ?
-        markers = encodeURIComponent([
-          "icon:" + m.icon,
-          "|",
-          "scale:2",
-          "|",
-          m.latitude + "," + m.longitude,
-        ].join(""));
+        markers = $scope.map.markers.map(m => {
+          if (!m.icon.match(/^http/)) {
+            m.icon = window.location.origin + "/" + m.icon;
+          }
+          return encodeURIComponent([
+            "icon:" + m.icon,
+            "|",
+            "scale:2",
+            "|",
+            m.latitude + "," + m.longitude,
+          ].join(""));
+        });
       } else {
         center = $scope.map.center.latitude + "," + $scope.map.center.longitude;
       }
@@ -56,7 +56,7 @@ angular.module("mwResourceLocationMap", [])
         "&scale=2", // for retina
         "&size=", width, "x", height,
         "&maptype=roadmap",
-        (markers ? "&markers=" + markers : ""),
+        (markers ? markers.map(def => "&markers=" + def).join("") : ""),
         ($scope.map.zonePolygon ? "&path=color:0x6c9d3fff|fillcolor:0x85bb5476|weight:2|" + $scope.map.zonePolygon.coordinates.map(function (c) {
           return c.latitude + "," + c.longitude;
         }).join("|") : ""),
