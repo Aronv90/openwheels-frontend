@@ -1,0 +1,45 @@
+<div class="container container-transitional">
+  <md-toolbar class="app-toolbar">
+
+    <div class="md-toolbar-tools">
+
+      <img ng-src="branding/img/logo.png" height="30" />
+
+      <!-- geo searchbar -->
+      <div class="mywheels-form hidden-xs" style="flex-grow: 1;">
+        <div class="form-group mw-icon searchbar searchbar--no-opacity" style="margin: 0;">
+          <ng-md-icon icon="search" aria-hidden="true" style="top: 11px;"></ng-md-icon>
+          <input class="hoverstyle"
+                type="text"
+                placeholder="Waar zoek je een auto?"
+             ng-model="geoSearch"
+             g-places-autocomplete
+             options="autocompleteOptions"
+             force-selection="true"
+                style="font-weight: normal; font-size: 16px;" />
+        </div>
+      </div>
+
+      <span flex></span>
+
+      <!-- <md-button
+        hide-xs
+        class="mywheels-btn-call-to-action app--toolbar--button--text"
+        md-ink-ripple="#8f6700"
+        href="#aanmeldformulier"
+        smooth-scroll-to-item="#aanmeldformulier"
+      >
+        <span>Meld je aan</span>
+      </md-button> -->
+
+      <md-button
+        hide-xs
+        ui-sref="home"
+      >
+        <span>Naar mywheels.nl</span>
+      </md-button>
+
+    </div>
+
+  </md-toolbar>
+</div>
