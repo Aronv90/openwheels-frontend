@@ -85,7 +85,7 @@
                 name="email"
                 class="form-control"
                 ng-model="newEmail.text"
-                ng-pattern="/^[^@]+@[a-z.]+\.[a-z.]{2,5}$/"
+                ng-pattern="/^[^@]+@[a-z0-9_+-.]+\.[a-z.]{2,5}$/"
                 required
               />
               <md-button class="md-icon-button" ng-if="$index > 0" ng-click="removeEmailLine(newEmail)">
