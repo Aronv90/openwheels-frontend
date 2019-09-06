@@ -41,7 +41,7 @@
     </p>
 
     <p ng-if="params.perspective.isRenter && params.discount.length > 0">
-      Je hebt kortingscode {{ params.discount[0].discount.code }} gebruikt voor deze reservering. Je krijgt tot <span ng-if="params.discount[0].discount.amount > 0">€ {{ params.discount[0].discount.amount }}</span> <span ng-if="params.discount[0].discount.percentage > 0">{{ discount[0].discount.percentage }}%</span> korting van <span ng-if="params.discount[0].discount.sender.id === params.resource.owner.id">verhuurder</span> {{ discount[0].discount.sender | fullname }}.
+      Je hebt kortingscode {{ params.discount[0].discount.code }} gebruikt voor deze reservering. Je krijgt tot <span ng-if="params.discount[0].discount.amount > 0">€ {{ params.discount[0].discount.amount }}</span> <span ng-if="params.discount[0].discount.percentage > 0">{{ params.discount[0].discount.percentage }}%</span> korting van <span ng-if="params.discount[0].discount.sender.id === params.resource.owner.id">verhuurder</span> {{ params.discount[0].discount.sender | fullname }}.
     </p>
 
     <div ng-if="params.perspective.isRenter && !params.me.isBusinessConnected">
