@@ -79,6 +79,20 @@ angular.module('owm.pages', [
     },
   })
 
+  .state('owmlanding.iedereendoetwat', {
+    url: '/klimaat',
+    views: {
+      'toolbar@shell': {
+        templateUrl: 'pages/iedereendoetwat/toolbar.tpl.html',
+        controller: 'ToolbarController'
+      },
+      'main-full@shell': {
+        templateUrl: 'pages/iedereendoetwat/iedereendoetwat.tpl.html',
+        controller: 'IedereenDoetWatController'
+      }
+    },
+  })
+
   // .state('owmlanding.mywheels-lease', {
   //   url: '/lease',
   //   views: {
