@@ -4,6 +4,11 @@ const PARKING_TYPES = {
   "zone": "Zoneplek"
 };
 
+const PARKING_TYPES_TOOLTIPS = {
+  "parking_spot": "Deze auto heeft een vaste aangewezen parkeerplaats.",
+  "zone": "Deze auto heeft geen vaste parkeerplaats, en kan vrij in de gemarkeerde zone geparkeerd worden."
+};
+
 angular.module("filters.resource", [])
 
 .filter("resourcePicture", function ($filter, appConfig) {
@@ -27,6 +32,12 @@ angular.module("filters.resource", [])
 .filter("parkingType", function () {
   return function (parkingType) {
     return PARKING_TYPES[parkingType] || "Onbekend";
+  };
+})
+
+.filter("parkingTypeTooltip", function () {
+  return function (parkingType) {
+    return PARKING_TYPES_TOOLTIPS[parkingType] || "";
   };
 })
 

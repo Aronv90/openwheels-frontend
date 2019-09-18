@@ -5,7 +5,26 @@
   <div class="card-heading">
     <h3 class="card-title">{{ resource.location }} {{ resource.streetNumber }} <small>{{ resource.city }}</small></h3>
   </div>
-  <mw-resource-location-map map="map"></mw-resource-location-map>
+
+  <div class="card-body" style="padding-top: 0; padding-bottom: 0; margin-bottom: 1em;">
+    <p ng-if="map.zonePolygon" style="margin-top: 0;">
+      Deze auto heeft geen vaste parkeerplaats, en kan vrij in de gemarkeerde zone geparkeerd worden.
+      <!-- iets van "Je krijgt de exacte locatie toegestuurd voor de rit begint." -->
+    </p>
+    <p ng-if="currentLocationMap">
+      <a ng-if="!showingCurrentLocationMap" ng-click="toggleCurrentLocationMap()">
+        <ng-md-icon icon="near_me"></ng-md-icon>
+        Toon huidige locatie
+      </a>
+      <a ng-if="showingCurrentLocationMap" ng-click="toggleCurrentLocationMap()">
+        <ng-md-icon icon="local_parking"></ng-md-icon>
+        <span ng-if="resource.parkingType === 'zone'">Toon parkeerzone</span>
+        <span ng-if="resource.parkingType !== 'zone'">Toon parkeerplaats</span>
+      </a>
+    </p>
+  </div>
+  <mw-resource-location-map map="showingCurrentLocationMap ? currentLocationMap : map"></mw-resource-location-map>
+
   <div class="card-heading" ng-if="locationError && !bookingEndedReally">
     <span>{{ locationError }}</span>
   </div>

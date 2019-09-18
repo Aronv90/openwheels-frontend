@@ -275,7 +275,7 @@ angular.module('owm.resource.place', [])
 
           if (!mapResourceCache[resourcePreview.id]) {
             var keyType = resourcePreview.boardcomputer ? '-open' : '-key';
-            var approx = (resourcePreview.parkingType === 'zone') ? '-approx' : '';
+            var approx = (resourcePreview.parkingType === 'zone') ? /*'-approx'*/ '' : '';
             var marker = {
               id: resourcePreview.id,
               //position: { lat: coords.latitude, lng: coords.longitude },

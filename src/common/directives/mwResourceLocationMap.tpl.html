@@ -1,10 +1,5 @@
 <div class="mw-resource-location-map">
 
-  <p ng-if="map.zonePolygon" class="card-body" style="padding-top: 0; padding-bottom: 0;">
-    Deze auto heeft geen vaste parkeerplaats, en kan vrij in de groen gemarkeerde zone geparkeerd worden.
-    <!-- iets van "Je krijgt de exacte locatie toegestuurd voor de rit begint." -->
-  </p>
-
   <a class="map-link" ng-click="openMap()" ng-if="!showMap">
     <img style="display: block; max-width: 100%; height: auto;" src="{{ src }}" />
     <div class="hover_overlay"></div>
@@ -20,31 +15,18 @@
       bounds="map.bounds"
       events="map.events"
       options="map.options"
+      control="map.control"
     >
       <ui-gmap-polygon
         ng-if="map.zonePolygon"
         path="map.zonePolygon.coordinates"
-        fill="{ color: '#85bb54', opacity: 0.5 }"
-        stroke="{ color: '#6c9d3f', opacity: 1 }"
+        fill="{ color: '#e1a100', opacity: 0.5 }"
+        stroke="{ color: '#e1a100', opacity: 1 }"
         static="true"
       ></ui-gmap-polygon>
 
-      <ui-gmap-marker idKey="m.idKey" ng-repeat="m in map.markers" coords="m" icon="m.icon.replace('80', '40')">
+      <ui-gmap-marker idKey="m.idKey" ng-repeat="m in map.markers" coords="m" icon="m.icon.replace('80', '40').replace('_2x', '')">
       </ui-gmap-marker>
     </ui-gmap-google-map>
   </div>
-
-  <!-- from booking/show -->
-  <!--
-  <ui-gmap-google-map
-       center="map.center"
-       zoom="map.zoom"
-       draggable="false"
-       dragging="map.dragging"
-       bounds="map.bounds"
-       events="map.events"
-       options="map.options">
-       <ui-gmap-marker ng-repeat="m in map.markers" idKey="m.idKey" coords="m" icon="m.icon"></ui-gmap-marker>
-  </ui-gmap-google-map>
-  -->
 </div>
