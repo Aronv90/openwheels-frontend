@@ -1113,12 +1113,12 @@ angular.module('owm.booking.show', [])
     boardcomputerService.currentLocation({
       resource: $scope.resource.id
     })
-    .catch(function () {
-      return {
-        lat: 52.0220785,
-        lng: 5.0449991
-      };
-    })
+    // .catch(function () {
+    //   return {
+    //     lat: 52.0220785,
+    //     lng: 5.0449991
+    //   };
+    // })
     .then(function (location) {
       if (location && location.lat && location.lng) {
         $scope.currentLocation = {
