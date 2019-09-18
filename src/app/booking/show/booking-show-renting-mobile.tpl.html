@@ -103,6 +103,18 @@
           </div>
         </div>
 
+        <div class="card-body-item" ng-if="resource.usageManual && progress.reservationCompleted">
+          <div
+            class="card-body"
+            info-dialog="booking-manual"
+            info-dialog-fullscreen="true"
+            info-dialog-params="{ booking: booking, resource: resource }"
+          >
+            <ng-md-icon class="pull-right" icon="chevron_right"></ng-md-icon>
+            Handleiding auto
+          </div>
+        </div>
+
         <div class="card-body-item" ng-if="resource.boardcomputer && progress.reservationCompleted">
           <div
             class="card-body"

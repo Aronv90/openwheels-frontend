@@ -256,7 +256,7 @@ angular.module('owm.resource.search.map', ['uiGmapgoogle-maps'])
             };
 
             var keyType = (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
-            var approx = (resource.parkingType === 'zone') ? '-approx' : '';
+            var approx = (resource.parkingType === 'zone') ? /*'-approx'*/ '' : '';
             var marker = {
               id: resource.id,
               coords: coords,

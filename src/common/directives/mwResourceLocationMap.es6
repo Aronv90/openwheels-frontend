@@ -7,62 +7,68 @@ angular.module("mwResourceLocationMap", [])
     restrict: "E",
     templateUrl: "directives/mwResourceLocationMap.tpl.html",
     scope: {
-      map: "=",
+      map: "="
     },
     controller: function ($scope, $element) {
 
-      var center = "";
-      var markers;
+      function render() {
+        var center = "";
+        var markers;
 
-      if ($scope.map.markers && $scope.map.markers.length > 0) {
-        markers = $scope.map.markers.map(m => {
-          if (!m.icon.match(/^http/)) {
-            m.icon = window.location.origin + "/" + m.icon;
-          }
-          return encodeURIComponent([
-            "icon:" + m.icon,
-            "|",
-            "scale:2",
-            "|",
-            m.latitude + "," + m.longitude,
-          ].join(""));
-        });
-      } else {
-        center = $scope.map.center.latitude + "," + $scope.map.center.longitude;
-      }
-
-      var width = 640; // = max width
-
-      if ($window.innerWidth < 640) {
-        width = $window.innerWidth;
-      }
-
-      var height = Math.round(width * (350/640));
-
-      // make sure polygon is a closed loop
-      if ($scope.map.zonePolygon) {
-        var coords = $scope.map.zonePolygon.coordinates;
-        var a = coords[0];
-        var z = coords[coords.length - 1];
-        if ((z.longitude - a.longitude) + (z.latitude - a.latitude) < 0.01) {
-          coords.push(a);
+        if ($scope.map.markers && $scope.map.markers.length > 0) {
+          markers = $scope.map.markers.map(m => {
+            if (!m.icon.match(/^http/)) {
+              m.icon = window.location.origin + "/" + m.icon;
+            }
+            return encodeURIComponent([
+              "icon:" + m.icon,
+              "|",
+              "scale:2",
+              "|",
+              m.latitude + "," + m.longitude,
+            ].join(""));
+          });
+        } else {
+          center = $scope.map.center.latitude + "," + $scope.map.center.longitude;
         }
+
+        var width = 640; // = max width
+
+        if ($window.innerWidth < 640) {
+          width = $window.innerWidth;
+        }
+
+        var height = Math.round(width * (350/640));
+
+        // make sure polygon is a closed loop
+        if ($scope.map.zonePolygon) {
+          var coords = $scope.map.zonePolygon.coordinates;
+          var a = coords[0];
+          var z = coords[coords.length - 1];
+          if ((z.longitude - a.longitude) + (z.latitude - a.latitude) < 0.01) {
+            coords.push(a);
+          }
+        }
+
+        $scope.src = [
+          "https://maps.googleapis.com/maps/api/staticmap",
+          "?zoom=", ($scope.map.zoom || 14),
+          (center ? "?center=" + center : ""), // not necessary if marker given
+          "&scale=2", // for retina
+          "&size=", width, "x", height,
+          "&maptype=roadmap",
+          (markers ? markers.map(def => "&markers=" + def).join("") : ""),
+          ($scope.map.zonePolygon ? "&path=color:0xe1a100ff|fillcolor:0xe1a10088|weight:2|" + $scope.map.zonePolygon.coordinates.map(function (c) {
+            return c.latitude + "," + c.longitude;
+          }).join("|") : ""),
+          "&key=", appConfig.gmaps_js_api_key,
+  // TODO        "&signature=",
+        ].join("");
       }
 
-      $scope.src = [
-        "https://maps.googleapis.com/maps/api/staticmap",
-        "?zoom=", ($scope.map.zoom || 14),
-        (center ? "?center=" + center : ""), // not necessary if marker given
-        "&scale=2", // for retina
-        "&size=", width, "x", height,
-        "&maptype=roadmap",
-        (markers ? markers.map(def => "&markers=" + def).join("") : ""),
-        ($scope.map.zonePolygon ? "&path=color:0x6c9d3fff|fillcolor:0x85bb5476|weight:2|" + $scope.map.zonePolygon.coordinates.map(function (c) {
-          return c.latitude + "," + c.longitude;
-        }).join("|") : ""),
-        "&key=", appConfig.gmaps_js_api_key,
-// TODO        "&signature=",
-      ].join("");
+      render();
+
+      $scope.$watch("map", render);
 
       // $scope.gmaps_url = [
       //   "https://maps.google.com/maps",

@@ -1003,12 +1003,35 @@ angular.module('owm.booking.show', [])
   //get currenct location of the resource if locktypes contains smartphone and booking begins within 60 minutes
   var longitude = $scope.resource.longitude;
   var latitude = $scope.resource.latitude;
-  var zoom = 14;
+  var zoom = 15;
+
+  $scope.currentLocation = null;
+  $scope.showingCurrentLocationMap = false;
+  $scope.toggleCurrentLocationMap = function () {
+    $scope.showingCurrentLocationMap = !$scope.showingCurrentLocationMap;
+  };
 
   $scope.setMarkersForMap = function() {
     var addMap = function (zonePolygon, chargingPoints) {
       var keyType = ($scope.resource.locktypes.indexOf('chipcard') >= 0 || $scope.resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
-      var approx = ($scope.resource.parkingType === 'zone') ? '-approx' : '';
+      var approx = ($scope.resource.parkingType === 'zone') ? /*'-approx'*/ '' : '';
+
+      var dist = $scope.currentLocation
+        ? Math.abs($scope.currentLocation.latitude - latitude)
+          + Math.abs($scope.currentLocation.longitude - longitude)
+        : 0;
+
+      // very roughly a kilometer (square) radius around
+      var maybeResourceMarker = (dist < 0.012) ? [
+        {
+          idKey: 1,
+          icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
+          latitude: $scope.currentLocation ? $scope.currentLocation.latitude : latitude,
+          longitude: $scope.currentLocation ? $scope.currentLocation.longitude : longitude,
+          title: $scope.resource.alias
+        }
+      ] : [];
+
       angular.extend($scope, {
         map: {
           zonePolygon: zonePolygon, // : { geometry: Array<{ latitude: number, longitude: number }>, type: "polygon" }
@@ -1017,17 +1040,11 @@ angular.module('owm.booking.show', [])
             longitude: longitude
           },
           draggable: true,
-          markers: [{
-            idKey: 1,
-            icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
-            latitude: latitude,
-            longitude: longitude,
-            title: $scope.resource.alias
-          }].concat((chargingPoints || []).map(function (chargingPoint, j) {
-            var key = Math.ceil(2 * (chargingPoint.status.available / (chargingPoint.status.available + chargingPoint.status.charging)));
+          markers: maybeResourceMarker.concat((chargingPoints || []).map(function (chargingPoint, j) {
+            var key = chargingPoint.status.available ? 1 : 0;
             return {
               idKey: j + 2,
-              icon: 'assets/img/chargingpoint_' + key + '.png',
+              icon: 'assets/img/chargingpoint_' + key + '_2x.png',
               latitude: chargingPoint.location.latitude,
               longitude: chargingPoint.location.longitude
             };
@@ -1039,8 +1056,31 @@ angular.module('owm.booking.show', [])
             mapTypeControl: false,
             streetViewControl: false
           }
-        }
+        },
       });
+
+      if ($scope.currentLocation) {
+        $scope.currentLocationMap = {
+          center: $scope.currentLocation,
+          draggable: true,
+          zoom: 16,
+          markers: [
+            {
+              idKey: 1,
+              icon: 'assets/img/mywheels' + keyType + approx + '-marker-v2-80.png',
+              latitude: $scope.currentLocation.latitude,
+              longitude: $scope.currentLocation.longitude,
+              title: $scope.resource.alias
+            }
+          ],
+          options: {
+            scrollwheel: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
+            streetViewControl: false
+          }
+        };
+      }
     };
 
     if ($scope.resource.parkingType === 'zone') {
@@ -1054,6 +1094,9 @@ angular.module('owm.booking.show', [])
         })
         .then(function (res2) {
           addMap(res.geometry, res2.data);
+        }).catch(function () {
+          $log.warn('chargingpoints could not be loaded');
+          addMap(res.geometry);
         });
       });
     } else {
@@ -1061,21 +1104,29 @@ angular.module('owm.booking.show', [])
     }
   };
 
-  if (booking.resource.locktypes.indexOf('smartphone') >= 0 && !$scope.bookingEndedReally && $scope.accepted && booking.ok && $scope.bookingStartsWithinOneHour) {
+  if (booking.resource.locktypes.indexOf('smartphone') >= 0 &&
+    !$scope.bookingEndedReally &&
+    $scope.accepted &&
+    booking.ok &&
+    $scope.bookingStartsWithinOneHour
+  ) {
     boardcomputerService.currentLocation({
       resource: $scope.resource.id
     })
-    .then(function(location) {
-      if (!location.lat || !location.lng) {
-        latitude = $scope.resource.latitude;
-        longitude = $scope.resource.longitude;
-        $scope.setMarkersForMap();
-      } else {
-        latitude = location.lat;
-        longitude = location.lng;
-        zoom = 16;
-        $scope.setMarkersForMap();
+    .catch(function () {
+      return {
+        lat: 52.0220785,
+        lng: 5.0449991
+      };
+    })
+    .then(function (location) {
+      if (location && location.lat && location.lng) {
+        $scope.currentLocation = {
+          latitude: location.lat,
+          longitude: location.lng
+        };
       }
+      $scope.setMarkersForMap();
     })
     .catch(function (error) {
       if (error.message === 'Not allowed to access log') {
@@ -1083,13 +1134,9 @@ angular.module('owm.booking.show', [])
       } else {
         $scope.locationError = error.message;
       }
-      latitude = $scope.resource.latitude;
-      longitude = $scope.resource.longitude;
       $scope.setMarkersForMap();
     });
   } else {
-    latitude = $scope.resource.latitude;
-    longitude = $scope.resource.longitude;
     $scope.setMarkersForMap();
   }
 
@@ -1188,7 +1235,7 @@ angular.module('owm.booking.show', [])
 
   $scope.stopBooking = function (booking) {
     dialogService.showModal(null, {
-      closeButtonText: $translate.instant('CLOSE'),
+      closeButtonText: 'Annuleer',
       actionButtonText: $translate.instant('CONFIRM'),
       headerText: $translate.instant('STOP_BOOKING'),
       bodyText: $translate.instant('BOOKING.STOP.CONFIRM_TEXT')
