@@ -1,91 +1,142 @@
+angular
+  .module("mwResourceLocationMap", [])
 
-angular.module("mwResourceLocationMap", [])
+  .directive("mwResourceLocationMap", function(appConfig, $window) {
+    return {
+      restrict: "E",
+      templateUrl: "directives/mwResourceLocationMap.tpl.html",
+      scope: {
+        map: "="
+      },
+      controller: function($scope, $element, $timeout) {
+        function render() {
+          var center = "";
+          var markers;
 
-.directive("mwResourceLocationMap", function (appConfig, $window) {
-
-  return {
-    restrict: "E",
-    templateUrl: "directives/mwResourceLocationMap.tpl.html",
-    scope: {
-      map: "="
-    },
-    controller: function ($scope, $element) {
-
-      function render() {
-        var center = "";
-        var markers;
-
-        if ($scope.map.markers && $scope.map.markers.length > 0) {
-          markers = $scope.map.markers.map(m => {
-            if (!m.icon.match(/^http/)) {
-              m.icon = window.location.origin + "/" + m.icon;
-            }
-            return encodeURIComponent([
-              "icon:" + m.icon,
-              "|",
-              "scale:2",
-              "|",
-              m.latitude + "," + m.longitude,
-            ].join(""));
-          });
-        } else {
-          center = $scope.map.center.latitude + "," + $scope.map.center.longitude;
-        }
-
-        var width = 640; // = max width
-
-        if ($window.innerWidth < 640) {
-          width = $window.innerWidth;
-        }
-
-        var height = Math.round(width * (350/640));
-
-        // make sure polygon is a closed loop
-        if ($scope.map.zonePolygon) {
-          var coords = $scope.map.zonePolygon.coordinates;
-          var a = coords[0];
-          var z = coords[coords.length - 1];
-          if ((z.longitude - a.longitude) + (z.latitude - a.latitude) < 0.01) {
-            coords.push(a);
+          if ($scope.map.markers && $scope.map.markers.length > 0) {
+            markers = $scope.map.markers.map(m => {
+              if (!m.icon.match(/^http/)) {
+                m.icon = window.location.origin + "/" + m.icon;
+              }
+              return encodeURIComponent(
+                [
+                  "icon:" + m.icon,
+                  "|",
+                  "scale:2",
+                  "|",
+                  m.latitude + "," + m.longitude
+                ].join("")
+              );
+            });
+          } else {
+            center =
+              $scope.map.center.latitude + "," + $scope.map.center.longitude;
           }
+
+          var width = 640; // = max width
+
+          if ($window.innerWidth < 640) {
+            width = $window.innerWidth;
+          }
+
+          var height = 350;
+
+          // make sure polygon is a closed loop
+          if ($scope.map.zonePolygon) {
+            var coords = $scope.map.zonePolygon.coordinates;
+            var a = coords[0];
+            var z = coords[coords.length - 1];
+            if (z.longitude - a.longitude + (z.latitude - a.latitude) < 0.01) {
+              coords.push(a);
+            }
+          }
+
+          $scope.src = [
+            "https://maps.googleapis.com/maps/api/staticmap",
+            "?zoom=",
+            $scope.map.zoom || 14,
+            center ? "?center=" + center : "", // not necessary if marker given
+            "&scale=2", // for retina
+            "&size=",
+            width,
+            "x",
+            height,
+            "&maptype=roadmap",
+            markers ? markers.map(def => "&markers=" + def).join("") : "",
+            $scope.map.zonePolygon
+              ? "&path=color:0xe1a100ff|fillcolor:0xe1a10088|weight:2|" +
+                $scope.map.zonePolygon.coordinates
+                  .map(function(c) {
+                    return c.latitude + "," + c.longitude;
+                  })
+                  .join("|")
+              : "",
+            "&key=",
+            appConfig.gmaps_js_api_key
+            // TODO        "&signature=",
+          ].join("");
         }
 
-        $scope.src = [
-          "https://maps.googleapis.com/maps/api/staticmap",
-          "?zoom=", ($scope.map.zoom || 14),
-          (center ? "?center=" + center : ""), // not necessary if marker given
-          "&scale=2", // for retina
-          "&size=", width, "x", height,
-          "&maptype=roadmap",
-          (markers ? markers.map(def => "&markers=" + def).join("") : ""),
-          ($scope.map.zonePolygon ? "&path=color:0xe1a100ff|fillcolor:0xe1a10088|weight:2|" + $scope.map.zonePolygon.coordinates.map(function (c) {
-            return c.latitude + "," + c.longitude;
-          }).join("|") : ""),
-          "&key=", appConfig.gmaps_js_api_key,
-  // TODO        "&signature=",
-        ].join("");
+        render();
+        $scope.$watch("map", render);
+
+
+        // pan-to-marker animation on marker click
+        function easeInOutQuad (t) {
+          return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+        }
+
+        $scope._panTimeout = null;
+        $scope.panningMapTo = null;
+        $scope.panAnimationStep = function () {
+          if ($scope.panningMapTo) {
+            var t = $scope.panningMapTo.t;
+            if (t >= 0) {
+              var l = easeInOutQuad(1 - ($scope.panningMapTo.t / $scope.panningMapTo.dur));
+              $scope.map.center = {
+                latitude: $scope.panningMapTo.from.latitude + l * ($scope.panningMapTo.to.latitude - $scope.panningMapTo.from.latitude),
+                longitude: $scope.panningMapTo.from.longitude + l * ($scope.panningMapTo.to.longitude - $scope.panningMapTo.from.longitude),
+              };
+              $scope.panningMapTo.t -= 10;
+              $scope._panTimeout = $timeout($scope.panAnimationStep, 10);
+            } else {
+              $scope.panningMapTo = null;
+            }
+          }
+        };
+
+        $scope.panToMarker = function (marker) {
+          const markerPosition = marker.getPosition();
+          const currentCenter = marker.map.getCenter();
+          if ($scope._panTimeout) {
+            $timeout.cancel($scope._panTimeout);
+            $scope._panTimeout = null;
+          }
+          $scope.panningMapTo = {
+            from: {
+              latitude: currentCenter.lat(),
+              longitude: currentCenter.lng(),
+            },
+            to: {
+              latitude: markerPosition.lat(),
+              longitude: markerPosition.lng(),
+            },
+            dur: 200,
+            t: 200,
+          };
+          $scope._panTimeout = $timeout($scope.panAnimationStep, 0);
+        };
+
+
+        // switching from static to dynamic map
+
+        $scope.openMap = function() {
+          $scope.showMap = true;
+        };
+        $scope.showMap = false;
       }
-
-      render();
-
-      $scope.$watch("map", render);
-
-      // $scope.gmaps_url = [
-      //   "https://maps.google.com/maps",
-      //   "?z=", 12,
-      //   "&t=m",
-      //   "&q=", $scope.map.center.latitude, ",", $scope.map.center.longitude,
-      // ].join(");
-
-      $scope.openMap = function () {
-        $scope.showMap = true;
-      };
-
-      $scope.showMap = false;
-    },
-  };
-
-});
+    };
+  });
 
 /*
 https://maps.googleapis.com/maps/api/staticmap

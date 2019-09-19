@@ -1,36 +1,41 @@
 <div>
-    <div ng-if="map">
-        <ui-gmap-google-map center="map.center"
-                            class="google-map"
-                            zoom="map.zoom"
-                            draggable="false"
-                            dragging="map.dragging"
-                            bounds="map.bounds"
-                            events="map.events"
-                            options="map.options"
-                            control="map.control">
+  <div ng-if="map">
+    <ui-gmap-google-map
+      center="map.center"
+      class="google-map"
+      zoom="map.zoom"
+      draggable="false"
+      dragging="map.dragging"
+      bounds="map.bounds"
+      events="map.events"
+      options="map.options"
+      control="map.control"
+    >
+      <ui-gmap-markers
+        models="map.markers"
+        idKey="'id'"
+        icon="'icon'"
+        coords="'coords'"
+        click="'onClick'"
+      >
+      </ui-gmap-markers>
 
-            <ui-gmap-markers
-                    models="map.markers"
-                    idKey="'id'"
-                    icon="'icon'"
-                    coords="'coords'"
-                    click="'onClick'"
-                    >
-            </ui-gmap-markers>
+      <ui-gmap-map-control
+        template="resource/search/map/resource-map-control.tpl.html"
+        position="TOP_LEFT"
+        controller="mapControlController"
+      >
+      </ui-gmap-map-control>
 
-            <ui-gmap-map-control template="resource/search/map/resource-map-control.tpl.html" position="TOP_LEFT" controller="mapControlController">
-            </ui-gmap-map-control>
-
-            <ui-gmap-window
-                coords="selectedMarker.coords"
-                show="selectedMarker.showWindow"
-                closeClick="closeWindow()"
-                templateUrl="'resource/search/map/resource-marker-window.tpl.html'"
-                templateParameter="selectedMarker"
-                options="map.windowOptions">
-            </ui-gmap-window>
-
-        </ui-gmap-google-map>
-    </div>
+      <ui-gmap-window
+        coords="selectedMarker.coords"
+        show="selectedMarker.showWindow"
+        closeClick="closeWindow()"
+        templateUrl="'resource/search/map/resource-marker-window.tpl.html'"
+        templateParameter="selectedMarker"
+        options="map.windowOptions"
+      >
+      </ui-gmap-window>
+    </ui-gmap-google-map>
+  </div>
 </div>

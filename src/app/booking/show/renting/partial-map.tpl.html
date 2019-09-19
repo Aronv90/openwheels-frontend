@@ -8,7 +8,7 @@
 
   <div class="card-body" style="padding-top: 0; padding-bottom: 0; margin-bottom: 1em;">
     <p ng-if="map.zonePolygon" style="margin-top: 0;">
-      Deze auto heeft geen vaste parkeerplaats, en kan vrij in de gemarkeerde zone geparkeerd worden.
+      {{ "zone" | parkingTypeTooltip }}
       <!-- iets van "Je krijgt de exacte locatie toegestuurd voor de rit begint." -->
     </p>
     <p ng-if="currentLocationMap">

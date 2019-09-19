@@ -1,7 +1,9 @@
 <div class="mw-resource-location-map">
-
   <a class="map-link" ng-click="openMap()" ng-if="!showMap">
-    <img style="display: block; max-width: 100%; height: auto;" src="{{ src }}" />
+    <img
+      style="display: block; max-width: 100%; height: auto;"
+      src="{{ src }}"
+    />
     <div class="hover_overlay"></div>
   </a>
 
@@ -25,8 +27,23 @@
         static="true"
       ></ui-gmap-polygon>
 
-      <ui-gmap-marker idKey="m.idKey" ng-repeat="m in map.markers" coords="m" icon="m.icon.replace('80', '40').replace('_2x', '')">
+      <ui-gmap-marker
+        idKey="m.idKey"
+        ng-repeat="m in map.markers"
+        coords="m"
+        icon="m.icon.replace('80', '40').replace('_2x', '')"
+        events="{ click: panToMarker }"
+      >
       </ui-gmap-marker>
+
+      <!-- <ui-gmap-window
+        ng-if="selectedMarker"
+        coords="selectedMarker.coords"
+        closeClick="closeSelectedMarker()"
+        templateUrl="'src/common/directives/mwResourceLocationMap-marker.tpl.html'"
+        templateParameter="selectedMarker"
+        options="map.windowOptions"
+      ></ui-gmap-window> -->
     </ui-gmap-google-map>
   </div>
 </div>
