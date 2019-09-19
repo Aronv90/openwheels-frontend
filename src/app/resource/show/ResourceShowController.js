@@ -255,6 +255,28 @@ angular.module('owm.resource.show', [])
     });
   }
 
+  function easeInOutQuad (t) {
+    return t < 0.5 ? 2*t*t : -1+(4-2*t)*t;
+  }
+
+  $scope.panningMapTo = null;
+  $scope.panAnimationStep = function () {
+    if ($scope.panningMapTo) {
+      var t = $scope.panningMapTo.t;
+      if (t >= 0) {
+        var l = easeInOutQuad(1 - ($scope.panningMapTo.t / $scope.panningMapTo.dur));
+        $scope.map.center = {
+          latitude: $scope.panningMapTo.from.latitude + l * ($scope.panningMapTo.to.latitude - $scope.panningMapTo.from.latitude),
+          longitude: $scope.panningMapTo.from.longitude + l * ($scope.panningMapTo.to.longitude - $scope.panningMapTo.from.longitude),
+        };
+        $scope.panningMapTo.t -= 10;
+        $scope._panTimeout = $timeout($scope.panAnimationStep, 10);
+      } else {
+        $scope.panningMapTo = null;
+      }
+    }
+  };
+
   if (!$scope.removed) {
     var addMap = function (zonePolygon, chargingPoints) {
       var keyType = (resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0) ? '-open' : '-key';
@@ -281,7 +303,28 @@ angular.module('owm.resource.show', [])
               idKey: j + 2,
               icon: 'assets/img/chargingpoint_' + key + '_2x.png',
               latitude: chargingPoint.location.latitude,
-              longitude: chargingPoint.location.longitude
+              longitude: chargingPoint.location.longitude,
+              // events: {
+              //   click: function () {
+              //     if ($scope._panTimeout) {
+              //       $timeout.cancel($scope._panTimeout);
+              //       $scope._panTimeout = null;
+              //     }
+              //     $scope.panningMapTo = {
+              //       from: {
+              //         latitude: $scope.map.center.latitude,
+              //         longitude: $scope.map.center.longitude,
+              //       },
+              //       to: {
+              //         latitude: chargingPoint.location.latitude,
+              //         longitude: chargingPoint.location.longitude,
+              //       },
+              //       dur: 200,
+              //       t: 200,
+              //     };
+              //     $scope._panTimeout = $timeout($scope.panAnimationStep, 0);
+              //   }
+              // }
             };
           })),
           zoom: 15,

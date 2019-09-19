@@ -31,7 +31,7 @@
             <md-list>
                 <md-list-item>
                     <!-- location -->
-                    <ng-md-icon icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
                         <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
                     </div>
@@ -62,6 +62,7 @@
                             ng-if="resource.parkingType !== 'default'"
                             class="tag tag-info"
                             style="margin-left: 0px;"
+                            uib-tooltip="{{ resource.parkingType | parkingTypeTooltip }}"
                         >
                             {{ resource.parkingType | parkingType }}
                         </span>
@@ -74,14 +75,14 @@
                 </md-list-item>
                 <md-list-item>
                     <!-- location -->
-                    <ng-md-icon icon="location_on" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="location_on" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         {{ resource.location }}, {{ resource.city }}
                     </div>
                 </md-list-item>
                 <md-list-item>
                     <!-- person -->
-                    <ng-md-icon icon="person" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="person" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         {{ resource.owner.firstName }}
                         <span rating-thumb="{ value : resource.rating_totals.satisfaction, senders: resource.rating_totals.senders }"></span>

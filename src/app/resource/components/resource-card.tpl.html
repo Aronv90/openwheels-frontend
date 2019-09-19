@@ -1,7 +1,7 @@
 <md-card class="ow-card elevate-on-hover"
         ng-click="select()">
     <div class="md-card-image" style="position: relative">
-        <ow-resource-picture resource="resource" size="large"></ow-resource-picture>
+        <ow-resource-picture-div resource="resource" size="large"></ow-resource-picture-div>
         <div ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0" class="mywheelsOpenBar">
             <ng-md-icon icon="lock_open" alt="Icoon" aria-label="Icoon"></ng-md-icon>
             <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone en OV-chipkaart</span>
@@ -29,17 +29,17 @@
         </md-card-title>
         <md-card-body class="ow-list-compact">
             <md-list class="margin-right">
-                <md-list-item style="height: 40px;">
+                <md-list-item>
                     <!-- location -->
-                    <ng-md-icon icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
                         <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
-                        <span hide-xs>
+                        <spans>
                             <span
                                 ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0"
                                 class="tag tag-warning"
                                 flex="none"
-                                style="margin-left: 6px;"
+                                style="margin-left: 2px;"
                             >
                                 {{ 'MYWHEELS_OPEN_TIP' | translate }}
                                 <md-tooltip class="multiline" md-direction="bottom" ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0">
@@ -50,7 +50,7 @@
                                 ng-if="resource.newScoreCar"
                                 class="tag tag-success"
                                 flex="none"
-                                style="margin-left: 6px;"
+                                style="margin-left: 2px;"
                             >
                                 {{ 'NEW_TIP' | translate }}
                             </span>
@@ -58,57 +58,22 @@
                                 ng-if="resource.parkingType !== 'default'"
                                 class="tag tag-info"
                                 flex="none"
-                                style="margin-left: 6px;"
+                                style="margin-left: 2px;"
+                                uib-tooltip="{{ resource.parkingType | parkingTypeTooltip }}"
                             >
                                 {{ resource.parkingType | parkingType }}
                             </span>
                             <fuel-charging-icon
                                 show-percentage="true"
                                 resource="resource"
-                                style="margin-left: 6px;"
+                                style="margin-left: -2px;"
                             />
                         </span>
                     </div>
                 </md-list-item>
-                <md-list-item 
-                    ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0 || resource.newScoreCar"
-                    style="margin-top:-10px; margin-bottom:-10px; height: 40px;"
-                    hide-gt-xs>
-                    <!-- tags -->
-                    <div flex>
-                        <span 
-                            ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0" 
-                            class="tag tag-warning" 
-                            style="margin-left: 0px;"
-                            id="mywheels-open-tip-label"
-                        >
-                            {{ 'MYWHEELS_OPEN_TIP' | translate }}
-                            <md-tooltip md-direction="bottom" class="multiline">{{ 'MYWHEELS_OPEN_INFO' | translate }}</md-tooltip>
-                        </span>
-                        <span 
-                            ng-if="resource.newScoreCar"
-                            class="tag tag-success"
-                            style="margin-left: 0px;"
-                        >
-                            {{ 'NEW_TIP' | translate }}
-                        </span>
-                        <span 
-                            ng-if="resource.parkingType !== 'default'"
-                            class="tag tag-info"
-                            style="margin-left: 0px;"
-                        >
-                            {{ resource.parkingType | parkingType }}
-                        </span>
-                        <fuel-charging-icon
-                            show-percentage="true"
-                            resource="resource"
-                            style="margin-left: -6px;"
-                        />
-                    </div>
-                </md-list-item>
                 <md-list-item>
                     <!-- location -->
-                    <ng-md-icon icon="location_on" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="location_on" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
                         <span> {{ resource.location }}, {{ resource.city }}
                           <span ng-if="resource.distance_to"> ({{ resource.distance_to | formatKilometers }})</span>
@@ -117,7 +82,7 @@
                 </md-list-item>
                 <md-list-item>
                     <!-- person -->
-                    <ng-md-icon icon="person" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="person" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
                         {{ resource.owner.firstName }}
                         <span rating-thumb="{ value : resource.rating_totals.satisfaction, senders: resource.rating_totals.senders }"></span>
@@ -125,7 +90,7 @@
                 </md-list-item>
                 <md-list-item ng-if="!lightweight">
                     <!-- number of bookings -->
-                    <ng-md-icon icon="event_available" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="event_available" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
                         <span>
                     {{ resource.numberOfBookings | wasBookedTimes }}

@@ -20,6 +20,7 @@
     }
     .tag {
         margin-left: 12px;
+        margin-bottom: 4px;
     }
     .margin-right {
         margin-right: 3em;
@@ -115,6 +116,17 @@
         flex-direction: column;
         text-align: center;
     }
+
+    md-list-item {
+        position: relative;
+        padding-left: 52px;
+
+        .list-item-icon {
+            position: absolute;
+            top: 0;
+            left: 16px;
+        }
+    }
 }
 
 .resource-card-box.ow-card {
@@ -193,6 +205,7 @@
         justify-content: space-between;
         align-content: center;
         align-items: center;
+        align-items: stretch;
     }
     .md-card-padding{
       padding: 1em;

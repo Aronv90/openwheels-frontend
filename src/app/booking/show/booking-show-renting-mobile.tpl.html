@@ -99,7 +99,7 @@
             info-dialog-params="{ booking: booking, resource: resource }"
           >
             <ng-md-icon class="pull-right" icon="chevron_right"></ng-md-icon>
-            Hoe tank ik?
+            Hoe {{ resource.fuelType === "elektrisch" ? "laad" : "tank" }} ik?
           </div>
         </div>
 

@@ -10,7 +10,7 @@ angular.module('owm.components')
       showPercentage: '='
     },
     template:
-      `<span ng-show="resource.fuelLevel !== null">
+      `<span ng-show="resource.fuelLevel !== null" style="white-space: nowrap;">
         <ng-md-icon
             icon="{{ resource | fuelChargingIconName }}"
             alt="Batterij"
