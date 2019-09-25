@@ -22,11 +22,14 @@
 
     <div class="truncate">
       <a ui-sref="owm.resource.show({city: (resource.city | replaceSpaceToDash | lowercase), resourceId: resource.id})" class="resource__alias">{{ resource.alias || ('RESOURCE_NO_NAME' | translate) }}</a>
-      <div class="tag tag-warning" ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0" style="margin-left: 12px;" hide-xs>
+      <div
+        ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0"
+        class="tag tag-warning"
+        style="margin-left: 12px;"
+        hide-xs
+        uib-tooltip="{{ 'MYWHEELS_OPEN_INFO' | translate }}"
+      >
         {{ 'MYWHEELS_OPEN_TIP' | translate }}
-        <md-tooltip>
-          {{ 'MYWHEELS_OPEN_INFO' | translate }}
-        </md-tooltip>
       </div>
     </div>
 
