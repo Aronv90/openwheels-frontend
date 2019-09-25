@@ -40,11 +40,9 @@
                                 class="tag tag-warning"
                                 flex="none"
                                 style="margin-left: 2px;"
+                                uib-tooltip="{{ 'MYWHEELS_OPEN_INFO' | translate }}"
                             >
                                 {{ 'MYWHEELS_OPEN_TIP' | translate }}
-                                <md-tooltip class="multiline" md-direction="bottom" ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0">
-                                    {{ 'MYWHEELS_OPEN_INFO' | translate }}
-                                </md-tooltip>
                             </span>
                             <span
                                 ng-if="resource.newScoreCar"

@@ -15,11 +15,7 @@
                 <ng-md-icon aria-hidden="true" icon="label"></ng-md-icon>
                 <input type="text" id="alias" name="alias" ng-model="resource.alias" placeholder="{{ 'ALIAS' | translate }}">
                 <div class="md-icon-button" style="padding: 4px 8px;">
-                    <ng-md-icon class="right-addon" icon="info">
-                        <md-tooltip md-direction="top" class="multiline">
-                            {{ 'INFO_RESOURCE_ALIAS' | translate }}
-                        </md-tooltip>
-                    </ng-md-icon>
+                    <ng-md-icon class="right-addon" icon="info" uib-tooltip="{{ 'INFO_RESOURCE_ALIAS' | translate }}"></ng-md-icon>
                 </div>
                 <div class="err-block" ng-show="editResourceForm.$submitted && !resource.alias">
                     <span class="text-danger">{{ 'REQUIRED' | translate }}</span>
