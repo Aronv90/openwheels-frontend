@@ -20,28 +20,34 @@
     <div class="return-toolbar-container container container-transitional hidden-xs">
         <div class="return-toolbar">
             <div ng-if="prevState && prevState.name">
-                <button type="button"
-                        ui-sref="{{ prevState.name }}({{ prevState.params }})"
-                        class="btn btn-link return">
+                <button
+                    type="button"
+                    ui-sref="{{ prevState.name }}({{ prevState.params }})"
+                    class="btn btn-link return"
+                    uib-tooltip="Terug"
+                >
                     <ng-md-icon size="32" icon="arrow_back"></ng-md-icon>
-                    <md-tooltip md-direction="top">Ga terug</md-tooltip>
                 </button>
             </div>
             <div ng-if="!(prevState && prevState.name)">
-                <button type="button"
-                        ui-sref="owm.resource.search.list"
-                        class="btn btn-link return">
+                <button
+                    type="button"
+                    ui-sref="owm.resource.search.list"
+                    class="btn btn-link return"
+                    uib-tooltip="{{ 'RESOURCE_BACK_TO_LIST' | translate }}"
+                >
                     <ng-md-icon size="32" icon="arrow_back"></ng-md-icon>
-                    <md-tooltip md-direction="top">{{ 'RESOURCE_BACK_TO_LIST' | translate }}</md-tooltip>
                 </button>
             </div>
 
-            <button ng-if="(me && (resource.owner.id === me.id || resource.contactPerson.id === me.id))"
-                    ui-sref="owm.resource.edit({ resourceId: resource.id })"
-                    type="button"
-                    class="btn btn-link edit-resource">
+            <button
+                ng-if="(me && (resource.owner.id === me.id || resource.contactPerson.id === me.id))"
+                ui-sref="owm.resource.edit({ resourceId: resource.id })"
+                type="button"
+                class="btn btn-link edit-resource"
+                uib-tooltip="{{ 'EDIT_RESOURCE' | translate }}"
+            >
                 <ng-md-icon size="32" icon="create"></ng-md-icon>
-                <md-tooltip md-direction="top">{{ 'EDIT_RESOURCE' | translate }}</md-tooltip>
             </button>
         </div>
     </div>
