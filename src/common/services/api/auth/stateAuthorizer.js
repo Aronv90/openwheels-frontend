@@ -79,6 +79,7 @@ angular.module('stateAuthorizer', [])
 
       authService.userPromise().finally(function (user) {
         $timeout(function () {
+          Analytics.trackEvent('buglogging_v3', 'stateauth_user_pending_go', user.profile.id + '_' + user.profile.status, undefined, true);
           $state.go(toState, toParams);
         }, 0);
       });
@@ -94,7 +95,7 @@ angular.module('stateAuthorizer', [])
 
         $timeout(function () {
           alertService.loaded();
-          Analytics.trackEvent('buglogging_v2', 'redirect_stateauth_to_dashboard', user.profile.id + '_' + user.profile.status, undefined, true);
+          Analytics.trackEvent('buglogging_v3', 'redirect_stateauth_to_dashboard', user.profile.id + '_' + user.profile.status, undefined, true);
           $state.go('owm.person.dashboard');
         }, 0);
       }

@@ -33,7 +33,7 @@ angular.module('owm.person', [
         return authService.me();
       }],
       buglogging: ['me', 'Analytics', function (me, Analytics) {
-        Analytics.trackEvent('buglogging_v2', 'hello_world', me.id + '_' + me.status, undefined, true);
+        Analytics.trackEvent('buglogging_v3', 'hello_world', me.id + '_' + me.status, undefined, true);
         return 42;
       }],
       homeAddressPrefill: ['me', 'makeHomeAddressPrefill', function (me, makeHomeAddressPrefill) {
