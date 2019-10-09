@@ -23,7 +23,7 @@ $stateProvider.state(name, {
 
 angular.module('stateAuthorizer', [])
 
-.service('stateAuthorizer', function ($log, $timeout, $rootScope, $state, $urlRouter, authService, tokenService, tokenSilentRefreshService, alertService, featuresService) {
+.service('stateAuthorizer', function ($log, $timeout, $rootScope, $state, $urlRouter, authService, Analytics, tokenService, tokenSilentRefreshService, alertService, featuresService) {
 
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
     $log.debug('state change: ' + fromState.name + ' > ' + toState.name);
@@ -94,6 +94,7 @@ angular.module('stateAuthorizer', [])
 
         $timeout(function () {
           alertService.loaded();
+          Analytics.trackEvent('buglogging', 'redirect_stateauth_to_dashboard', user.profile.id + '_' + user.profile.status, undefined, true);
           $state.go('owm.person.dashboard');
         }, 0);
       }

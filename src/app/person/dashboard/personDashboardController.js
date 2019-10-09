@@ -82,6 +82,7 @@ angular.module('owm.person.dashboard', [])
         showModal()
         .then(redirect);
       } else if(me.status === 'new' && me.preference !== 'owner' && !me.extraDriver) {
+        Analytics.trackEvent('buglogging', 'redirect_dashboard_to_intro', me.id + '_' + me.status, undefined, true);
         $state.go('owm.person.intro');
       }
     }
