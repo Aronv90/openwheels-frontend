@@ -94,7 +94,7 @@ angular.module('stateAuthorizer', [])
 
         $timeout(function () {
           alertService.loaded();
-          Analytics.trackEvent('buglogging', 'redirect_stateauth_to_dashboard', user.profile.id + '_' + user.profile.status, undefined, true);
+          Analytics.trackEvent('buglogging_v2', 'redirect_stateauth_to_dashboard', user.profile.id + '_' + user.profile.status, undefined, true);
           $state.go('owm.person.dashboard');
         }, 0);
       }
