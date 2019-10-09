@@ -7,7 +7,6 @@ angular.module('owm.pages', [
   'owm.pages.invite',
   'owm.pages.invite.subscribe',
 
-  'owmlanding.mywheels-open',
   'owmlanding.mywheels-lease',
   'owmlanding.mywheels-fleet',
   'owmlanding.mywheels-business',
@@ -62,19 +61,6 @@ angular.module('owm.pages', [
       'main-full@shell': {
         templateUrl: 'pages/beheerders/beheerders.tpl.html',
         controller: 'BeheerdersPaginaController'
-      }
-    },
-  })
-
-  .state('owmlanding.mywheels-open', {
-    url: '/open',
-    views: {
-      'toolbar@shell': {
-        templateUrl: 'pages/mywheels-open/toolbar.tpl.html',
-      },
-      'main-full@shell': {
-        templateUrl: 'pages/mywheels-open/mywheels-open.tpl.html',
-        controller: 'MyWheelsOpenController'
       }
     },
   })
