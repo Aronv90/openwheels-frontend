@@ -79,7 +79,7 @@ angular.module('stateAuthorizer', [])
 
       authService.userPromise().finally(function (user) {
         $timeout(function () {
-          Analytics.trackEvent('buglogging_v3', 'stateauth_user_pending_go', user.profile.id + '_' + user.profile.status, undefined, true);
+          Analytics.trackEvent('buglogging_v3', 'stateauth_user_pending_go', null, undefined, true);
           $state.go(toState, toParams);
         }, 0);
       });
