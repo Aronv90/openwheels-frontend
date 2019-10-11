@@ -21,9 +21,18 @@ angular.module('owm.shell', [])
         });
         return dfd.promise;
       }],
-      me: ['authService', 'providerInfoService', '$log', '$rootScope', function (authService, providerInfoService, $log, $rootScope) {
+      me: ['authService', 'providerInfoService', '$log', '$filter', '$rootScope', function (authService, providerInfoService, $log, $filter, $rootScope) {
         return authService.userPromise().then(function (user) {
           if (user.isAuthenticated) {
+            if (window.LogRocket) {
+              if (user.identity && user.identity.provider.id === 1 && (window.LogRocket_identified !== user.identity.id)) {
+                window.LogRocket_identified = user.identity.id;
+                window.LogRocket.identify('' + user.identity.id, {
+                  name: $filter('fullname')(user.identity),
+                  email: user.email
+                });
+              }
+            }
             return providerInfoService.getInfo({ provider: user.identity.provider.id })
             .then(function (info) {
 

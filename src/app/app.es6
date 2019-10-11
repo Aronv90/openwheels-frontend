@@ -237,6 +237,10 @@ angular.module('openwheels', [
    */
   $urlRouterProvider.otherwise(function ($injector, $location) {
     var $state = $injector.get('$state');
+    if (window.LogRocket) {
+      window.LogRocket.debug('[$state.go] non-existing url -> home');
+    }
+    // $log.debug('[$state.go] non-existing url -> home');
     $state.go('home');
   });
 
@@ -486,6 +490,7 @@ angular.module('openwheels', [
       const onLandingPage = $state.includes('owmlanding');
       if (shouldFlow && !onDashboard && !onLandingPage) {
         e.preventDefault();
+        $log.debug('[$state.go] possiblyRedirectToProfileFlow -> owm.person.dashboard');
         $state.go('owm.person.dashboard');
       }
     }
@@ -616,6 +621,7 @@ angular.module('openwheels', [
     
     if (!fromState.name) {
       $timeout(function () {
+        $log.debug('[$state.go] $stateChangeError without fromState.name -> home');
         $state.go('home');
       }, 0);
     } else {
@@ -636,7 +642,9 @@ angular.module('openwheels', [
   var $log = injector.get('$log');
 
   if (window.LogRocket) {
-    window.LogRocket.init('lftqp6/mywheels');
+    window.LogRocket.init('lftqp6/mywheels', {
+      release: '2.81.0'
+    });
   }
 
   if (!window.jasmine) {

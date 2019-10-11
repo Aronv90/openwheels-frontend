@@ -2,7 +2,7 @@
 
 angular.module('owm.person.intro', [])
 
-.controller('PersonIntroController', function ($scope, me, $state, $timeout, metaInfoService, Analytics, appConfig) {
+.controller('PersonIntroController', function ($scope, $log, me, $state, $timeout, metaInfoService, Analytics, appConfig) {
 
   metaInfoService.set({url: appConfig.serverUrl + '/dashboard/intro'});
   metaInfoService.set({canonical: 'https://mywheels.nl/dashboard/intro'});
@@ -17,6 +17,7 @@ angular.module('owm.person.intro', [])
   if(me.status !== 'new') {
     Analytics.trackEvent('buglogging_v4', 'redirect_intro_to_dashboard', me.id + '_' + me.status, undefined, true);
     $timeout(function () {
+      $log.debug('[$state.go] intro but not new -> owm.person.dashboard');
       $state.go('owm.person.dashboard');
     }, 100);
   }

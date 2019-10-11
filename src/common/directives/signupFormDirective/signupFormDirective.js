@@ -8,7 +8,7 @@ angular.module('signupFormDirective', [])
     replace: true,
     transclude: true,
     templateUrl: 'directives/signupFormDirective/signupFormDirective.tpl.html',
-    controller: function ($scope, $rootScope, $state, $stateParams, $translate, $q, authService, featuresService, alertService, personService, $mdDialog, Analytics, appConfig, $localStorage, $window) {
+    controller: function ($scope, $rootScope, $log, $state, $stateParams, $translate, $q, authService, featuresService, alertService, personService, $mdDialog, Analytics, appConfig, $localStorage, $window) {
       $scope.auth = {};
       $scope.user = {};
       $scope.me = {};
@@ -116,6 +116,7 @@ angular.module('signupFormDirective', [])
         }
         authService.loginPopup().then(function () {
           if ($state.current.name === 'home' || $state.current.name === 'owm.auth.signup') {
+            $log.debug('[$state.go] signup form login -> owm.person.dashboard');
             $state.go('owm.person.dashboard');
           }
         });

@@ -33,6 +33,9 @@ angular.module('openwheels.analytics', [
           value: value,
           noninteraction: noninteraction,
         });
+        if (window.LogRocket) {
+          window.LogRocket.track(category + ':' + action);
+        }
       },
     };
   };

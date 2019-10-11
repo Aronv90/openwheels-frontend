@@ -3,6 +3,7 @@
 angular.module('owm.person.dashboard', [])
 
 .controller('PersonDashboardController', function ($q, $scope, $sce, $state, me, bookingList, rentalList, actions, person,
+  $log,
   homeAddressPrefill, $filter, hasBooked,
   unwrap,
   contractService,
@@ -84,6 +85,7 @@ angular.module('owm.person.dashboard', [])
       } else if(me.status === 'new' && me.preference === 'renter' && !me.extraDriver) {
         Analytics.trackEvent('buglogging_v4', 'redirect_dashboard_to_intro', me.id + '_' + me.status, undefined, true);
         $timeout(function() {
+          $log.debug('[$state.go] dashboard new renter -> owm.person.intro');
           $state.go('owm.person.intro');
         }, 100);
       }
@@ -92,6 +94,7 @@ angular.module('owm.person.dashboard', [])
 
   function redirect(a) {
     if(me.preference === 'renter' || me.preference === 'both') {
+      $log.debug('[$state.go] dashboard redirect renter/both -> owm.person.intro');
       $state.go('owm.person.intro');
     } else {
       $timeout(function() {

@@ -80,6 +80,7 @@ angular.module('stateAuthorizer', [])
       authService.userPromise().finally(function (user) {
         $timeout(function () {
           Analytics.trackEvent('buglogging_v4', 'stateauth_user_pending_go', user && user.identity && (user.identity.id + '_' + user.identity.status), undefined, true);
+          $log.debug('[$state.go] state authorizer pending ->> ' + toState);
           $state.go(toState, toParams);
         }, 0);
       });
@@ -96,6 +97,7 @@ angular.module('stateAuthorizer', [])
         $timeout(function () {
           alertService.loaded();
           Analytics.trackEvent('buglogging_v4', 'redirect_stateauth_to_dashboard', user && user.identity && (user.identity.id + '_' + user.identity.status), undefined, true);
+          $log.debug('[$state.go] state authorizer ensure anonymous -> owm.person.dashboard');
           $state.go('owm.person.dashboard');
         }, 0);
       }
@@ -108,6 +110,7 @@ angular.module('stateAuthorizer', [])
 
         e.preventDefault();
 
+        $log.debug('[$state.go] state authorizer ensure authenticated -> login redirect');
         authService.loginRedirect(errorPath, successPath);
       }
 
