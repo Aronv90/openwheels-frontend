@@ -635,6 +635,10 @@ angular.module('openwheels', [
   var $q = injector.get('$q');
   var $log = injector.get('$log');
 
+  if (window.LogRocket) {
+    window.LogRocket.init('lftqp6/mywheels');
+  }
+
   if (!window.jasmine) {
 
     if ($window.location.host.indexOf('127.0.0.1') >= 0) {

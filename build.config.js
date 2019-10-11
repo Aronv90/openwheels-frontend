@@ -106,6 +106,7 @@ module.exports = {
       'vendor_custom/angular-load.js',
 
       'vendor_custom/snarkdown.js',
+      'vendor_custom/LogRocket.min.js'
     ],
     fonts: [
       'vendor/font-awesome/fonts/*'
