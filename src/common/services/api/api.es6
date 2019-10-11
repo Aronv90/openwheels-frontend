@@ -77,6 +77,8 @@ angular.module('api', [])
     };
   };
 
+  const excessive_rates = {};
+
   api.invokeRpcMethod = function (rpcMethod, rpcParams, multiPartParams, isAnonymousMethod, overrideOptions) {
     // for debugging purposes
     if (appConfig.test.mock_api) {
@@ -90,6 +92,25 @@ angular.module('api', [])
           }, 500);
         });
       }
+    }
+
+    if (!excessive_rates[rpcMethod]) {
+      excessive_rates[rpcMethod] = [];
+    }
+    const now = Date.now();
+    excessive_rates[rpcMethod] = excessive_rates[rpcMethod].filter(t => t > now - 1500);
+    excessive_rates[rpcMethod].push(now);
+    if (excessive_rates[rpcMethod].length > 10) {
+      if (window.LogRocket) {
+        $log.warn(`Called API method ${rpcMethod} excessively: ${excessive_rates[rpcMethod]} times in 1.5s`);
+        window.LogRocket.captureException(new Error(`Called API method ${rpcMethod} excessively`), {
+          extra: {
+            time_window: 1500,
+            number_of_calls: excessive_rates[rpcMethod].length
+          }
+        });
+      }
+      excessive_rates[rpcMethod] = [];
     }
 
     var http;

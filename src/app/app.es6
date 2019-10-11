@@ -643,7 +643,7 @@ angular.module('openwheels', [
 
   if (window.LogRocket) {
     window.LogRocket.init('lftqp6/mywheels', {
-      release: '2.81.0'
+      release: '2.82.0'
     });
   }
 
