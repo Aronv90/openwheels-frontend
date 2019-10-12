@@ -34,7 +34,7 @@ angular.module('owm.shell')
     authService.loginPopup().then(function () {
       $log.debug('Successfully logged in');
       if ($state.current.name === 'home' || $state.current.name === 'owm.auth.signup') {
-        $log.debug('[$state.go] shell successful login -> owm.person.dashboard');
+        if (window.LogRocket) { window.LogRocket.debug('[$state.go] shell successful login -> owm.person.dashboard'); }
         $state.go('owm.person.dashboard');
       }
     });
