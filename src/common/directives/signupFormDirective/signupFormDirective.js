@@ -116,7 +116,6 @@ angular.module('signupFormDirective', [])
         }
         authService.loginPopup().then(function () {
           if ($state.current.name === 'home' || $state.current.name === 'owm.auth.signup') {
-            if (window.LogRocket) { window.LogRocket.debug('[$state.go] signup form login -> owm.person.dashboard'); }
             $state.go('owm.person.dashboard');
           }
         });

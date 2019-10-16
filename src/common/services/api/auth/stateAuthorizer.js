@@ -23,7 +23,7 @@ $stateProvider.state(name, {
 
 angular.module('stateAuthorizer', [])
 
-.service('stateAuthorizer', function ($log, $timeout, $rootScope, $state, $urlRouter, authService, Analytics, tokenService, tokenSilentRefreshService, alertService, featuresService) {
+.service('stateAuthorizer', function ($log, $location, $timeout, $rootScope, $state, $urlRouter, authService, Analytics, tokenService, tokenSilentRefreshService, alertService, featuresService) {
 
   $rootScope.$on('$stateChangeStart', function (e, toState, toParams, fromState, fromParams) {
     $log.debug('state change: ' + fromState.name + ' > ' + toState.name);
@@ -79,8 +79,6 @@ angular.module('stateAuthorizer', [])
 
       authService.userPromise().finally(function (user) {
         $timeout(function () {
-          Analytics.trackEvent('buglogging_v4', 'stateauth_user_pending_go', user && user.identity && (user.identity.id + '_' + user.identity.status), undefined, true);
-          if (window.LogRocket) { window.LogRocket.debug('[$state.go] state authorizer pending ->> ' + toState); }
           $state.go(toState, toParams);
         }, 0);
       });
@@ -96,8 +94,6 @@ angular.module('stateAuthorizer', [])
 
         $timeout(function () {
           alertService.loaded();
-          Analytics.trackEvent('buglogging_v4', 'redirect_stateauth_to_dashboard', user && user.identity && (user.identity.id + '_' + user.identity.status), undefined, true);
-          if (window.LogRocket) { window.LogRocket.debug('[$state.go] state authorizer ensure anonymous -> owm.person.dashboard'); }
           $state.go('owm.person.dashboard');
         }, 0);
       }
@@ -110,7 +106,6 @@ angular.module('stateAuthorizer', [])
 
         e.preventDefault();
 
-        if (window.LogRocket) { window.LogRocket.debug('[$state.go] state authorizer ensure authenticated -> login redirect'); }
         authService.loginRedirect(errorPath, successPath);
       }
 

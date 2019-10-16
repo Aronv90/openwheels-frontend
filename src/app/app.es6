@@ -222,7 +222,8 @@ angular.module('openwheels', [
     var path = $location.path();
     var hasTrailingSlash = path[path.length-1] === '/';
 
-    if(hasTrailingSlash) {
+    console.log("urlrouter slash?", path, hasTrailingSlash);
+    if (hasTrailingSlash) {
 
       //if last charcter is a slash, return the same url without the slash
       var newPath = path.substr(0, path.length - 1);
@@ -237,7 +238,6 @@ angular.module('openwheels', [
    */
   $urlRouterProvider.otherwise(function ($injector, $location) {
     var $state = $injector.get('$state');
-    if (window.LogRocket) { window.LogRocket.debug('[$state.go] non-existing url -> home'); }
     $state.go('home');
   });
 
@@ -487,7 +487,6 @@ angular.module('openwheels', [
       const onLandingPage = $state.includes('owmlanding');
       if (shouldFlow && !onDashboard && !onLandingPage) {
         e.preventDefault();
-        if (window.LogRocket) { window.LogRocket.debug('[$state.go] possiblyRedirectToProfileFlow -> owm.person.dashboard'); }
         $state.go('owm.person.dashboard');
       }
     }
@@ -618,7 +617,6 @@ angular.module('openwheels', [
     
     if (!fromState.name) {
       $timeout(function () {
-        if (window.LogRocket) { window.LogRocket.debug('[$state.go] $stateChangeError without fromState.name -> home'); }
         $state.go('home');
       }, 0);
     } else {
@@ -637,12 +635,6 @@ angular.module('openwheels', [
   var $window = injector.get('$window');
   var $q = injector.get('$q');
   var $log = injector.get('$log');
-
-  if (window.LogRocket) {
-    window.LogRocket.init('lftqp6/mywheels', {
-      release: '2.83.0'
-    });
-  }
 
   if (!window.jasmine) {
 
@@ -667,6 +659,15 @@ angular.module('openwheels', [
 
   function bootstrap(config) {
     window.IS_DEELAUTO = !!config.app_url.match(/deelauto/);
+
+    if (window.history && window.history.replaceState) {
+      const l = window.location;
+      if (l.pathname.slice(-1)[0] === "/") {
+        // const newLocation = `${l.protocol}//${l.hostname}${l.port ? ":" + l.port : ""}${l.pathname.slice(0, -1)}${l.search}${l.hash}`;
+        const newLocation = l.pathname.slice(0, -1) + l.search + l.hash;
+        window.history.replaceState(window.history.state, "", newLocation);
+      }
+    }
 
     if (isValidConfig(config)) {
       angular.module('openwheels.config', []).constant('appConfig', {
