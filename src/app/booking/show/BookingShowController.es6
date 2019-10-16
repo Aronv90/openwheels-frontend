@@ -613,6 +613,9 @@ angular.module('owm.booking.show', [])
   var resource = $scope.resource = booking.resource;
   $scope.me = me;
 
+  $scope.$mdMedia = $mdMedia;
+  console.log("media?", $mdMedia('gt-sm'));
+
 //  $state.transitionTo('owm.booking.show', { cont: 'sdf' }, { notify: false });
 //  $state.current.reloadOnSearch = false;
 //  $location.search({ cont: null });
@@ -1692,10 +1695,12 @@ angular.module('owm.booking.show', [])
     reload();
   };
 
-  $scope.bookingDriversChanged = function() {
-    $log.log('bookingDriversChanged');
-    reloadRequiredValue();
-    $scope.extraDrivers.load();
+  $scope.bookingDriversChanged = function(booking, isFirstLoad) {
+    $log.log('bookingDriversChanged', booking, isFirstLoad);
+    if (!isFirstLoad) {
+      reloadRequiredValue();
+      $scope.extraDrivers.load();
+    }
   };
 
   function reloadRequiredValue() {

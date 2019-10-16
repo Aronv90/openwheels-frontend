@@ -10,7 +10,7 @@ angular.module('vouchersDirective', [])
       me: '=',
       booking: '=',
       onChanged: '&',
-      onExtraDriversChanged: '&',
+      onExtraDriversChanged: '=',
       discount: '='
     },
     controller: function ($scope, voucherService, alertService, bookingService, $rootScope, paymentService, appConfig, $state,
@@ -56,7 +56,7 @@ angular.module('vouchersDirective', [])
           $scope.booking.contract = contract;
 
           var promise = (contract.type.id === 60) ?
-            reloadExtraDrivers() :
+            reloadExtraDrivers(true) :
             getVoucherPrice($scope.booking);
         }).finally(function () {
           alertService.loaded();
@@ -64,23 +64,26 @@ angular.module('vouchersDirective', [])
         });
       }
 
-      function onExtraDriversChanged () {
+      function onExtraDriversChanged (isFirstLoad) {
         getVoucherPrice($scope.booking);
-        $scope.onExtraDriversChanged($scope.booking);
+        console.log('calling on extra drivers changed', $scope.onExtraDriversChanged);
+        if ($scope.onExtraDriversChanged) {
+          $scope.onExtraDriversChanged($scope.booking, isFirstLoad);
+        }
       }
 
-      function setExtraDrivers (extraDriverInviteRequests) {
+      function setExtraDrivers (extraDriverInviteRequests, isFirstLoad) {
         $scope.extraDrivers.drivers = extraDriverInviteRequests;
-        onExtraDriversChanged();
+        onExtraDriversChanged(isFirstLoad);
       }
 
-      function reloadExtraDrivers () {
+      function reloadExtraDrivers (isFirstLoad) {
         $scope.extraDrivers.loading = true;
 
         return extraDriverService
           .driversForBooking({ booking: $scope.booking.id })
-          .then(setExtraDrivers)
           .then(function (extraDriverInviteRequests) {
+            setExtraDrivers(extraDriverInviteRequests, isFirstLoad);
             $scope.extraDrivers.loading = false;
           });
       }

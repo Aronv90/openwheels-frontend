@@ -41,7 +41,7 @@
 
   <div class="card-body" ng-if="!$root.isPaymentLoading">
     <voucher me="me" booking="booking" discount="discount" on-changed="bookingChanged(booking)"
-      on-extra-drivers-changed="bookingDriversChanged(booking)"></voucher>
+      on-extra-drivers-changed="bookingDriversChanged"></voucher>
 
     <div ng-if="(requested && requiredValue.value.total === 0) || ((requiredValue.value.total | number:2) == ((booking.details.booking_price.total + booking.details.km_price - booking.details.discount - booking.details.friend_invite_discount) | number:2))" class="text-center">
       
