@@ -142,8 +142,8 @@
                 <div id="zipcode_group" class="icon home field">
                     <input type="text" name="zipcode" id="zipcode" ng-change="onSplitAddressChange()" ng-model="person.zipcode" placeholder="Postcode">
 
-                    <div class="err-block" ng-show="personalDataForm.$submitted && !person.zipcode">
-                        <span class="text-danger">{{ 'REQUIRED' | translate }}</span>
+                    <div class="err-block" ng-show="personalDataForm.$submitted && zipcodeInvalid(person.country, person.zipcode)">
+                        <span class="text-danger">{{ zipcodeInvalid(person.country, person.zipcode) }}</span>
                     </div>
                 </div>
                 <!-- /zipcode -->

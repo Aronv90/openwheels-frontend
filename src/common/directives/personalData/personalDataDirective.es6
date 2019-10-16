@@ -118,6 +118,7 @@ angular.module('personalDataDirective', [])
             day = $scope.date.day,
             male = $scope.genderText,
             phoneNumbers = $scope.verifiedPhoneNumbers,
+            country = $scope.person.country,
             city = $scope.person.city,
             zipcode = $scope.person.zipcode,
             streetName = $scope.person.streetName,
@@ -149,7 +150,7 @@ angular.module('personalDataDirective', [])
             if (year && month && day) {
               if (phoneNumbers) {
                 if (male) {
-                  if (streetName && streetNumber && city && zipcode && containsStreetNumber(streetNumber)) {
+                  if (streetName && streetNumber && city && zipcode && containsStreetNumber(streetNumber) && !zipcodeInvalid(country, zipcode)) {
 
                     // save persons info
                     personService.alter({
@@ -319,6 +320,18 @@ angular.module('personalDataDirective', [])
         }
       };
 
+      function zipcodeInvalid(country, zipcode) {
+        if (!(zipcode || '').trim()) {
+          return 'Vul een postcode in';
+        } else if (country === 'Nederland' && !zipcode.match(/^[0-9]{4}[ ]*[A-Z]{2}$/)) {
+          return 'Vul een geldige postcode in';
+        } else {
+          // no error
+          return false;
+        }
+      }
+      $scope.zipcodeInvalid = zipcodeInvalid;
+
       var phoneNumber = {
         ensure: function () {
           if (!$scope.person.phoneNumbers || !$scope.person.phoneNumbers.length) {
@@ -394,6 +407,7 @@ angular.module('personalDataDirective', [])
             $scope.addressSearch.address = null;
           } else {
             delete $scope.addressSearch.error;
+            console.log("found", found);
             $scope.addressSearch.found = found;
             angular.merge($scope.person, found);
             $timeout(() => {
