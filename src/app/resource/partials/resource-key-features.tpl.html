@@ -35,7 +35,7 @@
       <ng-md-icon icon="local_parking"></ng-md-icon>
       <span uib-tooltip="{{ resource.parkingType | parkingTypeTooltip }}">{{ resource.parkingType | parkingType }}</span>
     </div>
-    <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.fuelLevel !== null">
+    <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.fuelType === 'elektrisch' && resource.fuelLevel !== null">
       <fuel-charging-icon resource="resource" />
       {{ resource.fuelRange }} km ({{ resource.fuelLevel }}%)
     </div>

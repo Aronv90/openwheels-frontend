@@ -43,7 +43,7 @@ angular.module("filters.resource", [])
 
 .filter("fuelChargingIconName", function () {
   return function (resource) {
-    if (resource.fuelLevel === null) {
+    if (resource.fuelType !== 'elektrisch' || resource.fuelLevel === null) {
       return "battery_unknown";
     }
     const prefix = "battery_" + (resource.charging ? "charging_" : "");

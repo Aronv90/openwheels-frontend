@@ -104,6 +104,9 @@
                         <div class="user-text">
                             <p style="white-space: pre-line;">{{ resource.advertisement }}</p>
                         </div>
+                        <div ng-if="resource.fuelType === 'elektrisch'" style="margin-top: 2rem; display: flex; justify-content: center;">
+                            <iframe width="730" height="410" src="https://www.youtube-nocookie.com/embed/8o7zu_yZ3uw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
                     </div>
 
                     <div ng-include="'resource/partials/technische-kenmerken.tpl.html'"></div>
