@@ -34,7 +34,7 @@
                     <ng-md-icon class="list-item-icon" icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
                         <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
-                        <spans>
+                        <span>
                             <span
                                 ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0"
                                 class="tag tag-warning"
