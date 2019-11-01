@@ -13,7 +13,9 @@
     <div ng-bind-html="params.resource.usageManual | toParagraphs"></div>
 
     <div ng-if="params.resource.fuelType === 'elektrisch'" style="margin-top: 2rem; display: flex; justify-content: center;">
-      <iframe width="400" height="225" src="https://www.youtube-nocookie.com/embed/8o7zu_yZ3uw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <div class="embed-container">
+        <iframe src="https://www.youtube-nocookie.com/embed/8o7zu_yZ3uw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
     </div>
   </md-dialog-content>
 </md-dialog>
