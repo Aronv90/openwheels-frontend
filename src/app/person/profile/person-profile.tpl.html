@@ -281,21 +281,6 @@
           <form name="settingsForm">
 
             <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="preference">{{ 'TYPE_OF_USER' | translate }}</label>
-                  <select class="form-control" id="preference" name="preference" ng-model="person.preference" required
-                          ng-options="preference.value as preference.label for preference in preferenceOptions">
-                    <option value="">-- {{ 'PICK_PREFERENCE' | translate }} --</option>
-                  </select>
-                  <p class="help-block">{{ 'USER_PREFERENCE_HELP_BLOCK' | translate }}</p>
-                  <p class="help-block" ng-show="settingsForm.preference.$error.required"><span class="text-danger">{{ 'REQUIRED' | translate }}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="emailPreference">{{ 'EMAIL_PREFERENCE' | translate }}</label>
@@ -463,7 +448,7 @@
                 <li ng-if="person.provider.id === 5">
                   <a ui-sref="owm.finance.contributie">{{ 'PAY_SUBSCRIPTION' | translate }} ›</a>
                 </li>
-                <li ng-if="person.preference !== 'renter'">
+                <li ng-if="person.preference !== 'renter' && person.provider.id === 5">
                   <a ui-sref="owm.resource.own">{{ 'CREATE_RESOURCE_BUTTON' | translate }} ›</a>
                 </li>
               </ul>

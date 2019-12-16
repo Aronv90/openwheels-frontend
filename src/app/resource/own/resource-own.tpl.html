@@ -52,14 +52,6 @@
                 <ng-md-icon icon="settings"></ng-md-icon> <a ui-sref="owm.resource.edit({ resourceId: resource.id })">{{ 'EDIT_RESOURCE' | translate }}</a>
               </div>
 
-              <div class="truncate" ng-if="!isBeheerder(me, resource) && (resource.isAvailableOthers || resource.isAvailableFriends) && resource.isActive && me.provider.id !== 5">
-                <ng-md-icon icon="close"></ng-md-icon> <a ng-click="setResourceAvailability(resource, false)">{{ 'AVAILABLE_RESOURCE' | translate }}</a>
-              </div>
-
-              <div class="truncate" ng-if="!isBeheerder(me, resource) && !resource.isAvailableOthers && !resource.isAvailableFriends && resource.isActive && me.provider.id !== 5">
-                <ng-md-icon icon="check"></ng-md-icon> <a ng-click="setResourceAvailability(resource, true)">{{ 'NOT_AVAILABLE_RESOURCE' | translate }}</a>
-              </div>
-
               <div class="truncate" ng-if="resource.boardcomputer && resource.boardcomputer !== 'ccome' && resource.owner.id === me.id && me.provider.id !== 5">
                 <ng-md-icon icon="place"></ng-md-icon> <a ng-click="location(resource)">{{ 'SHOW_LOCATION_ON_MAP' | translate }}</a>
               </div>

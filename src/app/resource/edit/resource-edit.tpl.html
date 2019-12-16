@@ -96,16 +96,6 @@
                 </a>
               </li>
             </ul>
-
-            <div class="h-pad" ng-if="!isBeheerder(me, resource)">
-              <ul class="extra-links">
-                <li>
-                  <a ng-href="{{ $state.href('owm.resource.calendar', { city: (resource.city | replaceSpaceToDash | lowercase), resourceId: resource.id }) }}" ga-track-event="['interaction', 'updateAvailability', 'resourceEdit']">
-                    Pas beschikbaarheid aan ›
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
       </div>
