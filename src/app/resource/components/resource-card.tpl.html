@@ -2,12 +2,6 @@
         ng-click="select()">
     <div class="md-card-image" style="position: relative">
         <ow-resource-picture-div resource="resource" size="large"></ow-resource-picture-div>
-        <div ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0" class="mywheelsOpenBar">
-            <ng-md-icon icon="lock_open" alt="Icoon" aria-label="Icoon"></ng-md-icon>
-            <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone en OV-chipkaart</span>
-            <span ng-if="resource.locktypes.indexOf('chipcard') < 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone</span>
-            <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') < 0">Openen met OV-chipkaart</span>
-        </div>
         <div class="price" ng-if="!$root.providerInfo.isBusiness">
             <h2 class="no-margin" style="color:#fff">
           {{ resource.price.dayRateTotal | currency }}
@@ -35,15 +29,6 @@
                     <div flex>
                         <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
                         <span>
-                            <span
-                                ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0"
-                                class="tag tag-warning"
-                                flex="none"
-                                style="margin-left: 2px;"
-                                uib-tooltip="{{ 'MYWHEELS_OPEN_INFO' | translate }}"
-                            >
-                                {{ 'MYWHEELS_OPEN_TIP' | translate }}
-                            </span>
                             <span
                                 ng-if="resource.newScoreCar"
                                 class="tag tag-success"
@@ -80,10 +65,11 @@
                 </md-list-item>
                 <md-list-item>
                     <!-- person -->
-                    <ng-md-icon class="list-item-icon" icon="person" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="lock_open" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
-                        {{ resource.owner.firstName }}
-                        <span rating-thumb="{ value : resource.rating_totals.satisfaction, senders: resource.rating_totals.senders }"></span>
+                        <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone en OV-chipkaart</span>
+                        <span ng-if="resource.locktypes.indexOf('chipcard') < 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone</span>
+                        <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') < 0">Openen met OV-chipkaart</span>
                     </div>
                 </md-list-item>
                 <md-list-item ng-if="!lightweight">
@@ -92,6 +78,7 @@
                     <div flex>
                         <span>
                     {{ resource.numberOfBookings | wasBookedTimes }}
+                    <span rating-thumb="{ value : resource.rating_totals.satisfaction, senders: resource.rating_totals.senders }"></span>
                 </span>
                     </div>
                 </md-list-item>

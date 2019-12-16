@@ -5,7 +5,6 @@
         <section class="container homepage-baseline">
             <div class="homepage-baseline-header">
                 <span><h1 id="tagline" class="fadeInDown animated">{{'TAGLINE_HOME' | translate}}</h1></span>
-                <span><h3 id="taglineSubtitle" class="fadeInDown animated">{{'TAGLINE_HOME_SUBTITLE' | translate}}</h3></span>
             </div>
         </section>
         <section ng-if="features.homePage" class="homepage-searchbar-frontpage">
@@ -28,34 +27,12 @@
     <div class="triangle--bar--home triangle--bar--home-white"></div>
     <!-- /TRIANGLE BAR -->
 
-    <!-- BLOG ITEMS -->   
-    <!-- <div class="blog--overview" ng-if="features.homePage && (!user || !user.identity.isBusinessConnected)">
-        <section class="center">
-            <h2>Ons laatste nieuws</h2>
-            <a type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-big" href="https://mywheels.nl/blog/" target="_blank" md-ink-ripple="#3a6d81" hide-xs>
-                Lees alles
-            </a>
-        </section>
-        <div class="blog--overview--items">
-            <section>
-                <ul>
-                    <li class="blog--item" ng-repeat="item in blogItems">
-                        <a target="_blank" href="{{ item.url }}" ng-bind="item.title"></a>
-                    </li>
-                </ul>
-                <a type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-margin-top mywheels-btn-big" href="/blog" md-ink-ripple="#3a6d81" hide-gt-xs>
-                    Lees alles
-                </a>
-            </section>
-        </div>
-    </div> -->
-
     <!-- RENTER CALL TO ACTION -->
     <div class="renter--actions" ng-if="features.homePage">
         <div class="renter--action">
             <section>
                 <h2>Huur in de buurt</h2>
-                <p class="size-2">Met auto's in meer dan 500 plaatsen, vind je altijd wel een auto bij jou in de buurt. Geen vaste abonnementskosten en voordelige tarieven, bij ons betaal je alleen wanneer je een auto gebruikt.</p>
+                <p class="size-2">Open je deelauto met je smartphone. Geen vaste abonnementskosten en voordelige tarieven, bij ons betaal je alleen wanneer je een auto gebruikt.</p>
                 <a type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-margin-top mywheels-btn-big" href="/auto-huren?page=1" md-ink-ripple="#3a6d81">
                     Bekijk het aanbod
                 </a>
@@ -64,35 +41,6 @@
         </div>
     </div>
     <!-- /RENTER CALL TO ACTION -->
-
-    <!-- OWNER CALL TO ACTION -->
-    <!-- <div class="owner--actions" ng-if="features.homePage">
-        <div class="owner--action">
-            <section>
-                <h2>Verhuur en verdien</h2>
-                <div class="size-2">
-                    <p>Je auto aanbieden is gratis. Vul je kenteken in, plaats een paar mooie foto's en je kunt beginnen. Zo verdien jij iets extra's aan je auto en kunnen jouw buren op pad.</p>
-                    <p>Met <a href="/open" ui-sref="owmlanding.mywheels-open">MyWheels Open</a> kan je nog makkelijker en vaker je auto delen.</p>
-                </div>
-                <button type="button" name="button" class="mywheels-btn mywheels-btn-default mywheels-btn-margin-top mywheels-btn-big" ui-sref="list-your-car" md-ink-ripple="#3a6d81">
-                    Meld je auto aan
-                </button>
-            </section>
-            <div class="owner--action--image"></div>
-        </div>
-    </div> -->
-    <!-- /OWNER CALL TO ACTION -->
-
-    <!-- MYWHEELS OPEN -->
-    <!-- <div class="mywheels--open--card" ng-if="features.homePage && (!user || !user.identity.isBusinessConnected)" ui-sref="owmlanding.mywheels-open" ga-track-event="['interaction', 'mywheelsOpen', 'home']" hide-xs>
-       <img src="../branding/img/mywheels_open_desktop.png" class="banner" />
-           <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary">Meld je aan</a>
-    </div>
-   
-    <div class="mywheels--open--card" ng-if="features.homePage && (!user || !user.identity.isBusinessConnected)" ui-sref="owmlanding.mywheels-open" ga-track-event="['interaction', 'mywheelsOpen', 'home']" hide-gt-xs>
-       <img src="../branding/img/mywheels_open_mobiel.png" class="banner" />
-           <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary">Meld je aan</a>
-    </div> -->
 
     <div ng-include="'partials/landing-ratings.tpl.html'"></div>
 

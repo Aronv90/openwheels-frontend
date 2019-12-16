@@ -29,14 +29,6 @@
                 <ng-md-icon icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                 <div flex>
                     <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
-                    <span
-                      class="tag tag-warning"
-                      ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0"
-                      flex="none"
-                      uib-tooltip="{{ 'MYWHEELS_OPEN_INFO' | translate }}"
-                    >
-                      {{ 'MYWHEELS_OPEN_TIP' | translate }}
-                    </span>
                     <span class="tag tag-success" ng-if="resource.newScoreCar" flex="none"> {{ 'NEW_TIP' | translate }} </span>
                 </div>
               </md-list-item>

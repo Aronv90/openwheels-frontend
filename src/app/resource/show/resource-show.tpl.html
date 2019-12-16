@@ -72,10 +72,6 @@
                     </div>
 
                     <div class="subtitle">
-                        <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0">
-                            <span class="tag tag-warning mw-badge mw-badge-open">MyWheels Open</span>
-                            <span class="bullet"></span>
-                        </span>
                         <span ng-if="resource.newScoreCar">
                             <span class="tag tag-warning mw-badge mw-badge-new">Nieuw</span>
                             <span class="bullet"></span>
@@ -235,18 +231,6 @@
                     <div ng-if="resource.contactPerson.about">
                         <p>{{ resource.contactPerson.about}}</p>
                     </div>
-                </div>
-            </div>
-
-            <!-- mywheels open benefits -->
-            <div class="card mw"
-                 id="mywheels_open_info"
-                 ng-if="resource.locktypes.indexOf('chipcard') >= 0 || resource.locktypes.indexOf('smartphone') >= 0">
-                <div class="card-heading">
-                    <h3>{{ 'MYWHEELS_OPEN_TITLE' | translate }}</h3>
-                </div>
-                <div class="card-body">
-                    <div ng-include="'resource/partials/mw-open-benefits.tpl.html'"></div>
                 </div>
             </div>
 

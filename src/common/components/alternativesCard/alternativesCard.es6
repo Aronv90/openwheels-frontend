@@ -30,10 +30,10 @@ angular.module("owm.components")
           minSeats: this.booking.resource.numberOfSeats,
           resourceType: this.booking.resource.resourceType
         },
-        radius: 5000,
+        radius: 15000,
         maxresults: 4,
         person: this.booking.person.id,
-        sort: "relevance",
+        sort: "distance",
       };
     } else if (this.resource) {
       params = {
@@ -41,9 +41,9 @@ angular.module("owm.components")
           latitude: this.resource.latitude,
           longitude: this.resource.longitude
         },
-        radius: 5000,
+        radius: 15000,
         maxresults: 4,
-        sort: "relevance",
+        sort: "distance",
       };
     }
 

@@ -43,15 +43,6 @@
                     <!-- tags -->
                     <div style="width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         <span 
-                            ng-if="['smartphone', 'chipcard'].indexOf(resource.locktype) >= 0" 
-                            class="tag tag-warning" 
-                            style="margin-left: 0px;"
-                            id="mywheels-open-tip-label"
-                            uib-tooltip="{{ 'MYWHEELS_OPEN_INFO' | translate }}"
-                        >
-                            {{ 'MYWHEELS_OPEN_TIP' | translate }}
-                        </span>
-                        <span 
                             ng-if="resource.newScoreCar"
                             class="tag tag-success"
                             style="margin-left: 0px;"

@@ -23,8 +23,8 @@ angular.module('owmlanding.beheerders', ['slick'])
       answer: 'Ja, al bedankje krijgen MyWheels beheerders maandelijks een vrijwilligersvergoeding in de vorm van 75 vrije kilometers.',
     },
     {
-      question: 'Wat als er geen MyWheels Open auto in mijn buurt staat?',
-      answer_html: '<p>Staat er nog geen auto met MyWheels Open bij jou in de buurt? Neem dan <a href="https://mywheels.nl/autodelen/community/contact/">contact</a> met ons op om de mogelijkheden te bespreken.</p>',
+      question: 'Wat als er geen auto in mijn buurt staat?',
+      answer_html: '<p>Staat er nog geen MyWheels auto bij jou in de buurt? Neem dan <a href="https://mywheels.nl/autodelen/community/contact/">contact</a> met ons op om de mogelijkheden te bespreken.</p>',
     },
   ];
 

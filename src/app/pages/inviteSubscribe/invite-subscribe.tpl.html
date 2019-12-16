@@ -4,7 +4,7 @@
         <section style="z-index:2">
             <img class="invite-image media-object img-user-large" person-profile-image="{ person: inviter, size: 'large' }" />
             <span><h1 class="fadeInDown animated">Krijg van {{ inviter.firstName | toTitleCase }} €10 korting op je eerste rit!</h1></span>
-            <span hide-xs><p class="fadeInDown animated">Met MyWheels huur je makkelijk een auto in de buurt. Je opent een auto met je smartphone en/of OV-chipkaart, of door de sleutel bij verhuurder op te halen.</p></span>
+            <span hide-xs><p class="fadeInDown animated">Met MyWheels huur je makkelijk een auto in de buurt. Onze deelauto's open je met je smartphone en/of chipkaart.</p></span>
             <span hide-gt-xs><br/><p class="fadeInDown animated">Met MyWheels huur je makkelijk een auto in de buurt.</p><br/></span>
 
             <md-button class="md-raised " ng-click="openModal()" ga-track-event="['referral', 'acceptInvitation', 'inviteSubscribe']">Accepteer de uitnodiging</md-button>
@@ -37,22 +37,6 @@
         </div>
     </div>
     <!-- /Hire a car in 3 steps -->
-
-    <div class="resource-of-inviter text-center" ng-if="resources.length > 0">
-        <div class="container-home">
-            <h2 class="resource-of-inviter--heading" ng-if="resources.length > 1">Auto's van {{ inviter.firstName | toTitleCase }}</h2>
-            <h2 class="resource-of-inviter--heading" ng-if="resources.length === 1">De auto van {{ inviter.firstName | toTitleCase }}</h2>
-            <ul>
-                <li ng-repeat="resource in resources | limitTo: 2" ui-sref="owm.resource.show({ resourceId: resource.id, city: (resource.city | replaceSpaceToDash | lowercase) })">
-                    <ow-resource-picture resource="resource" size="large"></ow-resource-picture>
-                    <div class="information">
-                        <h2 class="no-margin" style="color:#fff;">{{ resource.alias | limitTo: 30}}{{resource.alias.length > 30 ? '...' : ''}}</h2>
-                        <h3 class="no-margin" style="color:#fff"">{{ resource.location }}, {{ resource.city }}</h3>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
 
     <div class="intro-section">
         <section class="intro-section__faq">

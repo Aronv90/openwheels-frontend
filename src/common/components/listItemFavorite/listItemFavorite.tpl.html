@@ -14,10 +14,6 @@
 
     <div class="col-sm-3 col-xs-8">
       <div class="list-item-line">{{ $ctrl.resource.location }}, {{ $ctrl.resource.city }}</div>
-      <div class="list-item-line">
-        <span ng-if="$ctrl.resource.boardcomputer" class="tag tag-warning mw-badge mw-badge-open">MyWheels Open</span>
-        <span ng-if="!$ctrl.resource.boardcomputer">Afspraak maken</span>
-      </div>
       <!--<div class="list-item-line" ng-if="!$root.providerInfo.isBusiness">{{ $ctrl.resource.price.dayRateTotal | currency }}</div>-->
       <!--<div class="list-item-line" ng-if="$ctrl.resource.price.kmFree && !$root.providerInfo.isBusiness"">
         <small style="line-height: 1rem;">100 km gratis per dag</small>

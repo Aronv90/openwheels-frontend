@@ -7,7 +7,7 @@ angular.module('owm.resourceQueryService', [])
   var URL_DATE_TIME_FORMAT = 'YYMMDDHHmm';
 
   var sortModes = ['relevance', 'distance', 'price'];
-  var defaultSortMode = 'relevance';
+  var defaultSortMode = 'distance';
   var defaultRadius = 25000;
 
   var data = {
@@ -16,7 +16,7 @@ angular.module('owm.resourceQueryService', [])
     timeFrame: null,
     radius   : defaultRadius,
     options  : null,
-    filters  : null,
+    filters  : {'smartwheels': true},
     sort     : defaultSortMode
   };
 
@@ -124,7 +124,6 @@ angular.module('owm.resourceQueryService', [])
   }
 
   function setFilters (filtersObject) {
-    data.filters = null;
     angular.forEach(filtersObject, function (value, key) {
       if (!value) { return; }
       if (key === 'minSeats') {

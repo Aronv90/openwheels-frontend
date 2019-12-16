@@ -52,10 +52,10 @@ angular.module('owm.resource.place', [])
       answer: 'Je hoeft bij MyWheels geen borg te betalen en geen machtiging voor automatische incasso af te geven. Je betaalt een rit vooraf veilig en snel met iDEAL.',
     }, {
       question: 'Hoe open ik een auto?',
-      answer: 'Je kunt bij ons MyWheels Open auto\'s huren die je opent met je smartphone en/of chipkaart. Of een van de vele auto\'s van particuliere autobezitters, die open je gewoon met de sleutel. Je spreekt dan samen met de verhuurder af hoe je in het bezit komt van de sleutel.',
+      answer: 'Onze deelauto\'s open je met je smartphone en/of chipkaart.',
     }, {
       question: 'Hoe open ik een auto met mijn smartphone?',
-      answer: 'Om een MyWheels Open auto te openen en sluiten, klik je op MyWheels.nl of in de MyWheels app op de lopende rit. Vervolgens zie je een groene en een rode knop staan met een sleutelicoon. Met de groene knop open je de auto, met de rode knop sluit je hem.',
+      answer: 'Klik je op MyWheels.nl of in de MyWheels app op de lopende rit. Vervolgens zie je een groene en een rode knop staan met een sleutelicoon. Met de groene knop open je de auto, met de rode knop sluit je hem.',
     }, {
       question: 'Hoe huur ik een auto?',
       answer: 'Zoek een auto in de buurt die je wilt huren, vul de datum en tijd in dat je de auto nodig hebt en klik op \'Maak reservering\' om de auto te reserveren. Als je nog geen account hebt, kun je deze in drie stappen aanmaken.',
@@ -65,13 +65,7 @@ angular.module('owm.resource.place', [])
     }, {
       question: 'Wanneer wordt mijn account gecontroleerd?',
       answer: 'Om te mogen rijden, heb je een geactiveerd MyWheels account nodig. De meeste accounts activeren we automatisch, je kunt dan direct op weg!',
-    }, {
-      question: 'Hoe ben ik verzekerd als ik huur?',
-      answer: 'De auto die je via MyWheels huurt, is automatisch goed verzekerd tegen schade, vernieling en diefstal. We sluiten namelijk voor elke rit een all-risk verzekering af. Zo loop jij geen risico als je in een deelauto rijdt. De tarieven van een auto zijn altijd inclusief verzekeringskosten.',
-    }, {
-      question: 'Wat betekent het label MyWheels Open?',
-      answer: 'MyWheels Open auto’s open je met je smartphone en/of chipkaart. De auto\'s zijn direct te boeken. Daarnaast hoef je bij een MyWheels Open auto geen kilometerstanden te noteren, de gereden kilometers registreren we automatisch.',
-    },
+    }
   ];
 
   $scope.FAQ.left = $scope.FAQ.slice(0, Math.floor($scope.FAQ.length/2));
@@ -99,7 +93,7 @@ angular.module('owm.resource.place', [])
         longitude: $scope.place.longitude,
       },
       radius: 5000,
-      sort: 'relevance',
+      sort: 'distance',
       person: me ? me.id : undefined,
       maxresults: 10,
       options: options, /*[

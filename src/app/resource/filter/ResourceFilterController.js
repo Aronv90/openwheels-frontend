@@ -16,35 +16,25 @@ angular.module('owm.resource.filter', [])
     ];
 
     $scope.fuelTypeOptions = [
-      {value: 'cng', label: $translate.instant('FUEL_TYPE.CNG')},
       {value: 'benzine', label: $translate.instant('FUEL_TYPE.BENZINE')},
-      {value: 'diesel', label: $translate.instant('FUEL_TYPE.DIESEL')},
-      {value: 'elektrisch', label: $translate.instant('FUEL_TYPE.ELECTRIC')},
-      {value: 'hybride', label: $translate.instant('FUEL_TYPE.HYBRID')},
-      {value: 'lpg', label: $translate.instant('FUEL_TYPE.LPG')}
+      {value: 'elektrisch', label: $translate.instant('FUEL_TYPE.ELECTRIC')}
     ];
 
     $scope.resourceTypeOptions = [
-      {value: 'van', label: $translate.instant('RESOURCE_TYPE.VAN')},
-      {value: 'station', label: $translate.instant('RESOURCE_TYPE.STATION')},
+      {value: 'Stadsauto', label: $translate.instant('RESOURCE_TYPE.CITY')},
+      {value: 'Elektrische auto', label: $translate.instant('RESOURCE_TYPE.ELECTRIC')},
+      {value: 'Gezinsauto', label: $translate.instant('RESOURCE_TYPE.FAMILY')}
     ];
 
     $scope.minSeatOptions = [
       {value: 3, label: '3'},
       {value: 4, label: '4'},
-      {value: 5, label: '5'},
-      {value: 6, label: '6'},
-      {value: 7, label: '7'}
+      {value: 5, label: '5'}
     ];
 
     $scope.optionsLabels = {
-      'airconditioning':     $translate.instant('ACCESSORIES.AIRCONDITIONING'),
       'automaat':            $translate.instant('ACCESSORIES.AUTOMATICTRANSMISSION'),
-      'fietsendrager':       $translate.instant('ACCESSORIES.BIKE_CARRIER'),
-      'kinderzitje':         $translate.instant('ACCESSORIES.CHILD_SEAT'),
-      'mp3-aansluiting':     $translate.instant('ACCESSORIES.MP3_CONNECTION'),
       'navigatie':           $translate.instant('ACCESSORIES.NAVIGATION'),
-      'rolstoelvriendelijk': $translate.instant('ACCESSORIES.WHEELCHAIR_FRIENDLY'),
       'trekhaak':            $translate.instant('ACCESSORIES.TOW_BAR'),
       'winterbanden':        $translate.instant('ACCESSORIES.WINTER_TIRES')
     };

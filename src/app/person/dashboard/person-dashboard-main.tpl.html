@@ -234,57 +234,6 @@
         </div>
       </div>
 
-
-      <!-- MyWheels Open banner for owners with resource-->
-      <!-- <div ng-if="me.provider.id === 1 && resources.length > 0">
-        <div 
-          class="mywheels--open--card"
-          ui-sref="owmlanding.mywheels-open"
-          href="/open"
-          ga-track-event="['interaction', 'mywheelsOpenUtrecht', 'dashboard']"
-          ng-if="MyWheelsOpenUtrecht"
-          hide-xs
-        >
-          <img src="../branding/img/mywheels_open_dashboard_utrecht.png" class="banner" />
-              <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary" style="right:0.5em; font-size:1.1em;padding:.5em 0.8em;">Meld je aan</a>
-        </div>
-
-        <div 
-          class="mywheels--open--card"
-          ui-sref="owmlanding.mywheels-open"
-          href="/open"
-          ga-track-event="['interaction', 'mywheelsOpen', 'dashboard']"
-          ng-if="!MyWheelsOpenUtrecht"
-          hide-xs
-        >
-          <img src="../branding/img/mywheels_open_dashboard.png" class="banner" />
-              <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary">Meld je aan</a>
-        </div>
-
-        <div 
-          class="mywheels--open--card"
-          ui-sref="owmlanding.mywheels-open"
-          href="/open"
-          ga-track-event="['interaction', 'mywheelsOpen', 'dashboard']"
-          ng-if="!MyWheelsOpenUtrecht"
-          hide-gt-xs
-        >
-          <img src="../branding/img/mywheels_open_mobiel.png" class="banner" />
-              <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary" style="font-size:1.1em;">Meld je aan</a>
-        </div>
-        <div 
-          class="mywheels--open--card"
-          ui-sref="owmlanding.mywheels-open"
-          href="/open"
-          ga-track-event="['interaction', 'mywheelsOpen', 'dashboard']"
-          ng-if="MyWheelsOpenUtrecht"
-          hide-gt-xs
-        >
-          <img src="../branding/img/mywheels_open_dashboard_utrecht_mobiel.png" class="banner" />
-              <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary" style="font-size:1.1em;">Meld je aan</a>
-        </div>
-      </div> -->
-
       <!-- Referral program-->
       <div ng-if="me.provider.id === 1 && (me.preference === 'renter' || resources.length === 0)">
         <div 
@@ -305,26 +254,6 @@
         >
           <img src="../branding/img/vrienden_uitnodigen_dashboard_mobiel.png" class="banner" />
               <a class="mywheels-btn mywheels-btn-light mywheels-btn-big" md-ink-ripple="#ded8d8" class="md-primary" style="font-size: 1em; bottom: 14%; right: 1.5em;">{{ 'INVITE_FRIENDS_MENU' | translate }}</a>
-        </div>
-      </div>
-
-      <!-- BLOG ITEMS -->   
-      <div class="mw card" ng-if="me.provider.id === 1">
-        <div class="card-heading">
-          <h2 class="card-title">{{ 'LAST_BLOG_ITEMS' | translate }}</h2>
-        </div>
-        <div class="card-body dashboard--blog--overview">
-            <ul>
-                <li class="blog--item" ng-repeat="item in blogItems | limitTo: 3">
-                    <a target="_blank" href="{{ item.url }}" ng-bind="item.title"></a>
-                    <p data-ng-bind-html="(item.content_text | removeEntersFilter | limitTo: 200) + '...'"></p>
-                </li>
-            </ul>
-            <center>
-              <a type="button" name="button" target="_blank" class="mywheels-btn mywheels-btn-big mywheels-btn-default mywheels-btn-margin-top mywheels-btn-big" href="https://mywheels.nl/blog" md-ink-ripple="#3a6d81">
-                Lees alles
-              </a>
-            </center>
         </div>
       </div>
       
