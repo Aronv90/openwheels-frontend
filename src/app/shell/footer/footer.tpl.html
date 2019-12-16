@@ -19,8 +19,6 @@
           <h4 class="no-margin">{{ 'CAR_SHARING_TITLE' | translate }}</h4>
           <ul>
             <li><a href="https://mywheels.nl/auto-huren">{{ 'RENT_A_CAR' | translate }}</a></li>
-            <li ng-if="!user.isAuthenticated"><a href="https://mywheels.nl/auto-verhuren">{{ 'LIST_YOUR_CAR' | translate }}</a></li>
-            <li ng-if="user.isAuthenticated"><a href="http://mywheels.nl/mijn-auto">{{ 'LIST_YOUR_CAR' | translate }}</a></li>
             <li><a href="/zakelijk" ui-sref="owmlanding.mywheels-zakelijk">{{ 'BUSINESS' | translate }}</a></li>
             <!-- <li><a href="/open" ui-sref="owmlanding.mywheels-open">{{ 'MYWHEELS_OPEN_HEADLINE' | translate }}</a></li> -->
             <li style="margin-top: 6px;">
@@ -40,9 +38,7 @@
         <div class="menubox">
           <h4 class="no-margin">{{ 'DISCOVER_CAR_SHARING_TITLE' | translate }}</h4>
           <ul>
-            <li><a href="https://mywheels.nl/autodelen/hoe-huren-werkt">{{ 'HOW_RENT_WORKS' | translate }}</a></li>
             <li><a href="https://mywheels.nl/autodelen/veelgestelde-vragen/">{{ 'FAQ' | translate }}</a></li>
-            <li><a href="https://mywheels.nl/autodelen/hoe-huren-werkt/verzekering">{{ 'INSURANCE' | translate }}</a></li>
             <li><a href="https://mywheels.nl/autodelen/hoe-huren-werkt/tarieven-huren/">{{ 'PRICING' | translate }}</a></li>
             <li><a href="https://mywheels.nl/autodelen/hoe-autodelen-werkt/voorwaarden/">{{ 'TERMS' | translate }}</a></li>
             <li><a href="https://mywheels.nl/autodelen/privacybeleid/">{{ 'PRIVACY' | translate }}</a></li>

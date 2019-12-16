@@ -68,7 +68,7 @@ angular.module('signupFormDirective', [])
           // do nothing
         } else {
           data = { // should fill in the details
-            preference: undefined,
+            preference: 'renter',
             flow: undefined,
           };
           $localStorage.booking_before_signup = data;
@@ -100,14 +100,14 @@ angular.module('signupFormDirective', [])
       initOptions();
 
       if (featuresService.get('hideSignupPreference')) {
-        $scope.user.preference = 'both';
+        $scope.user.preference = 'renter';
       } else {
         if ($state.previous.name === 'owm.resource.own') {
           $scope.user.preference = 'owner';
         } else if ($state.current.name === 'owm.resource.show') {
           $scope.user.preference = 'renter';
         } else {
-          $scope.user.preference = false;
+          $scope.user.preference = 'renter';
         }
       }
       $scope.login = function () {

@@ -38,12 +38,8 @@
       <ng-md-icon icon="search" alt="Icoon" aria-label="Icoon"></ng-md-icon><p>{{ 'RENT_A_CAR' | translate }}</p>
     </md-list-item>
 
-    <md-list-item id="menuMyCars" class="menu-item-resources" ng-click="navigate('owm.resource.own')" ng-if="user.isAuthenticated">
+    <md-list-item id="menuMyCars" class="menu-item-resources" ng-click="navigate('owm.resource.own')" ng-if="user.isAuthenticated && user.identity.preference !== 'renter'">
       <ng-md-icon icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon><p>{{ 'MY_RESOURCES' | translate }}</p>
-    </md-list-item>
-
-    <md-list-item id="menuListCar" class="menu-item-list-your-car" ng-click="navigate('list-your-car')" ng-if="!user.isAuthenticated">
-      <ng-md-icon icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon><p>{{ 'LIST_YOUR_CAR' | translate }}</p>
     </md-list-item>
 
     <md-list-item id="menuHelp" class="menu-item-how-it-works" ng-click="translateAndNavigate('NAVBAR.HOW_IT_WORKS_URL')" ng-if="!user.isAuthenticated">

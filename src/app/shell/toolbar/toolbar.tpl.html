@@ -52,12 +52,6 @@
         <span>{{ 'MYWHEELS_OPEN_HEADLINE' | translate }}</span>
       </md-button> -->
 
-      <!-- add resource -->
-      <md-button id="toolbarListyourcar" hide-xs hide-sm ng-if="!user.isAuthenticated && !onSignUpPage && !onListYourCarPage" ui-sref="list-your-car">
-        <!--<ng-md-icon icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>-->
-        <span>{{ 'LIST_YOUR_CAR' | translate }}</span>
-      </md-button>
-
       <!-- spinner -->
       <spinner ng-if="user.isPending" />
 
