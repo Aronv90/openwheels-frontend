@@ -7,12 +7,15 @@
       <span ng-if="!resource.locktypes">{{ 'UKNOWN_LOCKTYPE' | translate }}</span>
     </div>
     <div flex-gt-sm="40" flex="100" class="item">
-      <ng-md-icon icon="message"></ng-md-icon>
-      <span ng-if="resource.numberOfBookings">{{ resource.response_accept | percentage : 0 }} {{ 'ACCEPTED_REQUESTS' | translate}}</span>
-      <span ng-if="!resource.numberOfBookings">Nog geen huurverzoeken</span>
+      <ng-md-icon icon="location_city"></ng-md-icon>
+      <span>{{ resource.city }}</span>
     </div>
   </div>
   <div layout="column" layout-gt-xs="row" layout-align="center start" class="key-features-row">
+    <div flex-gt-sm="40" flex="100" class="item">
+      <ng-md-icon icon="directions_car"></ng-md-icon>
+      {{ resource.brand | toTitleCase }} {{ resource.model | toTitleCase }}
+    </div>
     <div flex-gt-sm="40" flex="100" class="item hidden-lt-600" ng-if="resource.rating_totals.senders && resource.rating_totals.satisfaction >= .5">
       <ng-md-icon icon="thumb_up"></ng-md-icon>
       {{ resource.rating_totals.satisfaction | percentage: 0 }} tevredenheid
@@ -25,10 +28,6 @@
       <ng-md-icon icon="thumbs_up_down"></ng-md-icon>
       Nog niet beoordeeld
     </div>
-    <div flex-gt-sm="40" flex="100" class="item">
-      <ng-md-icon icon="event_available"></ng-md-icon>
-      {{ resource.numberOfBookings | wasBookedTimes }}
-    </div>
   </div>
   <div layout="column" layout-gt-xs="row" layout-align="center start" class="key-features-row">
     <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.parkingType !== 'default'">
@@ -38,6 +37,10 @@
     <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.fuelType === 'elektrisch' && resource.fuelLevel !== null">
       <fuel-charging-icon resource="resource" />
       {{ resource.fuelRange }} km ({{ resource.fuelLevel }}%)
+    </div>
+    <div flex-gt-sm="40" flex="100" class="item" ng-if="resource.fuelType !== 'elektrisch' && resource.fuelLevel !== null">
+      <fuel-charging-icon resource="resource" />
+      {{ resource.fuelLevel }}%
     </div>
   </div>
 </div>

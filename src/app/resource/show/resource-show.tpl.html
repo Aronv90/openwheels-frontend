@@ -71,27 +71,6 @@
                         </md-button>
                     </div>
 
-                    <div class="subtitle">
-                        <span ng-if="resource.newScoreCar">
-                            <span class="tag tag-warning mw-badge mw-badge-new">Nieuw</span>
-                            <span class="bullet"></span>
-                        </span>
-                        <span ng-if="resource.price.vacationShortRate || resource.price.vacationLongRate">
-                            <span class="tag tag-warning mw-badge mw-badge-discount" info-dialog="meerdagenkorting" info-dialog-params="{ resource: resource }"><ng-md-icon size="16" icon="local_offer"></ng-md-icon> Meerdagenkorting</span>
-                            <span class="bullet"></span>
-                        </span>
-                        <span class="subtitle-feature">
-                            {{ (resource.brand | toTitleCase) || ('UNKNOWN_BRAND' | translate) }}
-                            <span ng-if="resource.model">{{ resource.model }}</span>
-                        </span>
-                        <span ng-if="resource.city">
-                            <span class="bullet"></span>
-                            <span class="subtitle-feature">
-                                {{ resource.city | replaceDashToSpace | toTitleCase }}
-                            </span>
-                        </span>
-                    </div>
-
                     <div ng-include="'resource/partials/resource-key-features.tpl.html'"></div>
 
                     <div class="resource-advertisement" ng-if="resource.advertisement">
@@ -184,32 +163,8 @@
                 </div>
             </div>
 
-            <!-- owner -->
-            <div class="card mw">
-                <div class="card-heading">
-                    <h3>Eigenaar</h3>
-                </div>
-                <div class="card-body">
-                    <div class="media">
-                        <img class="media-object pull-left img-user-normal" person-profile-image="{ person: resource.owner, size: 'normal' }" />
-                        <div class="media-body">
-                            <h4 class="media-heading"><a ui-sref="member({ personId: resource.owner.id })">{{ resource.owner | fullname }}</a></h4>
-                            <div ng-if="resource.owner.created" class="text-muted">
-                                <small>{{ resource.owner.created | memberSince }}</small>
-                            </div>
-                            <div><span badge-list="resource.owner.badges"></span></div>
-
-                            <button ng-if="me" type="button" class="btn btn-link" ng-click="openChatWith(resource.owner)">
-                                <i class="fa fa-comment fa-fw"></i> {{ 'SEND_MESSAGE' | translate }}
-                            </button>
-                        </div>
-                    </div>
-                    <p ng-if="resource.owner.about" style="white-space: pre-line;">{{ resource.owner.about}}</p>
-                </div>
-            </div>
-
             <!-- contact person -->
-            <div class="card mw" ng-if="me && resource.contactPerson && (resource.contactPerson.id !== resource.owner.id)">
+            <div class="card mw">
                 <div class="card-heading">
                     <h3>{{ 'CONTACT_PERSON' | translate }}</h3>
                     <div class="media">

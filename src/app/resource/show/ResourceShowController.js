@@ -77,11 +77,8 @@ angular.module('owm.resource.show', [])
   if(!$scope.removed) {
     $scope.airconditioning = resource.properties.map(function(o) { return o.id;}).indexOf('airconditioning');
     $scope.automaticGear = resource.properties.map(function(o) { return o.id;}).indexOf('automaat');
-    $scope.bikeCarrier = resource.properties.map(function(o) { return o.id;}).indexOf('fietsendrager');
-    $scope.childSeat = resource.properties.map(function(o) { return o.id;}).indexOf('kinderzitje');
     $scope.mp3Connection = resource.properties.map(function(o) { return o.id;}).indexOf('mp3-aansluiting');
     $scope.navigation = resource.properties.map(function(o) { return o.id;}).indexOf('navigatie');
-    $scope.wheelchairFriendly = resource.properties.map(function(o) { return o.id;}).indexOf('rolstoelvriendelijk');
     $scope.towbar = resource.properties.map(function(o) { return o.id;}).indexOf('trekhaak');
     $scope.winterTires = resource.properties.map(function(o) { return o.id;}).indexOf('winterbanden');
   }

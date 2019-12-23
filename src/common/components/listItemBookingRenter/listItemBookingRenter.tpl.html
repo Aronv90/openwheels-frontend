@@ -1,18 +1,23 @@
 
 <div ui-sref="owm.booking.show({ bookingId: $ctrl.booking.id })">
 
-  <div class="visible-xs-block">
-    <h4 style="color: #333; font-size: 1.8rem; margin: 0; padding: 1.3rem 0 0;">{{ $ctrl.booking.resource.alias }}</h4>
-    <div>{{ $ctrl.booking.resource.owner | fullname }}</div>
+  <div class="visible-xs-block v-mid">
+    <h4 style="color: #333; font-size: 1.8rem; margin: 0; padding: 1.3rem 0 0;">{{ $ctrl.booking.resource.brand }} {{ $ctrl.booking.resource.model }}</h4>
+    <div ng-if="$ctrl.booking.resource.streetNumber" style="color: #777;">
+      {{ $ctrl.booking.resource.location }} {{ $ctrl.booking.resource.streetNumber }}, {{ $ctrl.booking.resource.city }}
+    </div>
+    <div ng-if="!$ctrl.booking.resource.streetNumber" style="color: #777;">
+      {{ $ctrl.booking.resource.location }}, {{ $ctrl.booking.resource.city }}
+    </div>
   </div>
 
   <div class="row is-flex list-item">
 
-    <div class="col-sm-2 col-xs-4">
+    <div class="col-sm-2 col-xs-4 v-mid">
       <img ng-src="{{ $ctrl.booking.resource | resourcePicture: 'normal' }}" class="img-user-normal" alt="{{ $ctrl.booking.resource.alias }}" />
     </div>
 
-    <div class="col-sm-3 col-xs-8">
+    <div class="col-sm-3 col-xs-8 v-mid">
       <div ng-if="$ctrl.booking.beginBooking && !$ctrl.booking.beginRequested">
         <div>
           <datetime class="list-item-line" datetime="{{ $ctrl.booking.beginBooking }}"></datetime>
@@ -31,12 +36,15 @@
       ></div>
     </div>
 
-    <div class="col-sm-4 hidden-xs">
+    <div class="col-sm-4 hidden-xs v-mid">
       <div class="list-item-line truncate">
-        {{ $ctrl.booking.resource.alias }}
+        {{ $ctrl.booking.resource.brand }} {{ $ctrl.booking.resource.model }}
       </div>
-      <div class="list-item-line truncate" style="color: #777;">
-        {{ $ctrl.booking.resource.owner | fullname }}
+      <div class="list-item-line truncate" style="color: #777;" ng-if="$ctrl.booking.resource.streetNumber">
+        {{ $ctrl.booking.resource.location }} {{ $ctrl.booking.resource.streetNumber }}, {{ $ctrl.booking.resource.city }}
+      </div>
+      <div class="list-item-line truncate" style="color: #777;" ng-if="!$ctrl.booking.resource.streetNumber">
+        {{ $ctrl.booking.resource.location }}, {{ $ctrl.booking.resource.city }}
       </div>
     </div>
 

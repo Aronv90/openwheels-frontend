@@ -29,7 +29,7 @@
       <th>Eindtijd</th>
       <th>Huurder</th>
     </tr>
-    <tr ng-repeat="booking in bookings | orderBy:'-beginBooking'" ng-if="bookings.length > 0" ng-class="{danger: [50076, 53808, 904804, 904803, 886218, 904763, 924281, 934650, 934646, 61664, 912291, 921428, 934651, 909163, 916080, 877081, 868897, 865782, 886219, 912372, 911835, 66244].indexOf(booking.contract.id) >= 0}">
+    <tr ng-repeat="booking in bookings | orderBy:'-beginBooking'" ng-if="bookings.length > 0" ng-class="{danger: [50076, 53808, 904804, 904803, 886218, 904763, 924281, 934650, 934646, 61664, 912291, 921428, 934651, 909163, 916080, 877081, 868897, 865782, 886219, 912372, 911835, 66244, 958979, 958980].indexOf(booking.contract.id) >= 0}">
       <td hide-xs>{{ booking.id }}</td>
       <td>
         <span style="float:left; width:27px;">{{ booking.beginBooking | amDateFormat:'dd.' | lowercase }}</span> 

@@ -59,7 +59,7 @@ angular.module('bookingListDirective', [])
 
             $scope.getTotalHours = function(){
               for(var i = 0; i < $scope.bookings.length; i++){
-                if([50076, 53808, 904804, 904803, 886218, 904763, 924281, 934650, 934646, 934651, 61664, 912291, 921428, 909163, 916080, 877081, 868897, 865782, 886219, 912372, 911835, 66244].indexOf($scope.bookings[i].contract.id) < 0) {
+                if([50076, 958979, 958980, 53808, 904804, 904803, 886218, 904763, 924281, 934650, 934646, 934651, 61664, 912291, 921428, 909163, 916080, 877081, 868897, 865782, 886219, 912372, 911835, 66244].indexOf($scope.bookings[i].contract.id) < 0) {
                   var hours = moment($scope.bookings[i].endBooking).diff(moment($scope.bookings[i].beginBooking), 'hours');
                   var minutes = moment($scope.bookings[i].endBooking).diff(moment($scope.bookings[i].beginBooking), 'minutes');
                   bookingsHours += hours + (minutes / 60 - hours);

@@ -8,12 +8,4 @@
         <span ng-repeat="locktype in resource.locktypes | unique:'locktype'">{{  ('LOCKTYPE.' + locktype) | translateOrDefault : locktype | lowercase }}<span ng-if="!$last"> & </span></span>
         <span ng-if="!resource.locktypes">{{ 'UKNOWN_LOCKTYPE' | translate | lowercase }}</span>
     </li>
-    <li>
-        <ng-md-icon icon="event_available" class="text-success list-margin"></ng-md-icon>
-        <span>{{ resource.numberOfBookings | wasBookedTimes }}</span>
-    </li>
-    <li ng-if="resource.numberOfBookings > 0">
-        <ng-md-icon icon="check" class="text-success list-margin"></ng-md-icon>
-        <span>{{ resource.response_accept | percentage : 0 }} {{ 'ACCEPTED_REQUESTS' | translate}}</span>
-    </li>
 </ul>

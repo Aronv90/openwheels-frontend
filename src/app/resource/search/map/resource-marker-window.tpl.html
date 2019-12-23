@@ -5,7 +5,7 @@
         'background-image': 'url(' + parameter.imgUrl + ')'
     }"></div>
     <div class="pad">
-        <h4>{{ parameter.resource.alias }}</h4>
+        <h4>{{ parameter.resource.location }}, {{ parameter.resource.city }}</h4>
         <h5>{{ parameter.resource.brand }} {{ parameter.resource.model }}</h5>
         <p ng-if="!$root.providerInfo.isBusiness">{{ parameter.resource.price.dayRateTotal | currency }} per dag</p>
         <div ng-if="['smartphone', 'chipcard'].indexOf(parameter.resource.locktype) >= 0">

@@ -3,11 +3,11 @@
     <div class="md-card-image" style="position: relative">
         <ow-resource-picture-div resource="resource" size="large"></ow-resource-picture-div>
         <div class="price" ng-if="!$root.providerInfo.isBusiness">
-            <h2 class="no-margin" style="color:#fff">
-          {{ resource.price.dayRateTotal | currency }}
-          </h2>
-            <div ng-if="resource.price.kmFree" class="">
-                <small>{{ 'FREE_KM_DAY' | translate }}</small>
+            <h2 class="no-margin" style="color:#fff;line-height:1;">
+                {{ resource.price.dayRateTotal | currency }}
+            </h2>
+            <div>
+                <small>per dag</small>
             </div>
         </div>
     </div>
@@ -16,22 +16,28 @@
             <md-card-title-text>
               <a ui-sref="owm.resource.show({city: (resource.city | replaceSpaceToDash | lowercase), resourceId: resource.id})">
                 <h3 class="no-margin" style="font-size: 2rem" >
-                  <span>{{ resource.alias | limitTo: 50 || ('RESOURCE_NO_NAME' | translate)}}{{resource.alias.length > 50 ? '...' : ''}} </span>
+                  <span>{{ resource.location | limitTo: 50 || ('RESOURCE_NO_NAME' | translate)}}{{resource.location.length > 50 ? '...' : ''}}  ({{ resource.distance_to | formatKilometers }})</span>
                 </h3>
               </a>
             </md-card-title-text>
         </md-card-title>
         <md-card-body class="ow-list-compact">
             <md-list class="margin-right">
-                <md-list-item>
-                    <!-- location -->
-                    <ng-md-icon class="list-item-icon" icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                <md-list-item style="padding-left:16px;">
+                    <!-- tips -->
                     <div flex>
-                        <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
                         <span>
                             <span
+                                ng-if="resource.city"
+                                class="tag tag-info"
+                                flex="none"
+                                style="margin-left: 2px;"
+                            >
+                                {{ resource.city }}
+                            </span>
+                            <span
                                 ng-if="resource.newScoreCar"
-                                class="tag tag-success"
+                                class="tag tag-info"
                                 flex="none"
                                 style="margin-left: 2px;"
                             >
@@ -46,20 +52,28 @@
                             >
                                 {{ resource.parkingType | parkingType }}
                             </span>
-                            <fuel-charging-icon
-                                show-percentage="true"
-                                resource="resource"
-                                style="margin-left: -2px;"
-                            />
                         </span>
                     </div>
                 </md-list-item>
                 <md-list-item>
                     <!-- location -->
-                    <ng-md-icon class="list-item-icon" icon="location_on" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <ng-md-icon class="list-item-icon" icon="directions_car" alt="Icoon" aria-label="Icoon"></ng-md-icon>
                     <div flex>
-                        <span> {{ resource.location }}, {{ resource.city }}
-                          <span ng-if="resource.distance_to"> ({{ resource.distance_to | formatKilometers }})</span>
+                        <span ng-if="resource.brand || resource.model" flex="none">{{ (resource.brand + ' ' + resource.model) | toTitleCase }}</span>
+                        <span rating-thumb="{ value : resource.rating_totals.satisfaction, senders: resource.rating_totals.senders }"></span>
+                    </div>
+                </md-list-item>
+                <md-list-item>
+                    <!-- location -->
+                    <ng-md-icon class="list-item-icon" icon="local_gas_station" alt="Icoon" aria-label="Icoon"></ng-md-icon>
+                    <div flex>
+                        <span> {{ resource.fuelType | toTitleCase }}
+                            <fuel-charging-icon
+                                show-percentage="true"
+                                resource="resource"
+                                style="margin-left: -2px;"
+                                ng-if="resource.fuelType === 'elektrisch'"
+                            />
                         </span>
                     </div>
                 </md-list-item>
@@ -70,16 +84,6 @@
                         <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone en OV-chipkaart</span>
                         <span ng-if="resource.locktypes.indexOf('chipcard') < 0 && resource.locktypes.indexOf('smartphone') >= 0">Openen met smartphone</span>
                         <span ng-if="resource.locktypes.indexOf('chipcard') >= 0 && resource.locktypes.indexOf('smartphone') < 0">Openen met OV-chipkaart</span>
-                    </div>
-                </md-list-item>
-                <md-list-item ng-if="!lightweight">
-                    <!-- number of bookings -->
-                    <ng-md-icon class="list-item-icon" icon="event_available" alt="Icoon" aria-label="Icoon"></ng-md-icon>
-                    <div flex>
-                        <span>
-                    {{ resource.numberOfBookings | wasBookedTimes }}
-                    <span rating-thumb="{ value : resource.rating_totals.satisfaction, senders: resource.rating_totals.senders }"></span>
-                </span>
                     </div>
                 </md-list-item>
             </md-list>
