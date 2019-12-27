@@ -168,19 +168,8 @@ angular.module('owm.pages', [
   .state('list-your-car', {
     parent: 'owm.pages',
     url: '/auto-verhuren',
-    views: {
-      'main-full@shell': {
-        templateUrl: 'pages/list-your-car/list-your-car.tpl.html',
-        controller: 'listYourCarController'
-      }
-    },
-    data: {
-      title: 'META_LISTYOURCAR_TITLE',
-      description: 'META_LISTYOURCAR_DESCRIPTION',
-      access: {
-        feature: 'verhuurTussenscherm'
-      }
-    }
+    redirectTo: 'home',
+    redirectToParams: {},
   })
 
   .state('member', {

@@ -339,17 +339,21 @@ angular.module('owm.resource.show', [])
       zoneService
       .forResource({ resource: $scope.resource.id })
       .then(function (res) {
-        zoneService
-        .chargingPoints({
-          coordinates: res.geometry.coordinates,
-          type: 'polygon'
-        })
-        .then(function (res2) {
-          addMap(res.geometry, res2.data);
-        }).catch(function () {
-          $log.warn('chargingpoints could not be loaded');
+        if($scope.resource.fuelType === 'elektrisch') {
+          zoneService
+          .chargingPoints({
+            coordinates: res.geometry.coordinates,
+            type: 'polygon'
+          })
+          .then(function (res2) {
+            addMap(res.geometry, res2.data);
+          }).catch(function () {
+            $log.warn('chargingpoints could not be loaded');
+            addMap(res.geometry);
+          });
+        } else {
           addMap(res.geometry);
-        });
+        }
       });
     } else {
       addMap();
